@@ -38,11 +38,13 @@ public class EmployeeController {
 	
 	@GetMapping("report/list")
 	public String showEmpReports(ModelMap model,
-								@RequestParam("id") int id) {
+								@RequestParam("id") int id,
+								@RequestParam("empName") String empName) {
 		
 		List<Report> reports = reportService.getAllReports(id);	
 		model.addAttribute("reports", reports);
 		model.addAttribute("id", id);
+		model.addAttribute("empName", empName);
 		return "emp-report-list";
 	}
 	

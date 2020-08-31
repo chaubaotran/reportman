@@ -1,0 +1,55 @@
+.top-bar.navbar {
+	width: 100vw;
+	background-color: #015d82;
+}
+
+.top-bar .navbar-brand,
+.top-bar .toggle-btn {
+	color: #fff;
+}
+
+.top-bar .toggle-btn {
+	cursor: pointer;
+}
+
+.top-bar .navbar-brand:hover,
+.top-bar .navbar-brand:active,
+.top-bar .toggle-btn:hover,  {
+	color: #8080c0;
+}
+
+.top-bar .drop-down-menu {
+	position: absolute;
+	background-color: #fff;
+	top: 100%;
+	right: 0%;
+	border: 1px solid #555;
+	border-top: none;
+	display: none;
+	opacity: 0;
+	z-index: 0;
+}
+
+.top-bar .active {
+	display: block;
+	opacity: 1;
+	z-index: 5;
+}
+
+.top-bar .nav-link,
+.top-bar .logout-link {
+	border: none;
+	background: none;
+	width: 100%;
+	margin: 0;
+	padding: 10px 20px;
+	color: #000;
+	text-align: left;
+}
+
+.top-bar .nav-link:hover,
+.top-bar .logout-link:hover {
+	background-color: #015d82;
+	color: #fff;
+	
+} 

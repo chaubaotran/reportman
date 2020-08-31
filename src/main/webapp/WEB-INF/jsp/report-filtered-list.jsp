@@ -27,7 +27,7 @@
 				
 				<div class="d-flex">
 					<h3><strong>日報一覧</strong></h3>
-					<span class="ml-auto">ユーザー: ${user.userName}</span>
+					<span class="ml-auto">User: ${user.userName}</span>
 				</div>	
 				
 				<div class="d-flex justify-content-end">
