@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.tas.reportman.entity.Role;
 import com.tas.reportman.entity.User;
 import com.tas.reportman.service.UserService;
 import com.tas.reportman.user.CrmUser;
@@ -46,7 +48,6 @@ public class AccountController {
 							Model theModel) {
 	// form validation
 	 if (theBindingResult.hasErrors()){
-		 System.out.println("in error");
 		List<String> roles = new ArrayList<>();
 		roles.add("EMPLOYEE");
 		roles.add("MANAGER");
@@ -61,13 +62,12 @@ public class AccountController {
     User existing = userService.findByUserName(userName);
         
     if (existing != null){
-    	System.out.println("in existing");
     	List<String> roles = new ArrayList<String>();
     	roles.add("EMPLOYEE");
 		roles.add("MANAGER");
 		roles.add("ADMIN");
 		theModel.addAttribute("roles", roles);
-    	theModel.addAttribute("crmUser", new CrmUser());
+		theModel.addAttribute("crmUser", theCrmUser);
 		theModel.addAttribute("registrationError", "User name already exists.");
     	return "account-create";
     }
@@ -77,31 +77,58 @@ public class AccountController {
 	    return "account-create-success";		
 	}
 	
-//	@GetMapping("/edit")
-//	public String showEditPage(ModelMap model, @RequestParam("id") long id) {
-//		
-//		User user = userService.findByUserId(id);
-//		
-//		CrmUser theUser = new CrmUser();
-//		theUser.setId(user.getId());
-//		theUser.setUserName(user.getUserName());
-//		theUser.setFirstName(user.getFirstName());
-//		theUser.setLastName(user.getLastName());
-//		theUser.setEmail(user.getEmail());
-//		theUser.setPassword(user.getPassword());
-//		theUser.setMatchingPassword(user.getPassword());	
-//		theUser.setRoles(user.getRoles());
-//		
-//		List<String> roles = new ArrayList<String>();
-//		roles.add("ROLE_EMPLOYEE");
-//		roles.add("ROLE_MANAGER");
-//		roles.add("ROLE_ADMIN");
-//				
-//		model.addAttribute("crmUser", theUser);
-//		model.addAttribute("roles", roles);
-//		
-//		return "account-create";		
-//		
-//	}
-
+	@GetMapping("/edit")
+	public String showEditPage(ModelMap model, @RequestParam("id") int id) {
+		
+		User user = userService.findByUserId(id);
+		
+		CrmUser theUser = new CrmUser();
+		theUser.setId(user.getId());
+		theUser.setUserName(user.getUserName());
+		theUser.setFirstName(user.getFirstName());
+		theUser.setLastName(user.getLastName());
+		theUser.setEmail(user.getEmail());
+		List<Role> userRoles = user.getRoles();
+		
+		for (Role role:userRoles) {
+			if (role.getName().equals("ROLE_EMPLOYEE")) {
+				theUser.addRole("EMPLOYEE");
+			} else if (role.getName().equals("ROLE_MANAGER")) {
+				theUser.addRole("MANAGER");
+			} else if (role.getName().equals("ROLE_ADMIN")) {
+				theUser.addRole("ADMIN");
+			}
+		}
+				
+		List<String> roles = new ArrayList<String>();
+		roles.add("EMPLOYEE");
+		roles.add("MANAGER");
+		roles.add("ADMIN");
+				
+		model.addAttribute("crmUser", theUser);
+		model.addAttribute("roles", roles);
+		
+		return "account-edit";		
+		
+	}
+	
+	@PostMapping("/edit/processing")
+	public String editing(@Valid @ModelAttribute("crmUser") CrmUser theCrmUser, 
+							BindingResult theBindingResult, 
+							Model theModel) {
+		// form validation
+		 if (theBindingResult.hasErrors()){
+			List<String> roles = new ArrayList<>();
+			roles.add("EMPLOYEE");
+			roles.add("MANAGER");
+			roles.add("ADMIN");
+			theModel.addAttribute("roles", roles);
+			return "account-edit";
+	    }
+	
+	 	// create user account        						
+	    userService.save(theCrmUser);
+	    	    
+	    return "account-create-success";		
+	}
 }

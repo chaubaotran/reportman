@@ -1,32 +1,18 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
-<%@	taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-    
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>		
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-		<link rel="stylesheet" href="../resources/css/report-create.css">
-		<script src="https://kit.fontawesome.com/49bcf1dc87.js"></script>		
-		<title>レポーマン</title>
-	</head>
+
+<%@ include file="fragments/header.jsp"%>
 	
-	<body>
-	
+	<body>	
 		<div class="container-fluid">
 			<div class="row">			
 				<%@ include file="fragments/topbar.jsp"%>				
 			</div>
 		
 			<div class="row my-2">						
-				<%@ include file="fragments/sidebar.jsp"%>				
-				<div class="col-10 report-create">			
-				
-					<form:form action="addNewReport" method="POST" modelAttribute="report">
-						
+				<%@ include file="fragments/sidebar.jsp"%>	
+							
+				<div class="col-10 report-create">						
+					<form:form action="addNewReport" method="POST" modelAttribute="report">						
 						<div class="d-flex">
 							<h3><strong>新規作成</strong></h3>
 							<span class="ml-auto">ユーザー: ${user.userName}</span>
@@ -71,29 +57,58 @@
 		</div>
 		
 <script>
-	const getTodayDate = () => {
-		var date = new Date();
 
-		var day = date.getDate();
-		var month = date.getMonth() + 1;
-		var year = date.getFullYear();
+	window.onload = function() {
+		var path = window.location.pathname;
+		var menu = document.querySelector(".drop-down-menu");
+		var toggleBtn = document.querySelector(".toggle-btn");		
+		var navLinks = Array.from(document.querySelectorAll(".nav-link"));
+		
+		const getTodayDate = () => {
+			var date = new Date();
 
-		if (month < 10) month = "0" + month;
-		if (day < 10) day = "0" + day;
+			var day = date.getDate();
+			var month = date.getMonth() + 1;
+			var year = date.getFullYear();
 
-		var today = year + "-" + month + "-" + day;     
-		return today;
-	}	
-	  
-	document.getElementById("report-date").value = getTodayDate();
-	document.getElementById("report-date").setAttribute("max", getTodayDate());
+			if (month < 10) month = "0" + month;
+			if (day < 10) day = "0" + day;
+
+			var today = year + "-" + month + "-" + day;     
+			return today;
+		}			
+		
+		/* Make sidebar active item stand out */
+		navLinks.forEach(item => {
+			if (item.getAttribute("href").startsWith(path)) {
+				item.classList.add("active");
+			} else {
+				item.classList.remove("active");
+			}
+		})			
+		/* Make report date max value is today */
+		document.getElementById("report-date").value = getTodayDate();
+		document.getElementById("report-date").setAttribute("max", getTodayDate());
 	
+		/* Make drop down menu disappear when user clicks outside */
+		document.addEventListener("click", function(e) {
+			if (!menu.contains(e.target) && !toggleBtn.contains(e.target)) {
+				menu.classList.remove("active");
+			}			
+		})
+	}
+		
 	function confirmSubmit() {
 		var agree=confirm("Are you sure you wish to submit this report? Once submitted, report cannot be deleted");
 		if (agree)
 		 return true ;
 		else
 		 return false ;
+	}	
+	
+	function toggleMenu() {
+		var menu = document.querySelector(".drop-down-menu");
+		menu.classList.toggle("active");
 	}	
 </script>
 	

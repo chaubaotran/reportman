@@ -1,18 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
-<%@	taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-    
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>		
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-		<link rel="stylesheet" href="../resources/css/report-create.css">
-		<script src="https://kit.fontawesome.com/49bcf1dc87.js"></script>		
-		<title>レポーマン</title>
-	</head>
+
+<%@ include file="fragments/header.jsp"%>
 	
 	<body>
 	
@@ -64,12 +52,10 @@
 					<c:url var="backToList" value="${pageContext.request.contextPath}/employee/report/list">
 			            <c:param name="id" value="${emp.id}"/>
 			            <c:param name="empName" value="${emp.userName}"/>
-			        </c:url>
-						
-					<a href="${backToList}">${emp.userName}の日報一覧に戻る</a>
-					
+			        </c:url>											
 				</form:form>
-				
+			
+				<p class="mt-5"><a href="${backToList}">${emp.userName}の日報一覧に戻る</a></p>
 			
 			</div>
 		</div>
@@ -77,12 +63,40 @@
 	
 <script>
 	window.onload = function() {
-	  var textareas = Array.from(document.querySelectorAll(".form-control"));
-	  var date = document.querySelector("#report-date");
-	  textareas.forEach(item => {
-		  item.setAttribute("readonly", true);
-	  })
-	  date.setAttribute("readonly", true);
+		var path = window.location.pathname;
+		var menu = document.querySelector(".drop-down-menu");
+		var toggleBtn = document.querySelector(".toggle-btn");		
+		var navLinks = Array.from(document.querySelectorAll(".nav-link"));
+		var textareas = Array.from(document.querySelectorAll(".form-control"));
+	  	var date = document.querySelector("#report-date");
+		
+		/* Make sidebar active item stand out */
+		navLinks.forEach(item => {
+			if (item.getAttribute("href").startsWith(path)) {
+				item.classList.add("active");
+			} else {
+				item.classList.remove("active");
+			}
+		})			
+	
+		/* Make drop down menu disappear when user clicks outside */
+		document.addEventListener("click", function(e) {
+			if (!menu.contains(e.target) && !toggleBtn.contains(e.target)) {
+				menu.classList.remove("active");
+			}			
+		})
+		
+		/* Make textarea and date readonly */
+		textareas.forEach(item => {
+			  item.setAttribute("readonly", true);
+		  })
+		  
+	  	date.setAttribute("readonly", true);
+	}
+	
+	function toggleMenu() {
+		var menu = document.querySelector(".drop-down-menu");
+		menu.classList.toggle("active");
 	}
 </script>
 

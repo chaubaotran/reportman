@@ -1,8 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-
-
-<link rel="stylesheet" href="../../resources/css/sidebar.css">
 
 <div class="col-2 side-bar">
 	<ul class="nav flex-column horizontal-bar">
@@ -29,7 +25,7 @@
 	</ul>
 </div>		
 
-<script>
+<!-- <script>
 	window.onload = function() {
 		var path = window.location.pathname;
 		console.log(path);
@@ -42,5 +38,5 @@
 				item.classList.remove("active");
 			}
 		})		
-	}
-</script>
+	} 
+</script> -->

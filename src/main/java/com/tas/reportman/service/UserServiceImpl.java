@@ -69,6 +69,10 @@ public class UserServiceImpl implements UserService {
 	public void save(@Valid CrmUser crmUser) {
 		User user = new User();
 		// assign user details to the user object
+		if(crmUser.getId() != 0) {
+			user.setId(crmUser.getId());
+		}
+		
 		user.setUserName(crmUser.getUserName());
 		user.setPassword(passwordEncoder.encode(crmUser.getPassword()));
 		user.setFirstName(crmUser.getFirstName());

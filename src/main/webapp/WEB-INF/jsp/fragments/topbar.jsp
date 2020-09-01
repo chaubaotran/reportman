@@ -1,16 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
-<link rel="stylesheet" href="../../resources/css/topbar.css">
 
 <nav class="navbar top-bar">
-
-	<a class="navbar-brand" href="#">レポーマン</a>
-	
+	<a class="navbar-brand" href="#">レポーマン</a>	
 	<div class="toggle-btn">
 		<span onclick="toggleMenu()"><i class="fas fa-bars"></i></span>
-	</div>
-	
+	</div>	
 	<div class="drop-down-menu mr-2">
 		<nav class="nav flex-column">
 			<a class="nav-link" href="${pageContext.request.contextPath}/account/edit/?id=${user.id}">アカウント編集</a>
@@ -19,11 +13,10 @@
 				<input type="submit" value="ログアウト" class="logout-link" />										
 			</form:form>		  
 		</nav>
-	</div>		
-	
+	</div>	
 </nav>			
 
-<script>
+<!-- <script>
 
 	var menu = document.querySelector(".drop-down-menu");
 	var toggleBtn = document.querySelector(".toggle-btn");
@@ -39,4 +32,4 @@
 	})
 	
 	
-</script>	
+</script>	 -->

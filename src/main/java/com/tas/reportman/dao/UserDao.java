@@ -12,7 +12,7 @@ public interface UserDao {
 
 	public User findByUserEmail(String email);
 
-	public User findByUserId(long id);
+	public User findByUserId(int id);
 
 	public List<User> getAllEmps();
 }

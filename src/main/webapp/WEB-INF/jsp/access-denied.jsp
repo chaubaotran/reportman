@@ -1,40 +1,33 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ include file="fragments/header.jsp"%>
+	
+<body>
 
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<div class="container-fluid">
+		<div class="d-flex flex-column justify-content-center text-center mt-5">
 		
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css">
+			<h4>Access Denied - You are not authorized to access this resource.</h4>
 		
-		<title>reportman</title>
-	</head>
+			<hr>
+			
+			<a href="${pageContext.request.contextPath}/login" style="text-decoration: none; color: #000;">Login with different account</a>
+			
+			<br />
+			
+			<button onclick="goBack()" style="border: none; background: none; padding: 0;">Go back to previous page</button>	
+		
+		</div>
 	
-	<body>
-
-	<h2>Access Denied - You are not authorized to access this resource.</h2>
-
-	<hr>
+		
 	
-	<a href="${pageContext.request.contextPath}/login">Login with different account or</a>
-	
-	<button onclick="goBack()">Go back to previous page</button>
+	</div>
 
+	
 	<script>
 		function goBack() {
 		  window.history.back();
 		}
 	</script>
-	
-	<script src="webjars/jquery/3.5.1/jquery.min.js"></script>
-	<script src="webjars/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-	<script src="webjars/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
-	</body>
-</html>
+
+<%@ include file="fragments/footer.jsp"%>

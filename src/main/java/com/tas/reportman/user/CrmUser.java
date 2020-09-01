@@ -1,5 +1,8 @@
 package com.tas.reportman.user;
 
+import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.constraints.NotNull;
@@ -13,7 +16,7 @@ import com.tas.reportman.validation.ValidEmail;
 })
 public class CrmUser {
 	
-	private long id;
+	private int id;
 	
 	@NotNull(message = "is required")
 	@Size(min = 1, message = "is required")
@@ -40,17 +43,17 @@ public class CrmUser {
 	@Size(min = 1, message = "is required")
 	private String email;
 	
-	private List<String> roles;
+	private List<String> roles = new ArrayList<String>();
 
 	public CrmUser() {
 	
 	}
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -108,6 +111,10 @@ public class CrmUser {
 
 	public void setRoles(List<String> roles) {
 		this.roles = roles;
+	}
+	
+	public void addRole(String role) {
+		this.roles.add(role);
 	}
 
 	@Override

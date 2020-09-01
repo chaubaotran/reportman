@@ -16,7 +16,7 @@
 					
 
 				<!-- Registration Form -->
-				<form:form action="${pageContext.request.contextPath}/account/create/processing" 
+				<form:form action="${pageContext.request.contextPath}/account/edit/processing" 
 					  	   modelAttribute="crmUser"
 					  	   class="form-horizontal"
 					  	   method="POST">
@@ -45,14 +45,13 @@
 					<div class="mb-4">
 						<label>User name</label>
 						<form:input path="userName" placeholder="username (*)" class="form-control" />
-						<form:errors path="userName" cssClass="error" />
-						
+						<form:errors path="userName" cssClass="error" />						
 					</div>
 
 					<!-- Password -->
 					<div class="mb-4">
-						<label>Password</label>
-						<form:password path="password" placeholder="password (*)" class="form-control" />
+						<label>New password</label>
+						<form:password path="password" placeholder="new password (*)" class="form-control" />
 						<form:errors path="password" cssClass="error" />
 					</div>
 					
@@ -85,15 +84,17 @@
 					</div>
 					
 					<!-- Roles -->
-					<div class="mb-4">
-						<label>Roles</label>
-						<br>
-						<form:radiobuttons  items="${roles}" path="roles" class="mx-3" />
-					</div>
+					<sec:authorize access="hasAnyRole('ADMIN')">
+						<div class="mb-4">
+							<label>Roles</label>
+							<br>
+							<form:radiobuttons  items="${roles}" path="roles" class="mx-3" />
+						</div>
+					</sec:authorize>
 	
 					<!-- Register Button -->
 					<div class="form-group">
-						<button type="submit" class="btn btn-primary">Register</button>
+						<button type="submit" class="btn btn-primary">Change</button>
 					</div>
 					
 				</form:form>
