@@ -43,52 +43,45 @@
 
 					<!-- User name -->
 					<div class="mb-4">
-						<label>User name</label>
-						<form:input path="userName" placeholder="username (*)" class="form-control" />
-						<form:errors path="userName" cssClass="error" />
-						
+						<label>User name <form:errors path="userName" cssClass="error" /></label>
+						<form:input path="userName" placeholder="username (*)" class="form-control" />		
 					</div>
 
 					<!-- Password -->
 					<div class="mb-4">
-						<label>Password</label>
-						<form:password path="password" placeholder="password (*)" class="form-control" />
-						<form:errors path="password" cssClass="error" />
+						<label>Password <form:errors path="password" cssClass="error" /></label>
+						<form:password path="password" placeholder="password (*)" class="form-control" />						
 					</div>
 					
 					<!-- Confirm Password -->
 					<div class="mb-4">
-						<label>Confirm password</label>
-						<form:password path="matchingPassword" placeholder="confirm password (*)" class="form-control" />
-						<form:errors path="matchingPassword" cssClass="error" />
+						<label>Confirm password <form:errors path="matchingPassword" cssClass="error" /></label>
+						<form:password path="matchingPassword" placeholder="confirm password (*)" class="form-control" />						
 					</div>				
 					
 					<!-- First name -->
 					<div class="mb-4">
-						<label>First name</label>
-						<form:input path="firstName" placeholder="first name (*)" class="form-control" />
-						<form:errors path="firstName" cssClass="error" />
+						<label>First name <form:errors path="firstName" cssClass="error" /></label>
+						<form:input path="firstName" placeholder="first name (*)" class="form-control" />						
 					</div>
 					
 					<!-- Last name -->
 					<div class="mb-4">
-						<label>Last name</label>
-						<form:input path="lastName" placeholder="last name (*)" class="form-control" />
-						<form:errors path="lastName" cssClass="error" />
+						<label>Last name <form:errors path="lastName" cssClass="error" /></label>
+						<form:input path="lastName" placeholder="last name (*)" class="form-control" />						
 					</div>
 					
 					<!-- Email -->
 					<div class="mb-4">
-						<label>Email</label>
-						<form:input path="email" placeholder="email (*)" class="form-control" />
-						<form:errors path="email" cssClass="error" />
+						<label>Email <form:errors path="email" cssClass="error" /></label>
+						<form:input path="email" placeholder="email (*)" class="form-control" />						
 					</div>
 					
 					<!-- Roles -->
 					<div class="mb-4">
-						<label>Roles</label>
+						<label>Roles <form:errors path="roles" cssClass="error" /></label>
 						<br>
-						<form:radiobuttons  items="${roles}" path="roles" class="mx-3" />
+						<form:radiobuttons  items="${roles}" path="roles" class="mx-3" />						
 					</div>
 	
 					<!-- Register Button -->

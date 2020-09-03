@@ -50,8 +50,8 @@
 
 					<!-- Password -->
 					<div class="mb-4">
-						<label>New password</label>
-						<form:password path="password" placeholder="new password (*)" class="form-control" />
+						<label>New password (old password is allowed)</label>
+						<form:password path="password" placeholder="password (*)" class="form-control" />
 						<form:errors path="password" cssClass="error" />
 					</div>
 					
@@ -84,13 +84,13 @@
 					</div>
 					
 					<!-- Roles -->
-					<sec:authorize access="hasAnyRole('ADMIN')">
+					<%-- <sec:authorize access="hasAnyRole('ADMIN')"> --%>
 						<div class="mb-4">
 							<label>Roles</label>
 							<br>
-							<form:radiobuttons  items="${roles}" path="roles" class="mx-3" />
+							<form:radiobuttons items="${roles}" path="roles" class="mx-3 role" />
 						</div>
-					</sec:authorize>
+					<%-- </sec:authorize> --%>
 	
 					<!-- Register Button -->
 					<div class="form-group">
@@ -98,6 +98,8 @@
 					</div>
 					
 				</form:form>
+				
+				<input id="authentication" type=hidden value="${authentication}" />
 				
 <script>
 	window.onload = function() {
@@ -122,6 +124,17 @@
 				menu.classList.remove("active");
 			}			
 		})
+		
+		if (document.querySelector("#authentication").value !== "[ROLE_ADMIN]") {
+			document.querySelectorAll(".role").forEach(item => {
+				if (!item.checked) {
+					item.setAttribute("disabled", true);
+				}
+				
+			});
+			
+		}
+		
 	}
 	
 	function toggleMenu() {

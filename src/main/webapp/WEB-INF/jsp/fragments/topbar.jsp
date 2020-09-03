@@ -16,20 +16,3 @@
 	</div>	
 </nav>			
 
-<!-- <script>
-
-	var menu = document.querySelector(".drop-down-menu");
-	var toggleBtn = document.querySelector(".toggle-btn");
-	
-	function toggleMenu() {
-		menu.classList.toggle("active");
-	}
-	
-	document.addEventListener("click", function(e) {
-		if (!menu.contains(e.target) && !toggleBtn.contains(e.target)) {
-			menu.classList.remove("active");
-		}			
-	})
-	
-	
-</script>	 -->

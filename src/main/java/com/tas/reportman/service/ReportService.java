@@ -17,4 +17,6 @@ public interface ReportService {
 	List<Report> getFilteredReports(String year, String month, int id);
 
 	Boolean checkIfReportDateUnique(@Valid Report theReport, int id);
+
+	Report trimReport(@Valid Report theReport);
 }

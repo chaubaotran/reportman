@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -31,6 +32,7 @@ public class AccountController {
 	@GetMapping("/create")
 	public String showRegistrationForm(ModelMap model) {
 		
+			
 		List<String> roles = new ArrayList<String>();
 		roles.add("EMPLOYEE");
 		roles.add("MANAGER");
@@ -46,31 +48,42 @@ public class AccountController {
 	public String processing(@Valid @ModelAttribute("crmUser") CrmUser theCrmUser, 
 							BindingResult theBindingResult, 
 							Model theModel) {
-	// form validation
-	 if (theBindingResult.hasErrors()){
-		List<String> roles = new ArrayList<>();
-		roles.add("EMPLOYEE");
-		roles.add("MANAGER");
-		roles.add("ADMIN");
-		theModel.addAttribute("roles", roles);
-		return "account-create";
-    }
-
-	String userName = theCrmUser.getUserName();
+		// form validation
+		 if (theBindingResult.hasErrors()){
+			List<String> roles = new ArrayList<>();
+			roles.add("EMPLOYEE");
+			roles.add("MANAGER");
+			roles.add("ADMIN");
+			theModel.addAttribute("roles", roles);
+			theModel.addAttribute("registrationError", "Missing required value or invalid input");
+			return "account-create";
+	    }
+		 
+		 if (theCrmUser.getRoles().size() <= 0){
+		    	List<String> roles = new ArrayList<String>();
+		    	roles.add("EMPLOYEE");
+				roles.add("MANAGER");
+				roles.add("ADMIN");
+				theModel.addAttribute("roles", roles);
+				theModel.addAttribute("crmUser", theCrmUser);
+				theModel.addAttribute("registrationError", "Missing required value or invalid input");
+		    	return "account-create";
+		}
 	
-	// check the database if user already exists
-    User existing = userService.findByUserName(userName);
-        
-    if (existing != null){
-    	List<String> roles = new ArrayList<String>();
-    	roles.add("EMPLOYEE");
-		roles.add("MANAGER");
-		roles.add("ADMIN");
-		theModel.addAttribute("roles", roles);
-		theModel.addAttribute("crmUser", theCrmUser);
-		theModel.addAttribute("registrationError", "User name already exists.");
-    	return "account-create";
-    }
+		// check the database if user name or email already exists
+	    User existing1 = userService.findByUserName(theCrmUser.getUserName());
+	    User existing2 = userService.findByUserEmail(theCrmUser.getEmail());
+	        
+	    if (existing1 != null || existing2 != null){
+	    	List<String> roles = new ArrayList<String>();
+	    	roles.add("EMPLOYEE");
+			roles.add("MANAGER");
+			roles.add("ADMIN");
+			theModel.addAttribute("roles", roles);
+			theModel.addAttribute("crmUser", theCrmUser);
+			theModel.addAttribute("registrationError", "User name or email already exists.");
+	    	return "account-create";
+	    }
 	 	// create user account        						
 	    userService.save(theCrmUser);
 	    	    
@@ -78,7 +91,8 @@ public class AccountController {
 	}
 	
 	@GetMapping("/edit")
-	public String showEditPage(ModelMap model, @RequestParam("id") int id) {
+	public String showEditPage(ModelMap model, 
+							@RequestParam("id") int id) {
 		
 		User user = userService.findByUserId(id);
 		
@@ -104,6 +118,9 @@ public class AccountController {
 		roles.add("EMPLOYEE");
 		roles.add("MANAGER");
 		roles.add("ADMIN");
+		
+		UserDetails userDetails = userService.getUserDetails();
+		model.addAttribute("authentication",userDetails.getAuthorities());
 				
 		model.addAttribute("crmUser", theUser);
 		model.addAttribute("roles", roles);
@@ -117,7 +134,7 @@ public class AccountController {
 							BindingResult theBindingResult, 
 							Model theModel) {
 		// form validation
-		 if (theBindingResult.hasErrors()){
+		if (theBindingResult.hasErrors()){
 			List<String> roles = new ArrayList<>();
 			roles.add("EMPLOYEE");
 			roles.add("MANAGER");
@@ -125,10 +142,48 @@ public class AccountController {
 			theModel.addAttribute("roles", roles);
 			return "account-edit";
 	    }
-	
+		
+		Boolean result = userService.checkEditValidation(theCrmUser);
+		
+		// check user name and email 	        
+	    if (!result) {
+	    	List<String> roles = new ArrayList<String>();
+	    	roles.add("EMPLOYEE");
+			roles.add("MANAGER");
+			roles.add("ADMIN");
+			theModel.addAttribute("roles", roles);
+			theModel.addAttribute("crmUser", theCrmUser);
+			theModel.addAttribute("registrationError", "User name or email already exists.");
+	    	return "account-edit";
+	    }
+	    
+	    
+	    Boolean r = userService.checkIfUserInfoChanged(theCrmUser);
+	    	    
+	    if (!r) {	    	
+	    	List<String> roles = new ArrayList<String>();
+	    	roles.add("EMPLOYEE");
+			roles.add("MANAGER");
+			roles.add("ADMIN");
+			theModel.addAttribute("roles", roles);
+			theModel.addAttribute("crmUser", theCrmUser);
+			theModel.addAttribute("registrationError", "No changes in user info");
+	    	return "account-edit";
+	    }    
+
 	 	// create user account        						
 	    userService.save(theCrmUser);
 	    	    
 	    return "account-create-success";		
 	}
+	
+	@GetMapping("/list")
+	public String showAccountList(ModelMap model) {
+		List<User> users = userService.getAllUsers();
+		
+		model.addAttribute("users", users);
+		return "account-list";
+	}
+	
+	
 }

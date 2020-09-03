@@ -19,24 +19,14 @@
 		
 		<sec:authorize access="hasAnyRole('ADMIN')">
 			<li class="nav-item">
+				<a class="nav-link pl-0" href="${pageContext.request.contextPath}/account/list">アカウント一覧</a>
+			</li>
+		</sec:authorize>
+		
+		<sec:authorize access="hasAnyRole('ADMIN')">
+			<li class="nav-item">
 				<a class="nav-link pl-0" href="${pageContext.request.contextPath}/account/create">アカウント新規作成</a>
 			</li>
 		</sec:authorize>
 	</ul>
 </div>		
-
-<!-- <script>
-	window.onload = function() {
-		var path = window.location.pathname;
-		console.log(path);
-		
-		var navLinks = Array.from(document.querySelectorAll(".nav-link"));
-		navLinks.forEach(item => {
-			if (item.getAttribute("href").startsWith(path)) {
-				item.classList.add("active");
-			} else {
-				item.classList.remove("active");
-			}
-		})		
-	} 
-</script> -->

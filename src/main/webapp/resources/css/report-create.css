@@ -14,6 +14,11 @@
 }
 
 .report-create .message {
+	color: green;
+	font-size: 120%;
+}
+
+.report-create .error {
 	color: red;
 	font-size: 120%;
 }

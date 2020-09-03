@@ -15,4 +15,6 @@ public interface UserDao {
 	public User findByUserId(int id);
 
 	public List<User> getAllEmps();
+
+	public List<User> getAllUsers();
 }

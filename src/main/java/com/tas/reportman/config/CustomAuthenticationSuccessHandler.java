@@ -31,8 +31,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
 		// now place in the session
 		HttpSession session = request.getSession();
-		session.setAttribute("user", theUser);
-		
+		session.setAttribute("user", theUser);		
 		
 		authentication.getAuthorities().forEach(authority -> {
 			if(authority.getAuthority().equals("ROLE_EMPLOYEE")) {

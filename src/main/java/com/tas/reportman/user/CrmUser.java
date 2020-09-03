@@ -1,12 +1,12 @@
 package com.tas.reportman.user;
 
-import static org.assertj.core.api.Assertions.assertThatIllegalStateException;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Length;
 
 import com.tas.reportman.validation.FieldMatch;
 import com.tas.reportman.validation.ValidEmail;
@@ -38,11 +38,14 @@ public class CrmUser {
 	@Size(min = 1, message = "is required")
 	private String lastName;
 
-	@ValidEmail
+	
 	@NotNull(message = "is required")
 	@Size(min = 1, message = "is required")
+	@ValidEmail
 	private String email;
 	
+	@NotNull(message = "is required")
+	@Size(min = 1, message = "is required")
 	private List<String> roles = new ArrayList<String>();
 
 	public CrmUser() {

@@ -46,4 +46,20 @@ public class ReportServiceImpl implements ReportService {
 		return reportDao.checkIfReportDateUnique(theReport, id);
 	}
 
+	@Override
+	public Report trimReport(@Valid Report theReport) {
+		
+		Report report = new Report();
+		
+		report.setId(theReport.getId());
+		report.setDate(theReport.getDate());
+		// trim unnecessary space
+		report.setTask(theReport.getTask().trim());
+		report.setDetail(theReport.getDetail().trim());
+		report.setResult(theReport.getResult().trim());
+		report.setFeeling(theReport.getFeeling().trim());
+		
+		return report;
+	}
+
 }

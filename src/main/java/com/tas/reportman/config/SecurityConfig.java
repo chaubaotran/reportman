@@ -45,7 +45,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.successHandler(customAuthenticationSuccessHandler)
 				.permitAll()
 			.and()
-			.logout().permitAll()
+			.logout()
+			.permitAll()
+			.invalidateHttpSession(true)
+            .clearAuthentication(true)
 			.and()
 			.exceptionHandling().accessDeniedPage("/access-denied");
 		

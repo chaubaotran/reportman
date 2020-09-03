@@ -40,6 +40,7 @@ public class UserDaoImpl implements UserDao {
 	public void save(User theUser) {
 		// get current hibernate session
 		Session currentSession = entityManager.unwrap(Session.class);
+		currentSession.clear();
 
 		// create the user ... finally LOL
 		currentSession.saveOrUpdate(theUser);
@@ -81,6 +82,24 @@ public class UserDaoImpl implements UserDao {
 		// retrieve from db user with role employee
 		Query<User> theQuery = currentSession.createQuery("select u from User u WHERE :element in elements(u.roles)", User.class);
 		theQuery.setParameter("element", currentSession.get(Role.class, 1));
+		List<User> theUsers = null;
+		try {
+			theUsers = theQuery.getResultList();
+		} catch (Exception e) {
+			theUsers = null;
+		}
+
+		return theUsers;
+	}
+
+	@Override
+	public List<User> getAllUsers() {
+		// get the current hibernate session
+		Session currentSession = entityManager.unwrap(Session.class);
+		
+		// retrieve from db user with role employee
+		Query<User> theQuery = currentSession.createQuery("from User order by userName", User.class);
+		
 		List<User> theUsers = null;
 		try {
 			theUsers = theQuery.getResultList();

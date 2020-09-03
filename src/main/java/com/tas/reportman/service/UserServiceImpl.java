@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -105,6 +106,43 @@ public class UserServiceImpl implements UserService {
 	public List<User> getAllEmps() {
 		return userDao.getAllEmps();
 	}
+
+	@Override
+	public Boolean checkEditValidation(@Valid CrmUser theCrmUser) {
+		User existing1 = userDao.findByUserName(theCrmUser.getUserName());
+	    User existing2 = userDao.findByUserEmail(theCrmUser.getEmail());
+	        
+	    if ((existing1 != null && existing1.getId() != theCrmUser.getId()) || (existing2 != null && existing2.getId() != theCrmUser.getId())) {
+	    	return false;
+	    }
+		return true;
+	}
+
+	@Override
+	public Boolean checkIfUserInfoChanged(@Valid CrmUser theCrmUser) {
+		User user = userDao.findByUserId(theCrmUser.getId());
+		
+	    if (user.getUserName().equals(theCrmUser.getUserName()) 
+		    && user.getFirstName().equals(theCrmUser.getFirstName())
+		    && user.getLastName().equals(theCrmUser.getLastName())
+		    && user.getEmail().equals(theCrmUser.getEmail())
+		    && passwordEncoder.matches(theCrmUser.getPassword(), user.getPassword())) {	    	
+	    	return false;
+	    }
+	    
+	    return true;
+	}
+	
+	public UserDetails getUserDetails() {
+		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return userDetails;
+	}
+
+	@Override
+	public List<User> getAllUsers() {
+		// TODO Auto-generated method stub
+		return userDao.getAllUsers();
+	} 
 }
 
 

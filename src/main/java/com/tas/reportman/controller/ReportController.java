@@ -34,6 +34,7 @@ public class ReportController {
 	@GetMapping("/create")
 	public String showCreateNew(ModelMap model, 
 							    @ModelAttribute("message") String theMessage,
+							    @ModelAttribute("successMessage") String successMessage,
 							    @ModelAttribute("report") Report theReport) {	
 		if (theReport == null) {
 			model.addAttribute("report", new Report());
@@ -41,7 +42,8 @@ public class ReportController {
 			model.addAttribute("report", theReport);
 		}
 		
-		model.addAttribute("successMessage", theMessage);		
+		model.addAttribute("errorMessage", theMessage);		
+		model.addAttribute("successMessage", successMessage);	
 		return "report-create";
 	}
 	
@@ -59,9 +61,10 @@ public class ReportController {
 		
 		Boolean r = reportService.checkIfReportDateUnique(theReport, user.getId());
 		 if (r == true) {
+			Report report = reportService.trimReport(theReport);			 
 			// save report object to database
-			reportService.saveOrUpdateReport(theReport, user.getId());	
-			redirectAttrs.addFlashAttribute("message", "日報追加しました");
+			reportService.saveOrUpdateReport(report, user.getId());	
+			redirectAttrs.addFlashAttribute("successMessage", "日報追加しました");
 		 } else {
 			redirectAttrs.addFlashAttribute("report", theReport);
 			redirectAttrs.addFlashAttribute("message", "ご指定の日付にすでに日報が存在します");
@@ -113,8 +116,9 @@ public class ReportController {
 		
 		int userId = user.getId();
 		
+		Report report = reportService.trimReport(theReport);
 		// save report object to database
-		reportService.saveOrUpdateReport(theReport, userId);	
+		reportService.saveOrUpdateReport(report, userId);	
 		
 		redirectAttrs.addFlashAttribute("message", "日報編集しました");
 		// redirect to previous page

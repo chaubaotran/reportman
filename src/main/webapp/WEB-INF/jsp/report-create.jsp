@@ -19,6 +19,7 @@
 						</div>	
 						
 						<p class="message">${successMessage}</p>		
+						<p class="error">${errorMessage}</p>	
 								
 						<div class="form-group">
 							<label>日付*</label>	
@@ -51,7 +52,7 @@
 									
 						<form:input type="hidden" path="id" />	  	
 					  	<input type="submit" class="btn btn-primary" value="提出" onClick="return confirmSubmit()" />		  	
-					</form:form>							
+					</form:form>					
 				</div>
 			</div>
 		</div>
