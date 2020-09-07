@@ -3,7 +3,9 @@ package com.tas.reportman.entity;
 import javax.persistence.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -38,6 +40,10 @@ public class User {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="user",
 			   cascade= {CascadeType.REFRESH})
     private List<Report> reports = new ArrayList<>();
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="user",
+			   cascade= {CascadeType.REFRESH})
+	private Set<UserReportReadStatus> userReportReadSatus  = new HashSet<>();
 	
 	public User() {
 		
@@ -118,6 +124,14 @@ public class User {
 
 	public void setReports(List<Report> reports) {
 		this.reports = reports;
+	}	
+
+	public Set<UserReportReadStatus> getUserReportReadSatus() {
+		return userReportReadSatus;
+	}
+
+	public void setUserReportReadSatus(Set<UserReportReadStatus> userReportReadSatus) {
+		this.userReportReadSatus = userReportReadSatus;
 	}
 
 	public void add(Report tempReport) {
@@ -129,6 +143,10 @@ public class User {
 		reports.add(tempReport);
 		
 		tempReport.setUser(this);
+	}
+	
+	public void addUserReportReadSatus(UserReportReadStatus u) {
+		this.userReportReadSatus.add(u);
 	}
 
 	@Override

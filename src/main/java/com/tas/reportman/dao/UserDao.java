@@ -17,4 +17,8 @@ public interface UserDao {
 	public List<User> getAllEmps();
 
 	public List<User> getAllUsers();
+
+	List<User> getAllAdsAndMans();
+
+	User getUser(int id);
 }

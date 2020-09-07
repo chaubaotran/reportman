@@ -64,18 +64,41 @@
 							</thead>
 										
 							<tbody>
-								<c:forEach items="${reports}" var="report">
+								<c:forEach items="${reports}" var="report">									
+									
+									<c:set var="unread" value="false" />
+									<c:forEach var="unReadReport" items="${unReadReports}">
+									  <c:if test="${report eq unReadReport}">
+									    <c:set var="unread" value="true" />
+									  </c:if>
+									</c:forEach>
+									
 									<c:url var="readLink" value="${pageContext.request.contextPath}/employee/report">
-									<c:param name="id" value="${report.id}" />							
-								</c:url>
-								<tr>
-									<td><c:out value="${report.date}" /></td>
-									<td><c:out value="${report.task}" /></td>
-									<td>
-										<a href="${readLink}">読む</a>
-									</td>
-								</tr>
-								</c:forEach>			
+										<c:param name="id" value="${report.id}" />			
+										<c:param name="unread" value="${unread}" />				
+									</c:url>
+									
+									<c:if test="${unread eq true}">
+   										<tr style="color: red;">
+											<td><c:out value="${report.date}" /></td>
+											<td><c:out value="${report.task}" /></td>
+											<td>
+												<a style="color: red;" href="${readLink}">読む</a>
+											</td>
+										</tr>	
+								  	</c:if>
+								  	
+								  	<c:if test="${unread eq false}">
+   										<tr>
+											<td><c:out value="${report.date}" /></td>
+											<td><c:out value="${report.task}" /></td>
+											<td>
+												<a href="${readLink}">読む</a>
+											</td>
+										</tr>	
+								  	</c:if>
+
+								</c:forEach>	
 							</tbody>    					   
 						</table>
 					</div>

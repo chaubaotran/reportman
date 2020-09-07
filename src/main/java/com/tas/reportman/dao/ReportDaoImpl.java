@@ -12,12 +12,16 @@ import org.springframework.stereotype.Repository;
 
 import com.tas.reportman.entity.Report;
 import com.tas.reportman.entity.User;
+import com.tas.reportman.entity.UserReportReadStatus;
 
 @Repository
 public class ReportDaoImpl implements ReportDao {
 	
 	@Autowired
 	EntityManager entityManager;
+	
+	@Autowired
+	UserDao userDao;
 
 	@Override
 	public List<Report> getAllReports(int id) {
@@ -56,10 +60,19 @@ public class ReportDaoImpl implements ReportDao {
 	public void saveOrUpdateReport(Report report, int userId) {
 		Session session = entityManager.unwrap(Session.class);
 		
-		User user = session.get(User.class, userId);
-		
+		User user = session.get(User.class, userId);		
 		user.add(report);			
-		session.saveOrUpdate(report);	
+		
+		List<User> users = userDao.getAllAdsAndMans();
+		
+		for (User u:users) {
+			UserReportReadStatus userReportReadStatus = new UserReportReadStatus(u, report, false);
+			report.addUserReportReadSatus(userReportReadStatus);
+			u.addUserReportReadSatus(userReportReadStatus);
+			session.saveOrUpdate(report);
+			session.saveOrUpdate(u);
+			session.saveOrUpdate(userReportReadStatus);	
+		}
 	}
 
 	@Override

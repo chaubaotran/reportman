@@ -13,11 +13,20 @@
 				<%@ include file="fragments/sidebar.jsp"%>				
 				<div class="col-10 report-create">	
 								
-				<form:form action="addNewReport" method="POST" modelAttribute="report">
+				<form:form action="report/confirm" method="POST" modelAttribute="report">
 					<div class="d-flex flex-column">
 						<span class="ml-auto">研修生: ${emp.userName}</span>
 					</div>	
+					
 					<form:input type="hidden" path="id" />
+					
+					<c:if test="${unread eq true}">
+						<c:out value="Unread"></c:out>
+					</c:if>
+					
+					<c:if test="${unread eq false}">
+						<c:out value="Read"></c:out>
+					</c:if>
 					
 					<div class="form-group">
 						<label>日付*</label>	
@@ -51,7 +60,9 @@
 					<c:url var="backToList" value="${pageContext.request.contextPath}/employee/report/list">
 			            <c:param name="id" value="${emp.id}"/>
 			            <c:param name="empName" value="${emp.userName}"/>
-			        </c:url>											
+			        </c:url>	
+			        
+			        <input type="submit" value="確認"> 										
 				</form:form>
 			
 				<p class="mt-5"><a href="${backToList}">${emp.userName}の日報一覧に戻る</a></p>
