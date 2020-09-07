@@ -15,14 +15,13 @@
 					<div class="d-flex">
 						<h3><strong>日報一覧</strong></h3>	
 						<div class="d-flex flex-column ml-auto">
-							<span>ユーザー: ${user.userName}</span>
 							<span>研修生: ${empName}</span>
 						</div>					
 						
 					</div>	
 		
 					<div class="d-flex justify-content-end">
-						<form:form class="mt-4" method="GET" action="${pageContext.request.contextPath}/report/list/filter/">
+						<form:form class="mt-4" method="GET" action="${pageContext.request.contextPath}/employee/report/list/filter/">
 							<span>フィルター:</span>
 							
 							<label>年</label>
@@ -54,31 +53,32 @@
 							<input type="submit" value="Filter" id="filter-btn" disabled>				
 						</form:form>		
 					</div>
-					
-					<table class="table table-hover">
-						<thead>
-							<tr>
-								<th>日付</th>
-								<th>課題</th>
-								<th><i class="fas fa-cogs"></i></th>
-							</tr>
-						</thead>
-									
-						<tbody>
-							<c:forEach items="${reports}" var="report">
-								<c:url var="readLink" value="${pageContext.request.contextPath}/employee/report">
-								<c:param name="id" value="${report.id}" />							
-							</c:url>
-							<tr>
-								<td><c:out value="${report.date}" /></td>
-								<td><c:out value="${report.task}" /></td>
-								<td>
-									<a href="${readLink}">読む</a>
-								</td>
-							</tr>
-							</c:forEach>			
-						</tbody>    					   
-					</table>
+					<div class="table-wrapper-scroll-y my-custom-scrollbar">		
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th>日付</th>
+									<th>課題</th>
+									<th><i class="fas fa-cogs"></i></th>
+								</tr>
+							</thead>
+										
+							<tbody>
+								<c:forEach items="${reports}" var="report">
+									<c:url var="readLink" value="${pageContext.request.contextPath}/employee/report">
+									<c:param name="id" value="${report.id}" />							
+								</c:url>
+								<tr>
+									<td><c:out value="${report.date}" /></td>
+									<td><c:out value="${report.task}" /></td>
+									<td>
+										<a href="${readLink}">読む</a>
+									</td>
+								</tr>
+								</c:forEach>			
+							</tbody>    					   
+						</table>
+					</div>
 					
 					<c:set var = "reports" scope = "session" value = "${reports}"/>
 					<c:if test = "${reports == null || reports.size() == 0}">

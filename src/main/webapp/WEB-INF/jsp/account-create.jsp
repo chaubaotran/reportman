@@ -13,83 +13,81 @@
 			<div class="row my-2">						
 				<%@ include file="fragments/sidebar.jsp"%>	
 				
-					
-
-				<!-- Registration Form -->
-				<form:form action="${pageContext.request.contextPath}/account/create/processing" 
-					  	   modelAttribute="crmUser"
-					  	   class="form-horizontal"
-					  	   method="POST">
-
-				    <!-- Place for messages: error, alert etc ... -->
-				    <div class="form-group">
-				        <div class="col-xs-15">
-				            <div>
-							
+				<div class="col-10 report-create">			
+					<!-- Registration Form -->
+					<form:form action="${pageContext.request.contextPath}/account/create/processing" 
+						  	   modelAttribute="crmUser"
+						  	   class="form-horizontal"
+						  	   method="POST">
+						  	   
+						<div class="d-flex">
+							<h3><strong>アカウント新規作成</strong></h3>
+						</div>	
+	
+					    <!-- Place for messages: error, alert etc ... -->
+					    <div class="form-group mt-3">
+				            <div>							
 								<!-- Check for registration error -->
-								<c:if test="${registrationError != null}">
-							
+								<c:if test="${registrationError != null}">							
 									<div class="alert alert-danger col-xs-offset-1 col-xs-10">
 										${registrationError}
-									</div>
-	
-								</c:if>
-																		
+									</div>	
+								</c:if>																		
 				            </div>
-				        </div>
-				    </div>
-				    
-				    <form:input path="id" type="hidden" />
-
-					<!-- User name -->
-					<div class="mb-4">
-						<label>User name <form:errors path="userName" cssClass="error" /></label>
-						<form:input path="userName" placeholder="username (*)" class="form-control" />		
-					</div>
-
-					<!-- Password -->
-					<div class="mb-4">
-						<label>Password <form:errors path="password" cssClass="error" /></label>
-						<form:password path="password" placeholder="password (*)" class="form-control" />						
-					</div>
-					
-					<!-- Confirm Password -->
-					<div class="mb-4">
-						<label>Confirm password <form:errors path="matchingPassword" cssClass="error" /></label>
-						<form:password path="matchingPassword" placeholder="confirm password (*)" class="form-control" />						
-					</div>				
-					
-					<!-- First name -->
-					<div class="mb-4">
-						<label>First name <form:errors path="firstName" cssClass="error" /></label>
-						<form:input path="firstName" placeholder="first name (*)" class="form-control" />						
-					</div>
-					
-					<!-- Last name -->
-					<div class="mb-4">
-						<label>Last name <form:errors path="lastName" cssClass="error" /></label>
-						<form:input path="lastName" placeholder="last name (*)" class="form-control" />						
-					</div>
-					
-					<!-- Email -->
-					<div class="mb-4">
-						<label>Email <form:errors path="email" cssClass="error" /></label>
-						<form:input path="email" placeholder="email (*)" class="form-control" />						
-					</div>
-					
-					<!-- Roles -->
-					<div class="mb-4">
-						<label>Roles <form:errors path="roles" cssClass="error" /></label>
-						<br>
-						<form:radiobuttons  items="${roles}" path="roles" class="mx-3" />						
-					</div>
+					    </div>
+					    
+					    <form:input path="id" type="hidden" />
 	
-					<!-- Register Button -->
-					<div class="form-group">
-						<button type="submit" class="btn btn-primary">Register</button>
-					</div>
-					
-				</form:form>
+						<!-- User name -->
+						<div class="mb-4">
+							<label>User name <form:errors path="userName" cssClass="error" /></label>
+							<form:input path="userName" placeholder="username (*)" class="form-control" />		
+						</div>
+	
+						<!-- Password -->
+						<div class="mb-4">
+							<label>Password <form:errors path="password" cssClass="error" /></label>
+							<form:password path="password" placeholder="password (*)" class="form-control" />						
+						</div>
+						
+						<!-- Confirm Password -->
+						<div class="mb-4">
+							<label>Confirm password <form:errors path="matchingPassword" cssClass="error" /></label>
+							<form:password path="matchingPassword" placeholder="confirm password (*)" class="form-control" />						
+						</div>				
+						
+						<!-- First name -->
+						<div class="mb-4">
+							<label>First name <form:errors path="firstName" cssClass="error" /></label>
+							<form:input path="firstName" placeholder="first name (*)" class="form-control" />						
+						</div>
+						
+						<!-- Last name -->
+						<div class="mb-4">
+							<label>Last name <form:errors path="lastName" cssClass="error" /></label>
+							<form:input path="lastName" placeholder="last name (*)" class="form-control" />						
+						</div>
+						
+						<!-- Email -->
+						<div class="mb-4">
+							<label>Email <form:errors path="email" cssClass="error" /></label>
+							<form:input path="email" placeholder="email (*)" class="form-control" />						
+						</div>
+						
+						<!-- Roles -->
+						<div class="mb-4">
+							<label>Roles <form:errors path="roles" cssClass="error" /></label>
+							<br>
+							<form:radiobuttons  items="${roles}" path="roles" class="mx-3" />						
+						</div>
+		
+						<!-- Register Button -->
+						<div class="form-group">
+							<button type="submit" class="btn btn-primary">Register</button>
+						</div>
+						
+					</form:form>
+				</div>
 				
 <script>
 	window.onload = function() {

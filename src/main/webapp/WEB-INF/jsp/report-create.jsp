@@ -14,8 +14,8 @@
 				<div class="col-10 report-create">						
 					<form:form action="addNewReport" method="POST" modelAttribute="report">						
 						<div class="d-flex">
-							<h3><strong>新規作成</strong></h3>
-							<span class="ml-auto">ユーザー: ${user.userName}</span>
+							<h3><strong>日報新規作成</strong></h3>
+							<span class="ml-auto">研修生: ${user.userName}</span>
 						</div>	
 						
 						<p class="message">${successMessage}</p>		

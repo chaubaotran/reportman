@@ -16,7 +16,7 @@
 					<form:form action="editReport" method="POST" modelAttribute="report">
 						<div class="d-flex">
 							<h3><strong>日報編集</strong></h3>
-							<span class="ml-auto">ユーザー: ${user.userName}</span>
+							<span class="ml-auto">研修生: ${user.userName}</span>
 						</div>	
 						<p class="message">${successMessage}</p>		
 								

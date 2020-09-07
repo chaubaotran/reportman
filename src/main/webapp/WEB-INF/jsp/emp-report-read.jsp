@@ -15,7 +15,6 @@
 								
 				<form:form action="addNewReport" method="POST" modelAttribute="report">
 					<div class="d-flex flex-column">
-						<span class="ml-auto">ユーザー: ${user.userName}</span>
 						<span class="ml-auto">研修生: ${emp.userName}</span>
 					</div>	
 					<form:input type="hidden" path="id" />

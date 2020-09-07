@@ -2,6 +2,9 @@
 
 <nav class="navbar top-bar">
 	<a class="navbar-brand" href="#">レポーマン</a>	
+	
+	<span class="ml-auto mr-5 text-white">ユーザー: ${user.userName}</span>
+	
 	<div class="toggle-btn">
 		<span onclick="toggleMenu()"><i class="fas fa-bars"></i></span>
 	</div>	

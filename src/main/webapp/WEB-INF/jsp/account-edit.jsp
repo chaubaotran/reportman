@@ -13,13 +13,18 @@
 			<div class="row my-2">						
 				<%@ include file="fragments/sidebar.jsp"%>	
 				
-					
+				<div class="col-10 report-create">		
 
 				<!-- Registration Form -->
 				<form:form action="${pageContext.request.contextPath}/account/edit/processing" 
 					  	   modelAttribute="crmUser"
 					  	   class="form-horizontal"
 					  	   method="POST">
+					
+					<div class="d-flex">
+							<h3><strong>アカウント編集</strong></h3>
+							<span class="ml-auto">ユーザー名: ${crmUser.userName}</span>
+						</div>	
 
 				    <!-- Place for messages: error, alert etc ... -->
 				    <div class="form-group">
