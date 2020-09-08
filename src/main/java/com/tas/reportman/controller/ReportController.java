@@ -36,6 +36,7 @@ public class ReportController {
 							    @ModelAttribute("message") String theMessage,
 							    @ModelAttribute("successMessage") String successMessage,
 							    @ModelAttribute("report") Report theReport) {	
+		
 		if (theReport == null) {
 			model.addAttribute("report", new Report());
 		} else {
@@ -44,7 +45,8 @@ public class ReportController {
 		
 		model.addAttribute("errorMessage", theMessage);		
 		model.addAttribute("successMessage", successMessage);	
-		return "report-create";
+		return "report_create";
+		
 	}
 	
 	@PostMapping("/addNewReport")
@@ -54,21 +56,22 @@ public class ReportController {
 							   HttpSession session) {
 		
 		if(result.hasErrors()) {
-			return "report-create";
+			return "report_create";
 		}
 		
 		User user = (User)session.getAttribute("user");
 		
-		Boolean r = reportService.checkIfReportDateUnique(theReport, user.getId());
-		 if (r == true) {
+		// Check if report date is unique
+		Boolean r = reportService.checkIfReportDateUnique(theReport, user.getId());		
+		if (r == true) {
 			Report report = reportService.trimReport(theReport);			 
 			// save report object to database
 			reportService.saveOrUpdateReport(report, user.getId());	
 			redirectAttrs.addFlashAttribute("successMessage", "日報追加しました");
-		 } else {
+			 } else {
 			redirectAttrs.addFlashAttribute("report", theReport);
 			redirectAttrs.addFlashAttribute("message", "ご指定の日付にすでに日報が存在します");
-		 }	
+		}	
 		
 		// redirect to previous page
 		return "redirect:/report/create";
@@ -77,11 +80,16 @@ public class ReportController {
 	
 	@GetMapping("/list")
 	public String showAllReports(ModelMap model,
-								@RequestParam("id") int id) {		
+								@RequestParam("id") int id) {	
+		// get list reports
 		List<Report> reports = reportService.getAllReports(id);	
+		
+		// add model attributes
 		model.addAttribute("reports", reports);
 		model.addAttribute("message", "日報が存在しません");
-		return "report-list";
+		
+		return "report_list";
+		
 	}
 	
 	@GetMapping("/list/filter")
@@ -89,18 +97,25 @@ public class ReportController {
 									  @RequestParam("year") String year,
 									  @RequestParam("month") String month,
 									  @RequestParam("id") int id) {
+		
 		List<Report> reports = reportService.getFilteredReports(year, month, id);	
+		
 		model.addAttribute("reports", reports);
 		model.addAttribute("message", "フィルターの結果が見つかりません");
-		return "report-list";
+		
+		return "report_list";
+		
 	}
 	
 	@GetMapping("/edit")
 	public String showFilteredReports(ModelMap model, 
 									  @RequestParam("reportId") int id) {
+		
 		Report report = reportService.getReport(id);	
+		
 		model.addAttribute("report", report);
-		return "report-edit";
+		
+		return "report_edit";
 	}
 	
 	@PostMapping("/editReport")
@@ -108,8 +123,9 @@ public class ReportController {
 							   BindingResult result, 
 							   HttpSession session,
 							   final RedirectAttributes redirectAttrs) {
+		
 		if(result.hasErrors()) {
-			return "report-edit";
+			return "report_edit";
 		}
 		
 		User user = (User)session.getAttribute("user");
@@ -117,10 +133,12 @@ public class ReportController {
 		int userId = user.getId();
 		
 		Report report = reportService.trimReport(theReport);
+		
 		// save report object to database
 		reportService.saveOrUpdateReport(report, userId);	
 		
 		redirectAttrs.addFlashAttribute("message", "日報編集しました");
+		
 		// redirect to previous page
 		return "redirect:/report/list/?id=" + userId;
 	}   

@@ -8,7 +8,7 @@
 	<head>
 		<meta content="text/html; charset=UTF-8"/>
 		
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 		
 		<title>レポーマン</title>
 	</head>
@@ -17,31 +17,27 @@
 
 	    <div class="container">    		    	
 	    	<div class="row">
-	    		<div class="col col-6">
+	    		<div class="col mt-5">
 	    			<h2>Log in</h2>
 		    
 			    	<form action="${contextPath}/authenticateTheUser" method="POST">
 			    	
 			    		<!-- Place for messages: error, alert etc ... -->
-					    <div class="form-group">
-					        <div class="col-xs-15">
-					            <div>						
-									<!-- Check for login error -->						
-									<c:if test="${param.error != null}">								
-										<div class="alert alert-danger col-xs-offset-1 col-xs-10">
-											Invalid email and password.
-										</div>
-									</c:if>
-										
-									<!-- Check for logout -->
-									<c:if test="${param.logout != null}">								            
-										<div class="alert alert-success col-xs-offset-1 col-xs-10">
-											You have been logged out.
-										</div>						    
-									</c:if>							
-					            </div>
-					        </div>
-					    </div>
+					    <div class="form-group">					
+							<!-- Check for login error -->						
+							<c:if test="${param.error != null}">								
+								<div class="alert alert-danger col-xs-offset-1 col-xs-10">
+									Invalid email and password.
+								</div>
+							</c:if>
+								
+							<!-- Check for logout -->
+							<c:if test="${param.logout != null}">								            
+								<div class="alert alert-success col-xs-offset-1 col-xs-10">
+									You have been logged out.
+								</div>						    
+							</c:if>	
+				        </div>
 			            
 			            <!-- Login form ... -->        
 						<div class="form-group">

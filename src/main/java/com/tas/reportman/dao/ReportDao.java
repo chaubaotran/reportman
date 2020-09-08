@@ -17,4 +17,6 @@ public interface ReportDao {
 	List<Report> getFilteredReports(String year, String month, int id);
 
 	Boolean checkIfReportDateUnique(@Valid Report theReport, int id);
+
+	List<Report> getAll();
 }

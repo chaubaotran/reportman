@@ -7,16 +7,26 @@ import javax.persistence.EntityManager;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
 
+import com.tas.reportman.entity.Report;
 import com.tas.reportman.entity.Role;
 import com.tas.reportman.entity.User;
+import com.tas.reportman.entity.UserReportReadStatus;
 
 @Repository
 public class UserDaoImpl implements UserDao {
 
 	@Autowired
 	private EntityManager entityManager;
+	
+	private ReportDao reportDao;
+	
+	@Autowired
+	public void setReportDao(@Lazy ReportDao reportDao) {
+		this.reportDao = reportDao;
+	}
 
 	@Override
 	public User findByUserName(String theUserName) {
@@ -41,9 +51,32 @@ public class UserDaoImpl implements UserDao {
 		// get current hibernate session
 		Session currentSession = entityManager.unwrap(Session.class);
 		currentSession.clear();
-
-		// create the user ... finally LOL
-		currentSession.saveOrUpdate(theUser);
+		
+		// check role
+		List<Role> roles = theUser.getRoles();
+		Boolean isEmployee = false;
+		for (Role role : roles) {
+			if (role.getId() == 1) {
+				isEmployee = true;
+			}
+		}
+		
+		
+		// get all reports
+		List<Report> reports = reportDao.getAll();
+		if (reports.size() > 0 && reports != null && !isEmployee) {
+			for (Report report:reports) {
+				UserReportReadStatus userReportReadStatus = new UserReportReadStatus(theUser, report, false);
+				report.addUserReportReadSatus(userReportReadStatus);
+				theUser.addUserReportReadSatus(userReportReadStatus);
+				currentSession.saveOrUpdate(report);
+				currentSession.saveOrUpdate(theUser);
+				currentSession.saveOrUpdate(userReportReadStatus);	
+			}
+		} else {
+			currentSession.saveOrUpdate(theUser);
+		}
+		
 	}
 
 	@Override

@@ -55,7 +55,7 @@
 
 					<!-- Password -->
 					<div class="mb-4">
-						<label>New password (old password is allowed)</label>
+						<label>New password (enter old password if you don't wanna change)</label>
 						<form:password path="password" placeholder="password (*)" class="form-control" />
 						<form:errors path="password" cssClass="error" />
 					</div>

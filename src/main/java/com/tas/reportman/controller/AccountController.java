@@ -41,7 +41,7 @@ public class AccountController {
 		model.addAttribute("crmUser", new CrmUser());
 		model.addAttribute("roles", roles);
 		
-		return "account-create";		
+		return "account_create";		
 	}
 
 	@PostMapping("/create/processing")
@@ -56,7 +56,7 @@ public class AccountController {
 			roles.add("ADMIN");
 			theModel.addAttribute("roles", roles);
 			theModel.addAttribute("registrationError", "Missing required value or invalid input");
-			return "account-create";
+			return "account_create";
 	    }
 		 
 		 if (theCrmUser.getRoles().size() <= 0){
@@ -67,7 +67,7 @@ public class AccountController {
 				theModel.addAttribute("roles", roles);
 				theModel.addAttribute("crmUser", theCrmUser);
 				theModel.addAttribute("registrationError", "Missing required value or invalid input");
-		    	return "account-create";
+		    	return "account_create";
 		}
 	
 		// check the database if user name or email already exists
@@ -82,12 +82,12 @@ public class AccountController {
 			theModel.addAttribute("roles", roles);
 			theModel.addAttribute("crmUser", theCrmUser);
 			theModel.addAttribute("registrationError", "User name or email already exists.");
-	    	return "account-create";
+	    	return "account_create";
 	    }
 	 	// create user account        						
 	    userService.save(theCrmUser);
 	    	    
-	    return "account-create-success";		
+	    return "account_create_success";		
 	}
 	
 	@GetMapping("/edit")
@@ -125,7 +125,7 @@ public class AccountController {
 		model.addAttribute("crmUser", theUser);
 		model.addAttribute("roles", roles);
 		
-		return "account-edit";		
+		return "account_edit";		
 		
 	}
 	
@@ -142,7 +142,7 @@ public class AccountController {
 			theModel.addAttribute("roles", roles);
 			UserDetails userDetails = userService.getUserDetails();
 			theModel.addAttribute("authentication",userDetails.getAuthorities());
-			return "account-edit";
+			return "account_edit";
 	    }
 		
 		Boolean result = userService.checkEditValidation(theCrmUser);
@@ -158,7 +158,7 @@ public class AccountController {
 			theModel.addAttribute("registrationError", "User name or email already exists.");
 			UserDetails userDetails = userService.getUserDetails();
 			theModel.addAttribute("authentication",userDetails.getAuthorities());
-	    	return "account-edit";
+	    	return "account_edit";
 	    }
 	    
 	    
@@ -174,13 +174,13 @@ public class AccountController {
 			theModel.addAttribute("registrationError", "No changes in user info");
 			UserDetails userDetails = userService.getUserDetails();
 			theModel.addAttribute("authentication",userDetails.getAuthorities());
-	    	return "account-edit";
+	    	return "account_edit";
 	    }    
 
 	 	// create user account        						
 	    userService.save(theCrmUser);
 	    	    
-	    return "account-create-success";		
+	    return "account_create_success";		
 	}
 	
 	@GetMapping("/list")
@@ -188,7 +188,7 @@ public class AccountController {
 		List<User> users = userService.getAllUsers();
 		
 		model.addAttribute("users", users);
-		return "account-list";
+		return "account_list";
 	}
 	
 	

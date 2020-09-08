@@ -125,4 +125,20 @@ public class ReportDaoImpl implements ReportDao {
 		return false;
 	}
 
+	@Override
+	public List<Report> getAll() {
+		Session session = entityManager.unwrap(Session.class);
+		
+		Query<Report> theQuery = session.createQuery("FROM Report", Report.class);
+		List<Report> reports;
+		
+		try {
+			reports = theQuery.getResultList();
+		} catch (Exception e){
+			reports = null;
+		}
+		
+		return reports;
+	}
+
 }

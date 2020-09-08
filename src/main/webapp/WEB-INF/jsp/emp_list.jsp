@@ -22,6 +22,8 @@
 							<thead>
 								<tr>
 									<th>名前</th>
+									<th>日報数</th>
+									<th>未確認数</th>
 									<th><i class="fas fa-cogs"></i></th>
 								</tr>	
 							</thead>
@@ -29,13 +31,15 @@
 						    <tbody>
 							    <c:forEach items="${employees}" var="employee">
 									<c:url var="report" value="${pageContext.request.contextPath}/employee/report/list">
-									<c:param name="id" value="${employee.id}" />	
-									<c:param name="empName" value="${employee.userName}" />						
-								</c:url>
-								<tr>
+										<c:param name="id" value="${employee.id}" />	
+										<c:param name="empName" value="${employee.userName}" />						
+									</c:url>
+								<tr  <c:if test="${employee.unreadNumber > 0}">style="color: red"</c:if>>
 									<td><c:out value="${employee.userName}" /></td>
+									<td><c:out value="${employee.reportNumber}" /></td>
+									<td><c:out value="${employee.unreadNumber}" /></td>
 									<td>
-										<a href="${report}">日報一覧</a>
+										<a <c:if test="${employee.unreadNumber > 0}">style="color: red"</c:if> href="${report}">日報一覧</a>
 									</td>
 								</tr>
 								</c:forEach>		

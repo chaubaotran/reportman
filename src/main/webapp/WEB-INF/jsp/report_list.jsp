@@ -54,9 +54,9 @@
 						<table class="table table-hover">
 							<thead>
 								<tr>
-									<th>日付</th>
-									<th>課題</th>
-									<th><i class="fas fa-cogs"></i></th>
+									<th style="width: 40%">日付</th>
+									<th style="width: 40%">課題</th>
+									<th style="width: 20%"><i class="fas fa-cogs"></i></th>
 								</tr>	
 							</thead>
 								

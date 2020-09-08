@@ -6,8 +6,6 @@ import java.util.List;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.Length;
-
 import com.tas.reportman.validation.FieldMatch;
 import com.tas.reportman.validation.ValidEmail;
 

@@ -19,14 +19,15 @@
 					</div>	
 					
 					<form:input type="hidden" path="id" />
-					
 					<c:if test="${unread eq true}">
-						<c:out value="Unread"></c:out>
+						<h4><span class="badge badge-warning">未確認</span></h4>
 					</c:if>
 					
 					<c:if test="${unread eq false}">
-						<c:out value="Read"></c:out>
+						<h4><span class="badge badge-success">確認済</span></h4>
 					</c:if>
+					
+					<p class="message">${message}</p>						
 					
 					<div class="form-group">
 						<label>日付*</label>	
@@ -61,8 +62,8 @@
 			            <c:param name="id" value="${emp.id}"/>
 			            <c:param name="empName" value="${emp.userName}"/>
 			        </c:url>	
-			        
-			        <input type="submit" value="確認"> 										
+			        			        
+			        <input type="submit" class="btn btn-primary confirm-btn" value="確認"  <c:if test="${unread == false}"><c:out value="disabled='disabled'"/></c:if> /> 					
 				</form:form>
 			
 				<p class="mt-5"><a href="${backToList}">${emp.userName}の日報一覧に戻る</a></p>
@@ -79,7 +80,7 @@
 		var navLinks = Array.from(document.querySelectorAll(".nav-link"));
 		var textareas = Array.from(document.querySelectorAll(".form-control"));
 	  	var date = document.querySelector("#report-date");
-		
+				
 		/* Make sidebar active item stand out */
 		navLinks.forEach(item => {
 			if (item.getAttribute("href").startsWith(path)) {
@@ -99,9 +100,10 @@
 		/* Make textarea and date readonly */
 		textareas.forEach(item => {
 			  item.setAttribute("readonly", true);
-		  })
+		})
 		  
 	  	date.setAttribute("readonly", true);
+		
 	}
 	
 	function toggleMenu() {

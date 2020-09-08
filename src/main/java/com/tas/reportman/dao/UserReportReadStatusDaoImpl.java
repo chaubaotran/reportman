@@ -39,7 +39,7 @@ public class UserReportReadStatusDaoImpl implements UserReportReadStatusDao {
 		User user = userDao.getUser(managerId);
 		
 		List<Report> unReadReports = new ArrayList<Report>();
-		Query<Report> theQuery = currentSession.createQuery("select distinct u.report from UserReportReadStatus u where u.report in (:reports) and u.user = :user and u.read = :read", Report.class);
+		Query<Report> theQuery = currentSession.createQuery("select distinct u.report from UserReportReadStatus u where u.report in (:reports) and u.user = :user and u.read = :read order by u.report.date desc", Report.class);
 		theQuery.setParameter("user", user);
 		theQuery.setParameter("reports", reports);
 		theQuery.setParameter("read", false);
