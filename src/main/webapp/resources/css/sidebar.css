@@ -5,6 +5,8 @@
 
 .side-bar .nav-link:hover {
 	color: #015d82;
+	font-weight: 600;
+	letter-spacing: 1px;
 }
 
 .side-bar .nav-link.active {
