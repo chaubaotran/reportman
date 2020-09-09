@@ -1,6 +1,10 @@
-@import "report-create.css";
+@import "form.css";
 @import "sidebar.css";
 @import "topbar.css";
+
+.error {
+	color: red;
+}
 
 .my-custom-scrollbar {
 	position: relative;

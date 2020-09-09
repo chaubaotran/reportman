@@ -1,19 +1,24 @@
 package com.tas.reportman.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.validation.Valid;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.tas.reportman.entity.Report;
 import com.tas.reportman.entity.Role;
 import com.tas.reportman.entity.User;
 import com.tas.reportman.entity.UserReportReadStatus;
+import com.tas.reportman.form.AccountEditForm;
+import com.tas.reportman.form.PasswordEditForm;
 
 @Repository
 public class UserDaoImpl implements UserDao {
@@ -22,6 +27,12 @@ public class UserDaoImpl implements UserDao {
 	private EntityManager entityManager;
 	
 	private ReportDao reportDao;
+	
+	@Autowired
+	private RoleDao roleDao;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@Autowired
 	public void setReportDao(@Lazy ReportDao reportDao) {
@@ -175,6 +186,54 @@ public class UserDaoImpl implements UserDao {
 		}
 
 		return user;
+	}
+
+	@Override
+	public void edit(@Valid AccountEditForm theCrmUser) {
+		// get current hibernate session
+		Session currentSession = entityManager.unwrap(Session.class);
+		currentSession.clear();
+		
+		// get user
+		User user = currentSession.get(User.class, theCrmUser.getId());
+		
+		// edit user
+		user.setUserName(theCrmUser.getUserName());
+		user.setFirstName(theCrmUser.getFirstName());
+		user.setLastName(theCrmUser.getLastName());
+		user.setEmail(theCrmUser.getEmail());
+		
+		List<String> roles = theCrmUser.getRoles();
+		
+		List<Role> theRoles = new ArrayList<Role>();
+		
+		for (String role:roles) {
+			theRoles.add(roleDao.findRoleByName("ROLE_"+role));
+		}
+		
+		// give user default role of "employee"
+		user.setRoles(theRoles);
+		
+		// update to database
+		currentSession.saveOrUpdate(user);
+		
+	}
+
+	@Override
+	public void editPassword(@Valid PasswordEditForm theCrmUser) {
+		
+		// get current hibernate session
+		Session currentSession = entityManager.unwrap(Session.class);
+		currentSession.clear();
+		
+		// get user
+		User user = currentSession.get(User.class, theCrmUser.getId());
+		
+		// edit user password
+		user.setPassword(passwordEncoder.encode(theCrmUser.getNewPassword()));
+		
+		// update to database
+		currentSession.saveOrUpdate(user);
 	}
 
 }

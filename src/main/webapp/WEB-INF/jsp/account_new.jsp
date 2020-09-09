@@ -4,18 +4,11 @@
 	
 	<body>
 	
-		<div class="container-fluid">
-		
-			<div class="row">			
-				<%@ include file="fragments/topbar.jsp"%>				
-			</div>
-		
-			<div class="row my-2">						
-				<%@ include file="fragments/sidebar.jsp"%>	
-				
-				<div class="col-10 form-frame">			
+		<div class="container">		
+			<div class="row my-5">										
+				<div class="col form-frame">			
 					<!-- Registration Form -->
-					<form:form action="${pageContext.request.contextPath}/account/create/processing" 
+					<form:form action="${pageContext.request.contextPath}/account/new/processing" 
 						  	   modelAttribute="crmUser"
 						  	   class="form-horizontal"
 						  	   method="POST">
@@ -29,9 +22,16 @@
 				            <div>							
 								<!-- Check for registration error -->
 								<c:if test="${registrationError != null}">							
-									<div class="alert alert-danger col-xs-offset-1 col-xs-10">
+									<div class="alert alert-danger">
 										${registrationError}
 									</div>	
+								</c:if>		
+								
+								<c:if test="${successMessage != null}">							
+									<div class="alert alert-success">
+										${successMessage}
+									</div>	
+									
 								</c:if>																		
 				            </div>
 					    </div>
@@ -85,39 +85,12 @@
 						<div class="form-group">
 							<button type="submit" class="btn btn-primary">Register</button>
 						</div>
-						
 					</form:form>
+					
+					<div class="mt-3">
+						<a style="font-size: 130%" href="${pageContext.request.contextPath}/login"><i class="fas fa-arrow-circle-left"></i>Back to login</a>
+					</div>
+					
 				</div>
-				
-<script>
-	window.onload = function() {
-		var path = window.location.pathname;
-		var menu = document.querySelector(".drop-down-menu");
-		var toggleBtn = document.querySelector(".toggle-btn");		
-		var navLinks = Array.from(document.querySelectorAll(".nav-link"));
-	
-		
-		/* Make sidebar active item stand out */
-		navLinks.forEach(item => {
-			if (item.getAttribute("href").startsWith(path)) {
-				item.classList.add("active");
-			} else {
-				item.classList.remove("active");
-			}
-		})			
-	
-		/* Make drop down menu disappear when user clicks outside */
-		document.addEventListener("click", function(e) {
-			if (!menu.contains(e.target) && !toggleBtn.contains(e.target)) {
-				menu.classList.remove("active");
-			}			
-		})
-	}
-	
-	function toggleMenu() {
-		var menu = document.querySelector(".drop-down-menu");
-		menu.classList.toggle("active");
-	}
-</script>
 				
 <%@ include file="fragments/footer.jsp"%>

@@ -11,7 +11,7 @@
 			<div class="row my-2">						
 				<%@ include file="fragments/sidebar.jsp"%>	
 							
-				<div class="col-10 report-create">						
+				<div class="col-10 form-frame">						
 					<form:form action="addNewReport" method="POST" modelAttribute="report">						
 						<div class="d-flex">
 							<h3><strong>日報新規作成</strong></h3>

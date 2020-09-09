@@ -35,4 +35,13 @@ public class RoleDaoImpl implements RoleDao {
 		
 		return theRole;
 	}
+	
+	@Override
+	public void saveOrUpdateRole(Role role) {
+
+		// get the current hibernate session
+		Session currentSession = entityManager.unwrap(Session.class);
+
+		currentSession.saveOrUpdate(role);
+	}
 }

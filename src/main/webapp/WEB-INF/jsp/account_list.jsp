@@ -2,82 +2,70 @@
 
 <%@ include file="fragments/header.jsp"%>
 
-<style>
-	.my-custom-scrollbar {
-	position: relative;
-	height: 70vh;
-	overflow: auto;
-	}
-	.table-wrapper-scroll-y {
-	display: block;
-	}
-
-</style>
-
-	<body>	
-		<div class="container-fluid">
-		
-			<div class="row">			
-				<%@ include file="fragments/topbar.jsp"%>				
-			</div>
-		
-			<div class="row my-2">						
-				<%@ include file="fragments/sidebar.jsp"%>				
-				
-				<div class="col-10 report-create">			
-					<div class="d-flex">
-						<h3><strong>アカウント一覧</strong></h3>
-					</div>	
-					
-					<div class="my-3"><a href="${pageContext.request.contextPath}/account/create">新規作成</a></div>
-						<div class="table-wrapper-scroll-y my-custom-scrollbar">				
-							<table class="table table-hover">
-								<thead>
-									<tr>
-										<th>ユーザー名</th>
-										<th>ファーストネーム</th>
-										<th>ファミリーネーム</th>
-										<th>メール</th>
-										<th>ロール</th>
-										<th><i class="fas fa-cogs"></i></th>
-									</tr>	
-								</thead>
-									
-							    <tbody>
-								    <c:forEach items="${users}" var="user">
-										<c:url var="accountEdit" value="${pageContext.request.contextPath}/account/edit">
-										<c:param name="id" value="${user.id}" />				
-									</c:url>
-									<tr>
-										<td><c:out value="${user.userName}" /></td>
-										<td><c:out value="${user.firstName}" /></td>
-										<td><c:out value="${user.lastName}" /></td>
-										<td><c:out value="${user.email}" /></td>
-										<td>
-											<c:forEach items="${user.roles}" var="role">
-												<c:if test="${role.name == 'ROLE_EMPLOYEE'}">
-													<c:out value="研修生"></c:out>
-												</c:if>
-												<c:if test="${role.name == 'ROLE_MANAGER'}">
-													<c:out value="指導者"></c:out>
-												</c:if>
-											    <c:if test="${role.name == 'ROLE_ADMIN'}">
-													<c:out value="アドミン"></c:out>
-												</c:if>
-											</c:forEach>
-										</td>
-										
-										<td>
-											<a href="${accountEdit}">編集</a>
-										</td>
-									</tr>
-									</c:forEach>		
-							    </tbody>							   
-							</table>
-						</div>
-					</div>
-			</div>
+<body>	
+	<div class="container-fluid">
+	
+		<div class="row">			
+			<%@ include file="fragments/topbar.jsp"%>				
 		</div>
+	
+		<div class="row my-2">						
+			<%@ include file="fragments/sidebar.jsp"%>				
+			
+			<div class="col-10 report-create">			
+				<div class="d-flex">
+					<h3><strong>アカウント一覧</strong></h3>
+				</div>	
+				
+				<div class="my-3"><a href="${pageContext.request.contextPath}/account/create">新規作成</a></div>
+					<div class="table-wrapper-scroll-y my-custom-scrollbar">				
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th>ユーザー名</th>
+									<th>ファーストネーム</th>
+									<th>ファミリーネーム</th>
+									<th>メール</th>
+									<th>ロール</th>
+									<th><i class="fas fa-cogs"></i></th>
+								</tr>	
+							</thead>
+								
+						    <tbody>
+							    <c:forEach items="${users}" var="user">
+									<c:url var="accountEdit" value="${pageContext.request.contextPath}/account/edit">
+									<c:param name="id" value="${user.id}" />				
+								</c:url>
+								<tr>
+									<td><c:out value="${user.userName}" /></td>
+									<td><c:out value="${user.firstName}" /></td>
+									<td><c:out value="${user.lastName}" /></td>
+									<td><c:out value="${user.email}" /></td>
+									<td>
+										<c:forEach items="${user.roles}" var="role">
+											<c:if test="${role.name == 'ROLE_EMPLOYEE'}">
+												<c:out value="研修生"></c:out>
+											</c:if>
+											<c:if test="${role.name == 'ROLE_MANAGER'}">
+												<c:out value="指導者"></c:out>
+											</c:if>
+										    <c:if test="${role.name == 'ROLE_ADMIN'}">
+												<c:out value="アドミン"></c:out>
+											</c:if>
+										</c:forEach>
+									</td>
+									
+									<td>
+										<a href="${accountEdit}">編集</a>
+									</td>
+								</tr>
+								</c:forEach>		
+						    </tbody>							   
+						</table>
+					</div>
+				</div>
+		</div>
+	</div>
 
 <script>
 

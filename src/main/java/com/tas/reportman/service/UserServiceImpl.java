@@ -21,6 +21,8 @@ import com.tas.reportman.dao.RoleDao;
 import com.tas.reportman.dao.UserDao;
 import com.tas.reportman.entity.Role;
 import com.tas.reportman.entity.User;
+import com.tas.reportman.form.AccountEditForm;
+import com.tas.reportman.form.PasswordEditForm;
 import com.tas.reportman.user.CrmUser;
 
 @Service
@@ -103,12 +105,14 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Transactional
 	public List<User> getAllEmps() {
 		return userDao.getAllEmps();
 	}
 
 	@Override
-	public Boolean checkEditValidation(@Valid CrmUser theCrmUser) {
+	@Transactional
+	public Boolean checkEditValidation(AccountEditForm theCrmUser) {
 		User existing1 = userDao.findByUserName(theCrmUser.getUserName());
 	    User existing2 = userDao.findByUserEmail(theCrmUser.getEmail());
 	        
@@ -119,19 +123,19 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Boolean checkIfUserInfoChanged(@Valid CrmUser theCrmUser) {
-		User user = userDao.findByUserId(theCrmUser.getId());
-		
-	    if (user.getUserName().equals(theCrmUser.getUserName()) 
-		    && user.getFirstName().equals(theCrmUser.getFirstName())
-		    && user.getLastName().equals(theCrmUser.getLastName())
-		    && user.getEmail().equals(theCrmUser.getEmail())
-		    && passwordEncoder.matches(theCrmUser.getPassword(), user.getPassword())) {	    	
-	    	return false;
-	    }
-	    
-	    return true;
+	@Transactional
+	public List<User> getAllUsers() {
+		// TODO Auto-generated method stub
+		return userDao.getAllUsers();
 	}
+
+	@Override
+	@Transactional
+	public void edit(@Valid AccountEditForm theCrmUser) {
+
+		userDao.edit(theCrmUser);
+		
+	} 
 	
 	public UserDetails getUserDetails() {
 		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -139,10 +143,17 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> getAllUsers() {
-		// TODO Auto-generated method stub
-		return userDao.getAllUsers();
-	} 
+	public Boolean checkIfPasswordMatch(int id, String currentPassword) {
+		User user = userDao.getUser(id);
+		return (passwordEncoder.matches(currentPassword, user.getPassword()));
+	}
+
+	@Override
+	@Transactional
+	public void editPassword(@Valid PasswordEditForm theCrmUser) {
+		userDao.editPassword(theCrmUser);
+		
+	}
 }
 
 

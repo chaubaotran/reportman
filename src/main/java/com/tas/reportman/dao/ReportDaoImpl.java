@@ -59,20 +59,34 @@ public class ReportDaoImpl implements ReportDao {
 	@Override
 	public void saveOrUpdateReport(Report report, int userId) {
 		Session session = entityManager.unwrap(Session.class);
-		
 		User user = session.get(User.class, userId);		
-		user.add(report);			
+		user.add(report);		
 		
-		List<User> users = userDao.getAllAdsAndMans();
-		
-		for (User u:users) {
-			UserReportReadStatus userReportReadStatus = new UserReportReadStatus(u, report, false);
-			report.addUserReportReadSatus(userReportReadStatus);
-			u.addUserReportReadSatus(userReportReadStatus);
-			session.saveOrUpdate(report);
-			session.saveOrUpdate(u);
-			session.saveOrUpdate(userReportReadStatus);	
+		if(report.getId() == 0) {
+			// save new report		
+			List<User> users = userDao.getAllAdsAndMans();
+			
+			for (User u:users) {
+				UserReportReadStatus userReportReadStatus = new UserReportReadStatus(u, report, false);
+				report.addUserReportReadSatus(userReportReadStatus);
+				u.addUserReportReadSatus(userReportReadStatus);
+				session.saveOrUpdate(report);
+				session.saveOrUpdate(u);
+				session.saveOrUpdate(userReportReadStatus);	
+			}
+		} else {
+			// edit report
+			Report theReport = session.get(Report.class, report.getId());
+			theReport.setTask(report.getTask());
+			theReport.setDetail(report.getDetail());
+			theReport.setFeeling(report.getFeeling());
+			theReport.setResult(report.getResult());
+			session.saveOrUpdate(theReport);
 		}
+		
+		
+		
+		
 	}
 
 	@Override

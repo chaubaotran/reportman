@@ -48,7 +48,25 @@ public class CrmUser {
 
 	public CrmUser() {
 	
+	}	
+
+	public CrmUser(@NotNull(message = "is required") @Size(min = 1, message = "is required") String userName,
+			@NotNull(message = "is required") @Size(min = 1, message = "is required") String password,
+			@NotNull(message = "is required") @Size(min = 1, message = "is required") String matchingPassword,
+			@NotNull(message = "is required") @Size(min = 1, message = "is required") String firstName,
+			@NotNull(message = "is required") @Size(min = 1, message = "is required") String lastName,
+			@NotNull(message = "is required") @Size(min = 1, message = "is required") String email,
+			@NotNull(message = "is required") @Size(min = 1, message = "is required") List<String> roles) {
+		this.userName = userName;
+		this.password = password;
+		this.matchingPassword = matchingPassword;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.roles = roles;
 	}
+
+
 
 	public int getId() {
 		return id;

@@ -8,15 +8,15 @@ import com.tas.reportman.entity.Report;
 
 public interface ReportService {
 
-	List<Report> getAllReports(int id);
+	public List<Report> getAllReports(int id);
 	
-	Report getReport(int id);
+	public Report getReport(int id);
 	
 	public void saveOrUpdateReport(Report report, int userId);
 
-	List<Report> getFilteredReports(String year, String month, int id);
+	public List<Report> getFilteredReports(String year, String month, int id);
 
-	Boolean checkIfReportDateUnique(@Valid Report theReport, int id);
+	public Boolean checkIfReportDateUnique(@Valid Report theReport, int id);
 
-	Report trimReport(@Valid Report theReport);
+	public Report trimReport(@Valid Report theReport);
 }

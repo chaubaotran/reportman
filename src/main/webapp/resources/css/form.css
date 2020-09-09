@@ -1,24 +1,20 @@
-.error {
-	color: red;
-}
-
-.report-create form {
+.form-frame form {
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	background-color: #e0e0e0;
 	border-radius: 20px;
 	padding: 20px 30px;
 }
 
-.report-create label {
+.form-frame label {
 	font-size: 100%;
 }
 
-.report-create .message {
+.form-frame .message {
 	color: green;
 	font-size: 120%;
 }
 
-.report-create .error {
+.form-frame .error {
 	color: red;
 	font-size: 120%;
 }

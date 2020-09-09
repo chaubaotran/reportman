@@ -16,15 +16,14 @@
 				<div class="col-10 report-create">		
 
 					<!-- Registration Form -->
-					<form:form action="${pageContext.request.contextPath}/account/edit/processing" 
+					<form:form action="${pageContext.request.contextPath}/account/password/edit/processing" 
 						  	   modelAttribute="crmUser"
 						  	   class="form-horizontal"
 						  	   method="POST">
 						
 						<div class="d-flex">
-								<h3><strong>アカウント編集</strong></h3>
-								<span class="ml-auto">ユーザー名: ${crmUser.userName}</span>
-							</div>	
+							<h3><strong>アカウント編集</strong></h3>
+						</div>	
 	
 					    <!-- Place for messages: error, alert etc ... -->
 					    <div class="form-group">
@@ -32,10 +31,18 @@
 					            <div>
 								
 									<!-- Check for registration error -->
-									<c:if test="${registrationError != null}">
+									<c:if test="${errorMessage != null}">
 								
 										<div class="alert alert-danger col-xs-offset-1 col-xs-10">
-											${registrationError}
+											${errorMessage}
+										</div>
+		
+									</c:if>
+									
+									<c:if test="${successMessage != null}">
+								
+										<div class="alert alert-success col-xs-offset-1 col-xs-10">
+											${successMessage}
 										</div>
 		
 									</c:if>
@@ -46,41 +53,27 @@
 					    
 					    <form:input path="id" type="hidden" />
 	
-						<!-- User name -->
+						<!-- Old password -->
 						<div class="mb-4">
-							<label>User name</label>
-							<form:input path="userName" placeholder="username (*)" class="form-control" />
-							<form:errors path="userName" cssClass="error" />						
+							<label>Current password</label>
+							<form:errors path="currentPassword" cssClass="error" />	
+							<form:password path="currentPassword" placeholder="current password (*)" class="form-control" />												
+						</div>	
+						
+						<!-- New password -->
+						<div class="mb-4">
+							<label>New password</label>
+							<form:errors path="newPassword" cssClass="error" />
+							<form:password path="newPassword" placeholder="new password (*)" class="form-control" />													
+						</div>	
+						
+						<!-- Matching password -->
+						<div class="mb-4">
+							<label>Matching password</label>
+							<form:errors path="matchingPassword" cssClass="error" />
+							<form:password path="matchingPassword" placeholder="matching password (*)" class="form-control" />													
 						</div>			
-						
-						<!-- First name -->
-						<div class="mb-4">
-							<label>First name</label>
-							<form:input path="firstName" placeholder="first name (*)" class="form-control" />
-							<form:errors path="firstName" cssClass="error" />
-						</div>
-						
-						<!-- Last name -->
-						<div class="mb-4">
-							<label>Last name</label>
-							<form:input path="lastName" placeholder="last name (*)" class="form-control" />
-							<form:errors path="lastName" cssClass="error" />
-						</div>
-						
-						<!-- Email -->
-						<div class="mb-4">
-							<label>Email</label>
-							<form:input path="email" placeholder="email (*)" class="form-control" />
-							<form:errors path="email" cssClass="error" />
-						</div>
-						
-						<!-- Roles -->
-						<div class="mb-4">
-							<label>Roles</label>
-							<br>
-							<form:radiobuttons items="${roles}" path="roles" class="mx-3 role" />
-						</div>
-		
+								
 						<!-- Register Button -->
 						<div class="form-group">
 							<button type="submit" class="btn btn-primary">Change</button>
@@ -88,7 +81,6 @@
 						
 					</form:form>
 					
-					<input id="authentication" type=hidden value="${authentication}" />
 			</div>
 		</div>
 	</div>
@@ -116,16 +108,6 @@
 				menu.classList.remove("active");
 			}			
 		})
-		
-		if (document.querySelector("#authentication").value !== "[ROLE_ADMIN]") {
-			document.querySelectorAll(".role").forEach(item => {
-				if (!item.checked) {
-					item.setAttribute("disabled", true);
-				}
-				
-			});
-			
-		}
 		
 	}
 	

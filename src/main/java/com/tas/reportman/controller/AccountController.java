@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tas.reportman.entity.Role;
 import com.tas.reportman.entity.User;
+import com.tas.reportman.form.AccountEditForm;
+import com.tas.reportman.form.PasswordEditForm;
 import com.tas.reportman.service.UserService;
 import com.tas.reportman.user.CrmUser;
 
@@ -28,6 +30,60 @@ public class AccountController {
 	
 	@Autowired 
 	UserService userService;
+	
+	@GetMapping("/new")
+	public String showAccountCreateNewForm(ModelMap model) {
+		
+			
+		List<String> roles = new ArrayList<String>();
+		roles.add("EMPLOYEE");
+		
+		model.addAttribute("crmUser", new CrmUser());
+		model.addAttribute("roles", roles);
+		
+		return "account_new";		
+	}
+	
+	@PostMapping("/new/processing")
+	public String newProcessing(@Valid @ModelAttribute("crmUser") CrmUser theCrmUser, 
+							BindingResult theBindingResult, 
+							Model theModel) {
+		List<String> roles = new ArrayList<>();
+		roles.add("EMPLOYEE");
+		
+		// form validation
+		 if (theBindingResult.hasErrors()){		
+			theModel.addAttribute("roles", roles);
+			theModel.addAttribute("registrationError", "Missing required value or invalid input");
+			return "account_new";
+	    }
+		 
+		 if (theCrmUser.getRoles().size() <= 0){
+				theModel.addAttribute("roles", roles);
+				theModel.addAttribute("crmUser", theCrmUser);
+				theModel.addAttribute("registrationError", "Missing required value or invalid input");
+		    	return "account_new";
+		}
+	
+		// check the database if user name or email already exists
+	    User existing1 = userService.findByUserName(theCrmUser.getUserName());
+	    User existing2 = userService.findByUserEmail(theCrmUser.getEmail());
+	        
+	    if (existing1 != null || existing2 != null){
+			theModel.addAttribute("roles", roles);
+			theModel.addAttribute("crmUser", theCrmUser);
+			theModel.addAttribute("registrationError", "User name or email already exists.");
+	    	return "account_new";
+	    }
+	 	// create user account        						
+	    userService.save(theCrmUser);
+	    
+	    theModel.addAttribute("roles", roles);
+		theModel.addAttribute("crmUser", new CrmUser());
+		theModel.addAttribute("successMessage", "Account's been created successfully");
+	    	    
+	    return "account_new";		
+	}
 	
 	@GetMapping("/create")
 	public String showRegistrationForm(ModelMap model) {
@@ -96,7 +152,7 @@ public class AccountController {
 		
 		User user = userService.findByUserId(id);
 		
-		CrmUser theUser = new CrmUser();
+		AccountEditForm theUser = new AccountEditForm();
 		theUser.setId(user.getId());
 		theUser.setUserName(user.getUserName());
 		theUser.setFirstName(user.getFirstName());
@@ -130,7 +186,7 @@ public class AccountController {
 	}
 	
 	@PostMapping("/edit/processing")
-	public String editing(@Valid @ModelAttribute("crmUser") CrmUser theCrmUser, 
+	public String editing(@Valid @ModelAttribute("crmUser") AccountEditForm theCrmUser, 
 							BindingResult theBindingResult, 
 							Model theModel) {
 		// form validation
@@ -159,29 +215,59 @@ public class AccountController {
 			UserDetails userDetails = userService.getUserDetails();
 			theModel.addAttribute("authentication",userDetails.getAuthorities());
 	    	return "account_edit";
-	    }
-	    
-	    
-	    Boolean r = userService.checkIfUserInfoChanged(theCrmUser);
-	    	    
-	    if (!r) {	    	
-	    	List<String> roles = new ArrayList<String>();
-	    	roles.add("EMPLOYEE");
-			roles.add("MANAGER");
-			roles.add("ADMIN");
-			theModel.addAttribute("roles", roles);
-			theModel.addAttribute("crmUser", theCrmUser);
-			theModel.addAttribute("registrationError", "No changes in user info");
-			UserDetails userDetails = userService.getUserDetails();
-			theModel.addAttribute("authentication",userDetails.getAuthorities());
-	    	return "account_edit";
-	    }    
+	    }   
 
 	 	// create user account        						
-	    userService.save(theCrmUser);
+	    userService.edit(theCrmUser);
 	    	    
 	    return "account_create_success";		
 	}
+	
+	@GetMapping("/password/edit")
+	public String showPasswordEditPage(ModelMap model, 
+									   @RequestParam("id") int id) {
+		
+		User user = userService.findByUserId(id);
+		
+		PasswordEditForm theUser = new PasswordEditForm();
+		theUser.setId(user.getId());
+					
+		model.addAttribute("crmUser", theUser);
+		
+		return "account_password_edit";		
+		
+	}
+	
+	@PostMapping("/password/edit/processing")
+	public String passwordEditProcessing(@Valid @ModelAttribute("crmUser") PasswordEditForm theCrmUser, 
+										BindingResult theBindingResult, 
+										Model model) {
+		// check validation
+		if (theBindingResult.hasErrors()) {			
+			model.addAttribute("crmUser", theCrmUser);
+			return "account_password_edit";
+	    }
+		
+		// check if current password is correct
+		if(userService.checkIfPasswordMatch(theCrmUser.getId(), theCrmUser.getCurrentPassword())) {
+			userService.editPassword(theCrmUser);
+			model.addAttribute("crmUser", new PasswordEditForm());
+			model.addAttribute("successMessage", "Password's been successfully updated");
+			return "account_password_edit";	
+		} else {
+			model.addAttribute("crmUser", theCrmUser);
+			model.addAttribute("errorMessage", "Incorrect current password");
+			return "account_password_edit";	
+		}
+		
+		
+		
+		
+			
+		
+	}
+	
+	
 	
 	@GetMapping("/list")
 	public String showAccountList(ModelMap model) {
@@ -190,6 +276,8 @@ public class AccountController {
 		model.addAttribute("users", users);
 		return "account_list";
 	}
+	
+	
 	
 	
 }

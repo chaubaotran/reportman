@@ -22,9 +22,7 @@ public class Role {
 	public Role() {
 	}
 
-	public Role(int id, String name) {
-		super();
-		this.id = id;
+	public Role(String name) {
 		this.name = name;
 	}
 
