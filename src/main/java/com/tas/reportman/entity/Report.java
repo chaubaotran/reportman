@@ -63,7 +63,6 @@ public class Report {
 	}
 
 	public Report(String task, String detail, String result, String feeling, String date) {
-		super();
 		this.task = task;
 		this.detail = detail;
 		this.result = result;

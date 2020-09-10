@@ -2,11 +2,9 @@
 
 <nav class="navbar top-bar">
 	<a class="navbar-brand" href="#">レポーマン</a>	
-	
-	<span class="ml-auto mr-5 text-white">ユーザー: ${user.userName}</span>
-	
+		
 	<div class="toggle-btn">
-		<span onclick="toggleMenu()"><i class="fas fa-bars"></i></span>
+		<div class="d-flex flex-column text-center" onclick="toggleMenu()"><i class="fas fa-user"></i>${user.userName}</div>
 	</div>	
 	<div class="drop-down-menu mr-2">
 		<nav class="nav flex-column">

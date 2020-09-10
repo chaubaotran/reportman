@@ -1,6 +1,5 @@
 .side-bar .nav-link {
 	color: #000;
-	font-size: 100%;
 }
 
 .side-bar .nav-link:hover {
@@ -15,7 +14,7 @@
 }
 
 @media only screen and (min-width: 768px) {
-
+	
 	.side-bar .nav-link {
 		font-size: 120%;
 	}

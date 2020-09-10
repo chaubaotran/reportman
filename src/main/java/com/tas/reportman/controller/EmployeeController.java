@@ -173,5 +173,80 @@ public class EmployeeController {
 			
 		return "emp_report_read";
 	}
+	
+	@GetMapping("report/month/status")
+	public String showMonthStatus(ModelMap model, 
+								  @RequestParam("id") int id,
+								  @RequestParam("empName") String empName) {
+		int year = java.time.LocalDate.now().getYear();
+		int month = java.time.LocalDate.now().getMonthValue();
+		
+		String monthString = month < 10 ? "0" + Integer.toString(month) : Integer.toString(month);
+		String yearString = Integer.toString(year);
+	
+		// get list report of the current month
+		List<Report> reports = reportService.getFilteredReports(yearString, monthString, id);
+		
+		//get month days
+		int monthDays = getMonthDays(month, year);
+		
+		model.addAttribute("reportDateList", getReportDate(reports));
+		model.addAttribute("month", month);
+		model.addAttribute("year", year);
+		model.addAttribute("monthDays", monthDays);
+		model.addAttribute("empName", empName);
+		model.addAttribute("empId", id);
+		
+		return "emp_report_month_status";
+	}
+	
+	@PostMapping("report/month/status")
+	public String showMonthStatusWithFilter(ModelMap model, 
+											@RequestParam("year") String year,
+											@RequestParam("month") String month,
+											@RequestParam("empId") int id,
+											@RequestParam("empName") String empName) {
+			
+		// get list report of the current month
+		List<Report> reports = reportService.getFilteredReports(year, month, id);
+				
+		//get month days
+		int monthDays = getMonthDays(Integer.parseInt(month), Integer.parseInt(year));
+		
+		model.addAttribute("reportDateList", getReportDate(reports));
+		model.addAttribute("month", month);
+		model.addAttribute("year", year);
+		model.addAttribute("monthDays", monthDays);
+		model.addAttribute("empName", empName);
+		model.addAttribute("empId", id);
+		
+		return "emp_report_month_status";
+	}
+	
+	public static int getMonthDays(int month, int year) {
+	    int daysInMonth ;
+	    if (month == 4 || month == 6 || month == 9 || month == 11) {
+	        daysInMonth = 30;
+	    }
+	    else {
+	        if (month == 2) {
+	            daysInMonth = (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)) ? 29 : 28;
+	        } else {
+	            daysInMonth = 31;
+	        }
+	    }
+	    return daysInMonth;
+	}
+	
+	
+	public List<String> getReportDate(List<Report> reports) {		
+		List<String> dateList = new ArrayList<String>();
+		
+		for (Report report:reports) {
+			dateList.add(report.getDate().substring(8));
+		}
+		
+		return dateList;
+	}
 }
 	

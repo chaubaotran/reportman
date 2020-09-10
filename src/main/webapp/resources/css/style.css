@@ -1,6 +1,15 @@
 @import "form.css";
 @import "sidebar.css";
 @import "topbar.css";
+@import "report_month_status.css";
+
+body {
+	font-size: 100%;
+}
+
+input {
+	font-size: 100%;
+}
 
 .error {
 	color: red;
@@ -14,4 +23,31 @@
 
 .table-wrapper-scroll-y {
 	display: block;
+}
+
+.table {
+	max-width: 1000px;
+}
+
+form {
+	max-width: 1000px;
+}
+
+.login-form {
+	font-size: 300%;
+	max-width: 600px;
+}
+
+
+@media only screen and (min-width: 768px) {
+	
+	.login-form {
+		font-size: 150%;
+		max-width: 600px;
+	}
+
+	.side-bar .nav-link {
+		font-size: 120%;
+	}
+	
 }

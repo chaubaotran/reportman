@@ -9,6 +9,9 @@
 			<li class="nav-item">
 				<a class="nav-link pl-0" href="${pageContext.request.contextPath}/report/list/?id=${user.id}">日報一覧</a>
 			</li>
+			<li class="nav-item">
+				<a class="nav-link pl-0" href="${pageContext.request.contextPath}/report/month/status/?id=${user.id}">毎月状況</a>
+			</li>
 		</sec:authorize>
 
 		<sec:authorize access="hasAnyRole('MANAGER', 'ADMIN')">

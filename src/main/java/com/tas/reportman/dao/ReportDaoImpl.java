@@ -83,10 +83,6 @@ public class ReportDaoImpl implements ReportDao {
 			theReport.setResult(report.getResult());
 			session.saveOrUpdate(theReport);
 		}
-		
-		
-		
-		
 	}
 
 	@Override

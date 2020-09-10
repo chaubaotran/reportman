@@ -1,0 +1,12 @@
+.status .fas {
+	font-size: 150%;
+}
+
+.status .fa-check-circle {
+	color: green;
+}
+
+.status td:first-child {
+	font-size: 120%;
+	font-weight: 600;
+}

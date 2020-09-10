@@ -15,12 +15,15 @@
 		<div class="container-fluid">
 			<div class="row d-flex justify-content-center mt-5">			
 				<div class="text-center">
-					<h2 style="color: #015d82;font-weight: 600;">指定されたページは存在しません</h2>	
-					<p><a href="${pageContext.request.contextPath}/login">Back to login</a></p>
+					<h2 style="color: #015d82;font-weight: 600;">Oops. Something went wrong.
+						<c:if test="${error == 404}">Page not found</c:if>
+						<c:if test="${error == 500}">Internal page server error</c:if>
+						<c:if test="${error == 503}">Service unavailable</c:if>
+						<c:if test="${error == 403}">Access to the requested resource is forbidden</c:if>
+					</h2>			
+					<p class="mt-5" style="font-size: 150%;"><a href="${pageContext.request.contextPath}/login">Back to login</a></p>
 				</div>			
-			</div>
-				
-				
+			</div>				
 		</div>
 			
 		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
