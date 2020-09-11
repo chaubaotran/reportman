@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.tas.reportman.entity.Report;
 import com.tas.reportman.entity.User;
 import com.tas.reportman.form.EmpListForm;
+import com.tas.reportman.form.ReportMonthlyStatusForm;
 import com.tas.reportman.service.ReportService;
 import com.tas.reportman.service.UserReportReadService;
 import com.tas.reportman.service.UserService;
@@ -177,7 +178,8 @@ public class EmployeeController {
 	@GetMapping("report/month/status")
 	public String showMonthStatus(ModelMap model, 
 								  @RequestParam("id") int id,
-								  @RequestParam("empName") String empName) {
+								  @RequestParam("empName") String empName,
+								  HttpSession session) {
 		int year = java.time.LocalDate.now().getYear();
 		int month = java.time.LocalDate.now().getMonthValue();
 		
@@ -190,8 +192,10 @@ public class EmployeeController {
 		//get month days
 		int monthDays = getMonthDays(month, year);
 		
-		model.addAttribute("reportDateList", getReportDate(reports));
-		model.addAttribute("month", month);
+		User user = (User)session.getAttribute("user");
+		
+		model.addAttribute("reports", convertToReportMonthlyStatusForm(reports, user.getId()));
+		model.addAttribute("month", monthString);
 		model.addAttribute("year", year);
 		model.addAttribute("monthDays", monthDays);
 		model.addAttribute("empName", empName);
@@ -200,12 +204,13 @@ public class EmployeeController {
 		return "emp_report_month_status";
 	}
 	
-	@PostMapping("report/month/status")
+	@GetMapping("report/month/status/filter")
 	public String showMonthStatusWithFilter(ModelMap model, 
 											@RequestParam("year") String year,
 											@RequestParam("month") String month,
 											@RequestParam("empId") int id,
-											@RequestParam("empName") String empName) {
+											@RequestParam("empName") String empName, 
+											HttpSession session) {
 			
 		// get list report of the current month
 		List<Report> reports = reportService.getFilteredReports(year, month, id);
@@ -213,7 +218,9 @@ public class EmployeeController {
 		//get month days
 		int monthDays = getMonthDays(Integer.parseInt(month), Integer.parseInt(year));
 		
-		model.addAttribute("reportDateList", getReportDate(reports));
+		User user = (User)session.getAttribute("user");
+		
+		model.addAttribute("reports", convertToReportMonthlyStatusForm(reports, user.getId()));
 		model.addAttribute("month", month);
 		model.addAttribute("year", year);
 		model.addAttribute("monthDays", monthDays);
@@ -239,14 +246,19 @@ public class EmployeeController {
 	}
 	
 	
-	public List<String> getReportDate(List<Report> reports) {		
-		List<String> dateList = new ArrayList<String>();
+	public List<ReportMonthlyStatusForm> convertToReportMonthlyStatusForm(List<Report> reports, int id) {		
+		List<ReportMonthlyStatusForm> reportMonthlyStatusForms = new ArrayList<ReportMonthlyStatusForm>();
 		
 		for (Report report:reports) {
-			dateList.add(report.getDate().substring(8));
-		}
-		
-		return dateList;
+			ReportMonthlyStatusForm temp = new ReportMonthlyStatusForm();
+			temp.setId(report.getId());
+			temp.setDate(report.getDate());
+			temp.setRead(userReportReadService.checkStatus(report.getId(), id));
+			
+			reportMonthlyStatusForms.add(temp);			
+		}		
+		return reportMonthlyStatusForms;
 	}
+	
 }
 	

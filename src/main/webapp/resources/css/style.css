@@ -38,6 +38,12 @@ form {
 	max-width: 600px;
 }
 
+hr {
+	max-width: 1000px;
+	diplay: inline-block;
+	margin: 1% 0;
+}
+
 
 @media only screen and (min-width: 768px) {
 	

@@ -3,8 +3,8 @@
 <nav class="navbar top-bar">
 	<a class="navbar-brand" href="#">レポーマン</a>	
 		
-	<div class="toggle-btn">
-		<div class="d-flex flex-column text-center" onclick="toggleMenu()"><i class="fas fa-user"></i>${user.userName}</div>
+	<div class="toggle-btn"  onclick="toggleMenu()">
+		<div class="d-flex flex-column text-center"><i class="fas fa-user"></i>${user.userName}</div>
 	</div>	
 	<div class="drop-down-menu mr-2">
 		<nav class="nav flex-column">

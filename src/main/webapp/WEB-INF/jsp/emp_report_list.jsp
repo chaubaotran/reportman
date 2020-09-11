@@ -13,73 +13,63 @@
 						
 			<div class="col-10">
 				
-				<div class="d-flex">
-					<h2><strong>日報一覧</strong></h2>	
-					<div class="d-flex flex-column ml-auto">
-						<span>研修生: ${empName}</span>
-					</div>						
-				</div>	
-	
-				<div class="d-flex mt-4">
+				<h2><strong>日報一覧</strong></h2>	
+				<h5>研修生: ${empName}</h5>
 				
-					<c:url var="showOnlyUnread" value="${pageContext.request.contextPath}/employee/report/list/unread">
-						<c:param name="id" value="${empId}" />			
-						<c:param name="empName" value="${empName}" />			
-						<c:param name="allNumber" value="${allNumber}" />			
-						<c:param name="unReadNumber" value="${unReadNumber}" />	
-					</c:url>
+				<hr>			
 					
-					<c:url var="showAll" value="${pageContext.request.contextPath}/employee/report/list">
-						<c:param name="id" value="${empId}" />			
-						<c:param name="empName" value="${empName}" />			
-					</c:url>
+				<form:form method="GET" action="${pageContext.request.contextPath}/employee/report/list/filter/">
+					<span>フィルター:</span>
 					
-					<h4>
-						<a href="${showAll}"><span class="badge badge-dark">日報数：${allNumber}</span></a>
-						<a href="${showOnlyUnread}"><span class="badge badge-danger">未確認数：${unReadNumber}</span></a>
-					</h4>
+					<label>年</label>
+					<select name="year" id="year-filter" onchange="enableFilter()">
+						<option value="None" selected>無</option>
+						<option value="2020">2020</option>
+						<option value="2019">2019</option>
+						<option value="2018">2018</option>
+					</select>
+					<label>月</label>
+					<select name="month" id="month-filter" onchange="enableFilter()">
+						<option value="None" selected>無</option>
+						<option value="01">01</option>
+						<option value="02">02</option>
+						<option value="03">03</option>
+						<option value="04">04</option>
+						<option value="05">05</option>
+						<option value="06">06</option>
+						<option value="07">07</option>
+						<option value="08">08</option>
+						<option value="09">09</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+					</select>
 					
-					<div class="d-flex flex-column ml-auto">
-						<form:form class="ml-auto" method="GET" action="${pageContext.request.contextPath}/employee/report/list/filter/">
-							<span>フィルター:</span>
-							
-							<label>年</label>
-							<select name="year" id="year-filter" onchange="enableFilter()">
-								<option value="None" selected>無</option>
-								<option value="2020">2020</option>
-								<option value="2019">2019</option>
-								<option value="2018">2018</option>
-							</select>
-							<label>月</label>
-							<select name="month" id="month-filter" onchange="enableFilter()">
-								<option value="None" selected>無</option>
-								<option value="01">01</option>
-								<option value="02">02</option>
-								<option value="03">03</option>
-								<option value="04">04</option>
-								<option value="05">05</option>
-								<option value="06">06</option>
-								<option value="07">07</option>
-								<option value="08">08</option>
-								<option value="09">09</option>
-								<option value="10">10</option>
-								<option value="11">11</option>
-								<option value="12">12</option>
-							</select>
-							
-							<input name="id" value="${empId}" type="hidden" />
-							<input name="empName" value="${empName}" type="hidden" />
-							<input name="allNumber" value="${allNumber}" type="hidden" />
-							<input name="unReadNumber" value="${unReadNumber}" type="hidden" />
-							
-							<input type="submit" value="Filter" id="filter-btn" disabled>				
-						</form:form>				
-						
-					</div>
+					<input name="id" value="${empId}" type="hidden" />
+					<input name="empName" value="${empName}" type="hidden" />
+					<input name="allNumber" value="${allNumber}" type="hidden" />
+					<input name="unReadNumber" value="${unReadNumber}" type="hidden" />
 					
+					<input type="submit" value="Filter" id="filter-btn" disabled>				
+				</form:form>	
+				
+				<c:url var="showOnlyUnread" value="${pageContext.request.contextPath}/employee/report/list/unread">
+					<c:param name="id" value="${empId}" />			
+					<c:param name="empName" value="${empName}" />			
+					<c:param name="allNumber" value="${allNumber}" />			
+					<c:param name="unReadNumber" value="${unReadNumber}" />	
+				</c:url>
+				
+				<c:url var="showAll" value="${pageContext.request.contextPath}/employee/report/list">
+					<c:param name="id" value="${empId}" />			
+					<c:param name="empName" value="${empName}" />			
+				</c:url>
+				
+				<h4>
+					<a href="${showAll}"><span class="badge badge-dark">日報数：${allNumber}</span></a>
+					<a href="${showOnlyUnread}"><span class="badge badge-danger">未確認数：${unReadNumber}</span></a>
+				</h4>	
 					
-									
-				</div>
 				
 				<div class="table-wrapper-scroll-y my-custom-scrollbar">		
 					<table class="table table-hover">
@@ -133,7 +123,7 @@
 				<c:if test = "${reports == null || reports.size() == 0}">
 					<c:out value="該当する日報は見つかりません" />
 			    </c:if>
-			    <div class="d-flex">
+			    <div class="d-flex mt-5" style="max-width: 1000px;">
 			    	<a class="nav-link pl-0" href="${pageContext.request.contextPath}/employee/list">研修生一覧に戻る</a>
 			    				
 					<c:url var="report" value="${pageContext.request.contextPath}/employee/report/month/status">

@@ -80,4 +80,33 @@ public class UserReportReadStatusDaoImpl implements UserReportReadStatusDao {
 
 	}
 
+	@Override
+	public boolean checkStatus(int reportId, int userId) {		
+		// get the current hibernate session
+		Session currentSession = entityManager.unwrap(Session.class);
+		
+		// get report
+		Report report = reportDao.getReport(reportId);
+		
+		// get User
+		User user = userDao.getUser(userId);
+		
+		UserReportReadStatus userReportReadStatus;
+		
+		Query<UserReportReadStatus> theQuery = currentSession.createQuery("from UserReportReadStatus u where u.report = :report and u.user = :user", UserReportReadStatus.class);
+		theQuery.setParameter("user", user);
+		theQuery.setParameter("report", report);
+		
+		try {
+			userReportReadStatus = theQuery.getSingleResult();
+		} catch (Exception e) {
+			userReportReadStatus = null;
+		}	
+				
+		Boolean result = userReportReadStatus.isRead();
+		
+		return 	result;
+		
+	}
+
 }

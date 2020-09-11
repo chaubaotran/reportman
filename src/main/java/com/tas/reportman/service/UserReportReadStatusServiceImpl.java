@@ -28,4 +28,11 @@ public class UserReportReadStatusServiceImpl implements UserReportReadService {
 		userReportReadStatusDao.confirmReadReport(reportId, userId);		
 	}
 
+	@Override
+	@Transactional
+	public boolean checkStatus(int reportId, int userId) {
+		// TODO Auto-generated method stub
+		return userReportReadStatusDao.checkStatus(reportId, userId);
+	}
+
 }

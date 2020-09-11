@@ -18,7 +18,7 @@
 				<hr>
 				
 				<div>				
-					<form:form method="POST" action="${pageContext.request.contextPath}/employee/report/month/status">						
+					<form:form method="GET" action="${pageContext.request.contextPath}/employee/report/month/status/filter">						
 						<label>年</label>
 						<select name="year" id="year-filter" onchange="enableFilter()">
 							<option value="None" selected>無</option>
@@ -73,24 +73,54 @@
 					    	<td>Status</td>
 					    	<c:forEach begin="1" end="10" varStatus="loop">
 					    		
-						    	<td>
-						    	<c:set var="index" value="${Integer.toString(loop.index)}" />
-							    	<c:if test="${loop.index < 10}">
-							    		<c:set var="zero" value="0" />							    		
-							    		<c:set var="temp" value="${zero}${index}" />
-							    		<c:choose>
-								    		<c:when test="${reportDateList.contains(temp)}"><i class="fas fa-check-circle"></i></c:when>
-								    		<c:otherwise><i class="fas fa-times"></i></c:otherwise>								    		
-							    		</c:choose>
-							    		
-						    		</c:if>
+					    		<!-- Check if has report or not  -->
+					    		<c:set var="check" value="false" />
+					    		<c:set var="index" value="${Integer.toString(loop.index)}" />
 					    		
-					    			<c:if test="${loop.index >= 10}">
+						    	<c:if test="${loop.index < 10}">
+						    		<c:set var="zero" value="0" />							    		
+						    		<c:set var="temp" value="${zero}${index}" />
+						    		<c:forEach items="${reports}" var="report">					    					
+							    		<c:choose>
+								    		<c:when test="${report.date.substring(8).equals(temp)}">	
+					    						<c:set var="check" value="true" />
+					    						<c:url var="reportEdit" value="${pageContext.request.contextPath}/employee/report">
+													<c:param name="id" value="${report.id}" />
+													<c:param name="unread" value="${!report.read}" />					
+												</c:url>	    					
+					    					</c:when>
+								    		<c:otherwise></c:otherwise>								    		
+							    		</c:choose>
+						    		</c:forEach>	
+					    		</c:if>
+				    		
+				    			<c:if test="${loop.index >= 10}">
+					    			<c:forEach items="${reports}" var="report">					    				
 					    				<c:choose>
-					    					<c:when test="${reportDateList.contains(index)}"><i class="fas fa-check-circle"></i></c:when>
-					    					<c:otherwise><i class="fas fa-times"></i></c:otherwise>
+					    					<c:when test="${report.date.substring(8).equals(index)}">	
+					    						<c:set var="check" value="true" />
+					    						<c:url var="reportEdit" value="${pageContext.request.contextPath}/employee/report">
+													<c:param name="id" value="${report.id}" />
+													<c:param name="unread" value="${!report.read}" />					
+												</c:url>	   			    					
+					    					</c:when>
+					    					<c:otherwise></c:otherwise>
 					    				</c:choose>
-					    			</c:if>							    	
+					    			</c:forEach>
+				    			</c:if>					
+					    		
+					    		<!-- Render icon  -->
+						    	<td>
+						    		<c:choose>
+				    					<c:when test="${check eq true}">
+											<a href="${reportEdit}" class="wrapper"  data-toggle="tooltip" data-placement="bottom" title="日報監督へ">
+										    	<i class="fas fa-check-circle"></i>
+											</a>
+										</c:when>
+				    					<c:otherwise>
+				    						<i class="fas fa-times"></i>				    						
+				    					</c:otherwise>
+				    				</c:choose>					    			    	
 						    	</td>
 					    	</c:forEach>
 					    </tr> 
@@ -105,12 +135,34 @@
 					     <tr>
 					    	<td>Status</td>
 					    	<c:forEach begin="11" end="20" varStatus="loop">
-					    		
-						    	<td>
+					    		<!-- Check if has report or not  -->
+					    		<c:set var="index" value="${Integer.toString(loop.index)}" />
+					    		<c:set var="check" value="false" />				
+			    				<c:forEach items="${reports}" var="report">		    					
 				    				<c:choose>
-				    					<c:when test="${reportDateList.contains(Integer.toString(loop.index))}"><i class="fas fa-check-circle"></i></c:when>
-				    					<c:otherwise><i class="fas fa-times"></i></c:otherwise>
-				    				</c:choose>						    	
+				    					<c:when test="${report.date.substring(8).equals(index)}">	
+				    						<c:set var="check" value="true" />
+				    						<c:url var="reportEdit" value="${pageContext.request.contextPath}/employee/report">
+												<c:param name="id" value="${report.id}" />
+												<c:param name="unread" value="${!report.read}" />					
+											</c:url>	   			    					
+				    					</c:when>
+				    					<c:otherwise></c:otherwise>
+				    				</c:choose>
+				    			</c:forEach>	
+				    			
+						    	<!-- Render icon  -->
+					    		<td>
+						    		<c:choose>
+				    					<c:when test="${check eq true}">				    						
+					    					<a href="${reportEdit}" class="wrapper" data-toggle="tooltip" data-placement="bottom" title="日報監督へ" >
+										    	<i class="fas fa-check-circle"></i>
+											</a>
+										</c:when>
+				    					<c:otherwise>
+				    						<i class="fas fa-times"></i>		    						
+				    					</c:otherwise>
+				    				</c:choose>					    			    	
 						    	</td>
 					    	</c:forEach>
 					    </tr>
@@ -124,12 +176,35 @@
 					    
 					    <tr>
 					    	<td>Status</td>
-					    	<c:forEach begin="21" end="${monthDays <= 30 ? monthDays : 30}" varStatus="loop">				    		
-						    	<td>
+					    	<c:forEach begin="21" end="${monthDays <= 30 ? monthDays : 30}" varStatus="loop">	
+					    		<!-- Check if has report or not  -->
+					    		<c:set var="index" value="${Integer.toString(loop.index)}" />
+					    		<c:set var="check" value="false" />				    
+			    				<c:forEach items="${reports}" var="report">		    					
 				    				<c:choose>
-				    					<c:when test="${reportDateList.contains(Integer.toString(loop.index))}"><i class="fas fa-check-circle"></i></c:when>
-				    					<c:otherwise><i class="fas fa-times"></i></c:otherwise>
-				    				</c:choose>						    	
+				    					<c:when test="${report.date.substring(8).equals(index)}">	
+				    						<c:set var="check" value="true" />
+				    						<c:url var="reportEdit" value="${pageContext.request.contextPath}/employee/report">
+												<c:param name="id" value="${report.id}" />
+												<c:param name="unread" value="${!report.read}" />					
+											</c:url>	   			    					
+				    					</c:when>
+				    					<c:otherwise></c:otherwise>
+				    				</c:choose>
+				    			</c:forEach>	
+				    			
+						    	<!-- Render icon  -->
+					    		<td>
+						    		<c:choose>
+				    					<c:when test="${check eq true}">				    						
+					    					<a href="${reportEdit}" class="wrapper"　 data-toggle="tooltip" data-placement="bottom" title="${日報監督へ}" >
+										    	<i class="fas fa-check-circle"></i>
+											</a>
+										</c:when>
+				    					<c:otherwise>				    						
+									    	<i class="fas fa-times"></i>															    						
+				    					</c:otherwise>
+				    				</c:choose>					    			    	
 						    	</td>
 					    	</c:forEach>
 					    </tr>						
@@ -140,19 +215,42 @@
 						    </tr>
 						    
 						    <tr>
-						    	<td>Status</td>			    		
-						    	<td>
-				    				<c:choose>
-				    					<c:when test="${reportDateList.contains(Integer.toString(monthDays))}"><i class="fas fa-check-circle"></i></c:when>
-				    					<c:otherwise><i class="fas fa-times"></i></c:otherwise>
-				    				</c:choose>						    	
-						    	</td>
+						    	<td>Status</td>
+						    		<!-- Check if has report or not  -->
+						    		<c:set var="check" value="false" />	
+				    				<c:forEach items="${reports}" var="report">			    						
+					    				<c:choose>
+					    					<c:when test="${report.date.substring(8).equals(Integer.toString(monthDays))}">	
+					    						<c:set var="check" value="true" />
+					    						<c:url var="reportEdit" value="${pageContext.request.contextPath}/employee/report">
+													<c:param name="id" value="${report.id}" />
+													<c:param name="unread" value="${!report.read}" />					
+												</c:url>				    					
+					    					</c:when>
+					    					<c:otherwise></c:otherwise>
+					    				</c:choose>
+					    				
+					    			</c:forEach>
+					    			
+					    			<!-- Render icon  -->
+						    		<td>
+							    		<c:choose>
+					    					<c:when test="${check eq true}">				    						
+						    					<a href="${reportEdit}" class="wrapper"  data-toggle="tooltip" data-placement="bottom" title="${日報監督へ}">
+											    	<i class="fas fa-check-circle"></i>
+												</a>
+											</c:when>
+					    					<c:otherwise>
+										    	<i class="fas fa-times"></i>			    						
+					    					</c:otherwise>
+					    				</c:choose>					    			    	
+							    	</td>
 						    </tr>			
-					    </c:if>					    							   
+					    </c:if>						   
 					</table>
 				</div>
-				
-				<div class="d-flex">	
+								
+				<div class="d-flex mt-5" style="max-width: 1000px;">	
 					<a class="nav-link pl-0" href="${pageContext.request.contextPath}/employee/list">研修生一覧に戻る</a>	
 								
 					<c:url var="report" value="${pageContext.request.contextPath}/employee/report/list">

@@ -9,4 +9,24 @@
 .status td:first-child {
 	font-size: 120%;
 	font-weight: 600;
+	text-align: left;
+}
+
+.status td {
+	text-align: center;
+}
+
+.status .the-hover-one:hover {
+	background-color: #c0c0c0;
+	cursor: pointer;
+}
+
+.status .wrapper {
+	padding: 0;
+	margin: 0;
+	border: none;
+}
+
+.status a .fa-times {
+	color: #000;
 }

@@ -10,4 +10,6 @@ public interface UserReportReadService {
 
 	public void confirmReadReport(int reportId, int userId);
 	
+	public boolean checkStatus(int reportId, int userId);
+	
 }

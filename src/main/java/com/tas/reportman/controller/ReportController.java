@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tas.reportman.entity.Report;
 import com.tas.reportman.entity.User;
+import com.tas.reportman.form.ReportMonthlyStatusForm;
 import com.tas.reportman.service.ReportService;
 import com.tas.reportman.service.UserService;
 
@@ -39,7 +40,8 @@ public class ReportController {
 							    @ModelAttribute("report") Report theReport) {	
 		
 		if (theReport == null) {
-			model.addAttribute("report", new Report());
+			Report report = new Report();
+			model.addAttribute("report", report);
 		} else {
 			model.addAttribute("report", theReport);
 		}
@@ -162,8 +164,8 @@ public class ReportController {
 		
 		User user = (User)session.getAttribute("user");
 		
-		model.addAttribute("reportDateList", getReportDate(reports));
-		model.addAttribute("month", month);
+		model.addAttribute("reports", convertToReportMonthlyStatusForm(reports));
+		model.addAttribute("month", month < 10 ? "0" + month : month);
 		model.addAttribute("year", year);
 		model.addAttribute("monthDays", monthDays);
 		model.addAttribute("empName", user.getUserName());
@@ -171,7 +173,7 @@ public class ReportController {
 		return "report_month_status";
 	}
 	
-	@PostMapping("/month/status")
+	@GetMapping("/month/status/filter")
 	public String showMonthStatusWithFilter(ModelMap model, 
 											@RequestParam("year") String year,
 											@RequestParam("month") String month,
@@ -184,7 +186,7 @@ public class ReportController {
 		//get month days
 		int monthDays = getMonthDays(Integer.parseInt(month), Integer.parseInt(year));
 		
-		model.addAttribute("reportDateList", getReportDate(reports));
+		model.addAttribute("reports", convertToReportMonthlyStatusForm(reports));
 		model.addAttribute("month", month);
 		model.addAttribute("year", year);
 		model.addAttribute("monthDays", monthDays);
@@ -210,14 +212,16 @@ public class ReportController {
 	}
 	
 	
-	public List<String> getReportDate(List<Report> reports) {		
-		List<String> dateList = new ArrayList<String>();
+	public List<ReportMonthlyStatusForm> convertToReportMonthlyStatusForm(List<Report> reports) {		
+		List<ReportMonthlyStatusForm> reportMonthlyStatusForms = new ArrayList<ReportMonthlyStatusForm>();
 		
 		for (Report report:reports) {
-			dateList.add(report.getDate().substring(8));
-		}
-		
-		return dateList;
+			ReportMonthlyStatusForm temp = new ReportMonthlyStatusForm();
+			temp.setId(report.getId());
+			temp.setDate(report.getDate());
+			reportMonthlyStatusForms.add(temp);			
+		}		
+		return reportMonthlyStatusForms;
 	}
 	
 

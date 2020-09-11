@@ -10,7 +10,7 @@
 		<div class="row my-2">						
 			<%@ include file="fragments/sidebar.jsp"%>				
 			
-			<div class="col-10 report-create">			
+			<div class="col-10">			
 				<div class="d-flex">
 					<h2><strong>研修生一覧</strong></h2>
 				</div>	

@@ -56,7 +56,7 @@
 			</div>
 		</div>
 	</div>
-		
+	
 	<script>
 		window.onload = function() {
 			var path = window.location.pathname;
@@ -76,7 +76,15 @@
 	
 				var today = year + "-" + month + "-" + day;     
 				return today;
-			}			
+			}	
+			
+			const getParam = (string) => {
+				 var url_string = window.location.href; // www.test.com?filename=test
+			    var url = new URL(url_string);
+			    var paramValue = url.searchParams.get(string);
+			    return paramValue
+				
+			}
 			
 			/* Make sidebar active item stand out */
 			navLinks.forEach(item => {
@@ -87,7 +95,7 @@
 				}
 			})			
 			/* Make report date max value is today */
-			document.getElementById("report-date").value = getTodayDate();
+			document.getElementById("report-date").value = getParam("reportDate") != null ? getParam("reportDate") : getTodayDate();
 			document.getElementById("report-date").setAttribute("max", getTodayDate());
 		
 			/* Make drop down menu disappear when user clicks outside */
