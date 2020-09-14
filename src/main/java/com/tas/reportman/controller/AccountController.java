@@ -249,26 +249,26 @@ public class AccountController {
 	    }
 		
 		// check if current password is correct
-		if(userService.checkIfPasswordMatch(theCrmUser.getId(), theCrmUser.getCurrentPassword())) {
+		if (userService.checkIfPasswordMatch(theCrmUser.getId(), theCrmUser.getCurrentPassword())) {
+			
+			// check if new password is different from current password
+			if (userService.checkIfPasswordMatch(theCrmUser.getId(), theCrmUser.getNewPassword())) {
+				model.addAttribute("crmUser", theCrmUser);
+				model.addAttribute("errorMessage", "New password must be different from current password");
+				return "account_password_edit";	
+			}
+			
 			userService.editPassword(theCrmUser);
-			model.addAttribute("crmUser", new PasswordEditForm());
+			model.addAttribute("crmUser", theCrmUser);
 			model.addAttribute("successMessage", "Password's been successfully updated");
 			return "account_password_edit";	
 		} else {
 			model.addAttribute("crmUser", theCrmUser);
 			model.addAttribute("errorMessage", "Incorrect current password");
 			return "account_password_edit";	
-		}
-		
-		
-		
-		
-			
-		
+		}		
 	}
-	
-	
-	
+		
 	@GetMapping("/list")
 	public String showAccountList(ModelMap model) {
 		List<User> users = userService.getAllUsers();
@@ -276,8 +276,5 @@ public class AccountController {
 		model.addAttribute("users", users);
 		return "account_list";
 	}
-	
-	
-	
 	
 }
