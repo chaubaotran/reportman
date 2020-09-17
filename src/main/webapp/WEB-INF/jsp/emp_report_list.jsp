@@ -7,11 +7,11 @@
 			<%@ include file="fragments/topbar.jsp"%>				
 		</div>
 	
-		<div class="row my-2">				
+		<div class="row main-frame">				
 			
 			<%@ include file="fragments/sidebar.jsp"%>	
 						
-			<div class="col-10">
+			<div class="col-9 col-md-10">
 				
 				<h2><strong>日報一覧</strong></h2>	
 				<h5>研修生: ${empName}</h5>
@@ -123,15 +123,16 @@
 				<c:if test = "${reports == null || reports.size() == 0}">
 					<c:out value="該当する日報は見つかりません" />
 			    </c:if>
-			    <div class="d-flex mt-5" style="max-width: 1000px;">
-			    	<a class="nav-link pl-0" href="${pageContext.request.contextPath}/employee/list">研修生一覧に戻る</a>
+			    
+			    <div class="d-flex mt-2" style="max-width: 800px;">
+			    	<a class="nav-link pl-0" href="${pageContext.request.contextPath}/employee/list"><i class="fas fa-chevron-circle-left mr-2"></i>${empName}の研修生一覧へ</a>
 			    				
 					<c:url var="report" value="${pageContext.request.contextPath}/employee/report/month/status">
 						<c:param name="id" value="${empId}" />	
 						<c:param name="empName" value="${empName}" />						
 					</c:url>
 					
-					<p class="ml-auto"><a href="${report}">毎月状況へ</a></p>	
+					<a class="nav-link ml-auto" href="${report}">${empName}の毎月状況へ<i class="fas fa-chevron-circle-right ml-2"></i></a>
 				</div>
 			</div>
 		</div>

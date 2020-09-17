@@ -7,19 +7,19 @@
 			<%@ include file="fragments/topbar.jsp"%>				
 		</div>
 	
-		<div class="row my-2">						
+		<div class="row main-frame">						
 			<%@ include file="fragments/sidebar.jsp"%>	
 			
-			<div class="col-10 form-frame">		
+			<div class="col-9 col-md-10 form-frame">		
 
 				<!-- Registration Form -->
-				<form:form action="${pageContext.request.contextPath}/account/password/edit/processing" 
+				<form:form style="max-width: 400px;" action="${pageContext.request.contextPath}/account/password/edit/processing" 
 					  	   modelAttribute="crmUser"
 					  	   class="form-horizontal"
 					  	   method="POST">
 					
 					<div class="d-flex">
-						<h2><strong>アカウント編集</strong></h2>
+						<h2><strong>アカウント変更</strong></h2>
 					</div>	
 
 				    <!-- Place for messages: error, alert etc ... -->
@@ -46,28 +46,28 @@
 
 					<!-- Old password -->
 					<div class="mb-4">
-						<label>Current password</label>
+						<label>現在パスワード</label>
 						<form:errors path="currentPassword" cssClass="error" />	
 						<form:password path="currentPassword" placeholder="current password (*)" class="form-control" />												
 					</div>	
 					
 					<!-- New password -->
 					<div class="mb-4">
-						<label>New password</label>
+						<label>新しいパスワード</label>
 						<form:errors path="newPassword" cssClass="error" />
 						<form:password path="newPassword" placeholder="new password (*)" class="form-control" />													
 					</div>	
 					
 					<!-- Matching password -->
 					<div class="mb-4">
-						<label>Matching password</label>
+						<label>確認</label>
 						<form:errors path="matchingPassword" cssClass="error" />
-						<form:password path="matchingPassword" placeholder="matching password (*)" class="form-control" />													
+						<form:password path="matchingPassword" placeholder="new password again (*)" class="form-control" />													
 					</div>			
 							
 					<!-- Register Button -->
 					<div class="form-group">
-						<button type="submit" class="btn btn-primary">Change</button>
+						<button type="submit" class="btn btn-primary">変更</button>
 					</div>						
 				</form:form>					
 			</div>

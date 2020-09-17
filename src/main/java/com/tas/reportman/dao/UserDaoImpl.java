@@ -236,4 +236,5 @@ public class UserDaoImpl implements UserDao {
 		currentSession.saveOrUpdate(user);
 	}
 
+
 }

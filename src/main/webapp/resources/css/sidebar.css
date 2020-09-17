@@ -1,11 +1,17 @@
+.side-bar {
+	background-color: #E6E6FA;
+}
+
 .side-bar .nav-link {
+	font-size: 10px;
 	color: #000;
+	padding: 0;
+	padding-top: 10px;
 }
 
 .side-bar .nav-link:hover {
 	color: #015d82;
 	font-weight: 600;
-	letter-spacing: 1px;
 }
 
 .side-bar .nav-link.active {
@@ -14,10 +20,18 @@
 }
 
 @media only screen and (min-width: 768px) {
-	
+
 	.side-bar .nav-link {
-		font-size: 120%;
-	}
+		font-size: 12px;
+	} 
 	
+}
+	
+@media only screen and (min-width: 1024px) {
+
+	.side-bar .nav-link {
+		font-size: 14px;
+	} 
+
 }
 	

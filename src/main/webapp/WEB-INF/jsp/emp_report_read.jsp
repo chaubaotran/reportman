@@ -7,25 +7,31 @@
 			<%@ include file="fragments/topbar.jsp"%>				
 		</div>
 	
-		<div class="row my-2">						
-			<%@ include file="fragments/sidebar.jsp"%>				
-			<div class="col-10 form-frame">								
+		<div class="row main-frame">			
+					
+			<%@ include file="fragments/sidebar.jsp"%>		
+					
+			<div class="col-9 col-md-10 form-frame emp-report-read">								
 				<form:form action="report/confirm" method="POST" modelAttribute="report">
-					<div class="d-flex flex-column">
-						<span class="ml-auto">研修生: ${emp.userName}</span>
-					</div>	
+					
 					
 					<form:input type="hidden" path="id" />
+					<div class="d-flex">
+						
+						<c:if test="${unread eq true}">
+							<h2><span class="badge badge-warning">未確認</span></h2>
+						</c:if>
+						
+						<c:if test="${unread eq false}">
+							<h2><span class="badge badge-success">確認済</span></h2>
+						</c:if>
+						
+						<p class="ml-auto">研修生: ${emp.userName}</p>
+					</div>
 					
-					<c:if test="${unread eq true}">
-						<h4><span class="badge badge-warning">未確認</span></h4>
-					</c:if>
-					
-					<c:if test="${unread eq false}">
-						<h4><span class="badge badge-success">確認済</span></h4>
-					</c:if>
-					
-					<p class="message">${message}</p>						
+					<c:if test="${message != null}">
+						<p class="message">${message}</p>
+					</c:if>											
 					
 					<div class="form-group">
 						<label>日付*</label>	
@@ -34,25 +40,25 @@
 					</div>
 					<div class="form-group">
 					    <label>課題*</label>		    
-					    <form:textarea class="form-control" path="task" rows="3" />
+					    <form:textarea class="form-control" path="task" rows="2" />
 					    <form:errors path="task" class="error" />
 					</div>
 					
 					<div class="form-group">
 					    <label>詳細内容*</label>		    
-					    <form:textarea class="form-control" path="detail" rows="3" />
+					    <form:textarea class="form-control" path="detail" rows="2" />
 					    <form:errors path="detail" class="error" />
 					</div>
 					
 					<div class="form-group">
 					    <label>進歩の良し悪し*</label>		     
-					    <form:textarea class="form-control" path="result" rows="3" />
+					    <form:textarea class="form-control" path="result" rows="2" />
 					    <form:errors path="result" class="error" />
 					</div>
 					
 					<div class="form-group">
 					    <label>所感*</label>
-					    <form:textarea class="form-control" path="feeling" rows="3" />
+					    <form:textarea class="form-control" path="feeling" rows="2" />
 					    <form:errors path="feeling" class="error" />
 					</div>
 					
@@ -64,7 +70,18 @@
 			        <input type="submit" class="btn btn-primary confirm-btn" value="確認"  <c:if test="${unread == false}"><c:out value="disabled='disabled'"/></c:if> /> 					
 				</form:form>
 			
-				<p class="mt-5"><a href="${backToList}">${emp.userName}の日報一覧に戻る</a></p>		
+				<div class="d-flex" style="max-width: 800px;">
+					<a class="nav-link" href="${backToList}"><i class="fas fa-chevron-circle-left mr-2"></i>${emp.userName}の日報一覧へ</a>
+				
+					<c:url var="report" value="${pageContext.request.contextPath}/employee/report/month/status">
+						<c:param name="id" value="${emp.id}" />	
+						<c:param name="empName" value="${emp.userName}" />						
+					</c:url>
+					
+					<a class="nav-link ml-auto" href="${report}">${emp.userName}の毎月状況へ<i class="fas fa-chevron-circle-right ml-2"></i></a>		
+					
+				</div>
+			
 			</div>
 		</div>
 	</div>

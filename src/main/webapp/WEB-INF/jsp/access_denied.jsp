@@ -2,20 +2,13 @@
 
 <%@ include file="fragments/header.jsp"%>
 	
-	<div class="container-fluid">
-		<div class="d-flex flex-column justify-content-center text-center mt-5">		
-			<h3>Access Denied - You are not authorized to access this resource.</h3>
+	<div class="container text-center mt-5">
+			<h4>Access Denied - You are not authorized to access this resource.</h4>
+			<a href="${pageContext.request.contextPath}/login">Login with different account</a>
 			
-			<a href="${pageContext.request.contextPath}/login" style="text-decoration: none; color: #000;">Login with different account</a>		
+			<span class="mx-2">|</span>
 			
-			<button onclick="goBack()" style="border: none; background: none; padding: 0;">Go back to previous page</button>		
-		</div>	
+			<a href="javascript:history.back()">Back to previous page</a>
 	</div>
-	
-	<script>
-		function goBack() {
-		  window.history.back();
-		}
-	</script>
 
 <%@ include file="fragments/footer.jsp"%>

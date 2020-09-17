@@ -1,20 +1,108 @@
 .form-frame form {
+	font-size: 10px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	background-color: #e0e0e0;
-	border-radius: 20px;
-	padding: 20px 30px;
+	background-color: #feffcc; 
+	border-radius: 10px;
+	padding: 20px 30px;	
+	position: relative;
+	max-width: 800px;
+	overflow: auto;
+	max-height: calc(100vh - 70px - 30px);
 }
 
-.form-frame label {
-	font-size: 100%;
+.form-frame label,
+.form-frame input,
+.form-frame button,
+.form-frame textarea,
+.form-frame a {
+	font-size: 10px;
 }
 
 .form-frame .message {
 	color: green;
-	font-size: 120%;
+	font-size: 10px;
 }
 
 .form-frame .error {
 	color: red;
-	font-size: 120%;
+	font-size: 10px;
 }
+
+
+.emp-report-read form {
+	max-height: calc(100vh - 70px - 70px);
+}
+
+.search-form {
+	position: relative;
+	width: 15vw;
+}
+
+.search-form input {
+	height: 100%;
+	font-size: 10px;
+}
+
+.search-form button {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	border: none;	
+	height: 100%;
+	width: 3vw;
+	transition: background-color 0.5s;
+}
+
+.search-form button:hover {
+	background-color: #015d82;
+	color: #fff;
+}
+
+@media only screen and (min-width: 768px) {
+	
+	.form-frame form {
+		font-size: 12px;
+	}
+	
+	.form-frame form label,
+	.form-frame form input,
+	.form-frame form button,
+	.form-frame textarea,
+	.form-frame a {
+		font-size: 12px;
+	}
+	
+	.form-frame .message {
+		color: green;
+		font-size: 12px;
+	}
+
+	.form-frame .error {
+		color: red;
+		font-size: 12px;
+	}
+	
+	.emp-report-read form {
+		max-height: calc(100vh - 70px - 60px);
+	}
+	
+	.search-form input {
+		font-size: 12px;
+	}
+	
+
+}
+
+@media only screen and (min-width: 1024px) {
+	
+	.form-frame form {
+		font-size: 14px;
+	}
+
+
+} 
+
+
+
+
+

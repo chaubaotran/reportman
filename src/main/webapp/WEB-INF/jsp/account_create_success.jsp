@@ -7,13 +7,13 @@
 			<%@ include file="fragments/topbar.jsp"%>				
 		</div>
 	
-		<div class="row my-2">						
+		<div class="row main-frame">						
 			<%@ include file="fragments/sidebar.jsp"%>				
 			
-			<div class="col-10">
-				<h2>User registered successfully!</h2>				
+			<div class="col-9 col-md-10">
+				<h2>アカウントが登録されました。</h2>				
 				<hr>					
-				<a href="${pageContext.request.contextPath}/login">Login with new user</a>
+				<a href="${pageContext.request.contextPath}/login">ログインページへ</a>
 			</div>
 		</div>
 	</div>

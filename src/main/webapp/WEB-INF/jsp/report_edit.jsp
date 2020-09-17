@@ -7,10 +7,10 @@
 			<%@ include file="fragments/topbar.jsp"%>				
 		</div>
 	
-		<div class="row my-2">						
+		<div class="row main-frame">						
 			<%@ include file="fragments/sidebar.jsp"%>		
 					
-			<div class="col-10 form-frame">	
+			<div class="col-9 col-md-10 form-frame">	
 				<form:form action="editReport" method="POST" modelAttribute="report">
 					<div class="d-flex">
 						<h2><strong>日報編集</strong></h2>

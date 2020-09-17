@@ -4,11 +4,31 @@
 @import "report_month_status.css";
 
 body {
-	font-size: 100%;
+	font-size: 10px;
 }
 
-input {
-	font-size: 100%;
+h2 {
+	font-size: 20px;
+}
+
+h5 {
+	font-size: 12px;
+}
+
+hr {
+	max-width: 800px;
+	diplay: inline-block;
+	margin: 10px 0;
+}
+
+.badge {
+	font-size: 10px; 
+}
+
+.main-frame {
+	border: 3px solid #c0c0c0;
+	height: calc(100vh - 70px);
+	over-flow: hidden;
 }
 
 .error {
@@ -17,43 +37,47 @@ input {
 
 .my-custom-scrollbar {
 	position: relative;
-	max-height: 70vh;
+	max-height: 40vh;
 	overflow: auto;
 }
 
-.table-wrapper-scroll-y {
-	display: block;
+.table-wrapper-scroll-y {	
+	max-width: 800px;
 }
 
 .table {
-	max-width: 1000px;
+	background-color: #feffcc; 
 }
 
-form {
-	max-width: 1000px;
+.col-md-10,
+.col-9 {
+	padding: 10px 20px;
+	border-left: 3px solid #c0c0c0;
 }
-
-.login-form {
-	font-size: 300%;
-	max-width: 600px;
-}
-
-hr {
-	max-width: 1000px;
-	diplay: inline-block;
-	margin: 1% 0;
-}
-
 
 @media only screen and (min-width: 768px) {
+
+	body {
+		font-size: 12px;
+	}
 	
-	.login-form {
-		font-size: 150%;
-		max-width: 600px;
+	h5 {
+		font-size: 14px;
+	}
+	
+	.badge {
+		font-size: 12px; 
+	}
+	
+} 
+
+
+
+@media only screen and (min-width: 1024px) {
+	
+	.my-custom-scrollbar {
+		max-height: 50vh;
 	}
 
-	.side-bar .nav-link {
-		font-size: 120%;
-	}
-	
-}
+
+} 

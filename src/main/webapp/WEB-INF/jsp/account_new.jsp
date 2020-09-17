@@ -3,7 +3,7 @@
 <%@ include file="fragments/header.jsp"%>
 	
 	<div class="container">		
-		<div class="row my-5">										
+		<div class="row mt-2">										
 			<div class="col form-frame">			
 				<!-- Registration Form -->
 				<form:form action="${pageContext.request.contextPath}/account/new/processing" 
@@ -86,7 +86,7 @@
 				</form:form>
 				
 				<div class="mt-3">
-					<a style="font-size: 130%" href="${pageContext.request.contextPath}/login"><i class="fas fa-arrow-circle-left"></i>Back to login</a>
+					<a href="${pageContext.request.contextPath}/login"><i class="fas fa-arrow-circle-left mr-2"></i>Back to login</a>
 				</div>					
 			</div>
 		</div>

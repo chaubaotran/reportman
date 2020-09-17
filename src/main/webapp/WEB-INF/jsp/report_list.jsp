@@ -7,17 +7,17 @@
 			<%@ include file="fragments/topbar.jsp"%>				
 		</div>
 		
-		<div class="row my-2">						
+		<div class="row main-frame">						
 			<%@ include file="fragments/sidebar.jsp"%>	
 
-			<div class="col-10">
+			<div class="col-9 col-md-10">
 				
 				<h2><strong>日報一覧</strong></h2>
 				<h5>研修生: ${user.userName}</h5>
 				
 				<hr>
 				
-				<div>
+				<div class="my-3">
 					<form:form method="GET" action="${pageContext.request.contextPath}/report/list/filter/">
 						<span>フィルター:</span>							
 						<label>年</label>
@@ -53,9 +53,9 @@
 					<table class="table table-hover">
 						<thead>
 							<tr>
-								<th style="width: 40%">日付</th>
-								<th style="width: 40%">課題</th>
-								<th style="width: 20%"><i class="fas fa-cogs"></i></th>
+								<th>日付</th>
+								<th>課題</th>
+								<th><i class="fas fa-cogs"></i></th>
 							</tr>	
 						</thead>
 							
@@ -79,9 +79,8 @@
 				
 				<c:set var = "reports" scope = "session" value = "${reports}"/>
 				<c:if test = "${reports == null || reports.size() == 0}">
-					<c:out value="${message}" />
-					<br />
-					<a href="${pageContext.request.contextPath}/report/create">日報を追加しましょう</a>
+					<p>${message}</p>
+					<a href="${pageContext.request.contextPath}/report/create">日報追加へ</a>
 			    </c:if>
 			</div>
 		</div>

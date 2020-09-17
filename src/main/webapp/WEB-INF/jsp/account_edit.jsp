@@ -8,10 +8,10 @@
 			<%@ include file="fragments/topbar.jsp"%>				
 		</div>
 	
-		<div class="row my-2">						
+		<div class="row main-frame">						
 			<%@ include file="fragments/sidebar.jsp"%>	
 			
-			<div class="col-10 form-frame">			
+			<div class="col-9 col-md-10 form-frame">			
 				<!-- Registration Form -->
 				<form:form action="${pageContext.request.contextPath}/account/edit/processing" 
 					  	   modelAttribute="crmUser"

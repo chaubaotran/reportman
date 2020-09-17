@@ -11,8 +11,6 @@ import com.tas.reportman.form.AccountEditForm;
 import com.tas.reportman.form.PasswordEditForm;
 import com.tas.reportman.user.CrmUser;
 
-
-
 public interface UserService extends UserDetailsService {
 	
 	public User findByUserName(String userName);
@@ -36,5 +34,6 @@ public interface UserService extends UserDetailsService {
 	public Boolean checkIfPasswordMatch(int id, String currentPassword);
 
 	public void editPassword(@Valid PasswordEditForm theCrmUser);
+
 
 }

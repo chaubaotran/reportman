@@ -1,19 +1,21 @@
+.status .table {
+	width: 800px;
+	overflow: hidden;
+}
+
 .status .fas {
-	font-size: 150%;
+	font-size: 12px;
 }
 
 .status .fa-check-circle {
 	color: green;
 }
 
-.status td:first-child {
-	font-size: 120%;
-	font-weight: 600;
-	text-align: left;
-}
 
 .status td {
 	text-align: center;
+	font-size: 10px;
+	padding: 5px;
 }
 
 .status .the-hover-one:hover {
@@ -30,3 +32,20 @@
 .status a .fa-times {
 	color: #000;
 }
+
+@media only screen and (min-width: 768px) {
+	
+	.status .table {
+		max-width: 800px;
+		font-size: 12px;
+	}
+	
+	.status .fas {
+		font-size: 15px;
+	}
+	
+	.status td {
+		font-size: 12px;
+		padding: 10px;
+	}
+} 

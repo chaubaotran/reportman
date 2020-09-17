@@ -277,4 +277,20 @@ public class AccountController {
 		return "account_list";
 	}
 	
+	@GetMapping("/find")
+	public String showAccount(ModelMap model,
+								@RequestParam("userName") String userName) {
+		User user = userService.findByUserName(userName);
+		List<User> users = new ArrayList<User>();
+		
+		if (user != null) {
+			users.add(user);
+		} else {
+			model.addAttribute("message", "お探しのユーザーが見つかりません。");
+		}
+		
+		model.addAttribute("users", users);
+		return "account_list";
+	}
+	
 }

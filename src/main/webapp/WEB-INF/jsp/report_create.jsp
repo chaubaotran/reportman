@@ -7,15 +7,13 @@
 			<%@ include file="fragments/topbar.jsp"%>				
 		</div>
 	
-		<div class="row my-2">						
+		<div class="row main-frame">						
 			<%@ include file="fragments/sidebar.jsp"%>	
 						
-			<div class="col-10 form-frame">						
-				<form:form action="addNewReport" method="POST" modelAttribute="report">						
-					<div class="d-flex">
-						<h2><strong>日報新規作成</strong></h2>
-						<span class="ml-auto">研修生: ${user.userName}</span>
-					</div>	
+			<div class="col-9 col-md-10 form-frame">						
+				<form:form action="addNewReport" method="POST" modelAttribute="report">			
+					<h2><strong>日報新規作成</strong></h2>
+					<p>研修生: ${user.userName}</p>
 					
 					<p class="message">${successMessage}</p>		
 					<p class="error">${errorMessage}</p>	
@@ -27,25 +25,25 @@
 					</div>
 					<div class="form-group">
 					    <label>課題*</label>		    
-					    <form:textarea class="form-control" path="task" rows="3" />
+					    <form:textarea class="form-control" path="task" rows="2" />
 					    <form:errors path="task" class="error" />
 					</div>
 					
 					<div class="form-group">
 					    <label>詳細内容*</label>		    
-					    <form:textarea class="form-control" path="detail" rows="3" />
+					    <form:textarea class="form-control" path="detail" rows="2" />
 					    <form:errors path="detail" class="error" />
 					</div>
 					
 					<div class="form-group">
 					    <label>進歩の良し悪し*</label>		     
-					    <form:textarea class="form-control" path="result" rows="3" />
+					    <form:textarea class="form-control" path="result" rows="2" />
 					    <form:errors path="result" class="error" />
 					</div>
 					
 					<div class="form-group">
 					    <label>所感*</label>
-					    <form:textarea class="form-control" path="feeling" rows="3" />
+					    <form:textarea class="form-control" path="feeling" rows="2" />
 					    <form:errors path="feeling" class="error" />
 					</div>
 								

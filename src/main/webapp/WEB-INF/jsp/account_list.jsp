@@ -8,13 +8,18 @@
 			<%@ include file="fragments/topbar.jsp"%>				
 		</div>
 	
-		<div class="row my-2">						
+		<div class="row main-frame">						
 			<%@ include file="fragments/sidebar.jsp"%>				
 			
-			<div class="col-10 report-create">			
-				<div class="d-flex">
-					<h2><strong>アカウント一覧</strong></h2>
-				</div>	
+			<div class="col-9 col-md-10 report-create">			
+				<div class="d-flex" style="max-width: 800px;">
+					<h2><strong>研修生一覧</strong></h2>			
+					
+					<form class="search-form ml-auto" action="${contextPath}/account/find" method="GET">
+						<input type="text" name="userName" class="form-control form-control-sm" placeholder="ユーザー名">
+						<button type="submit" class="btn btn-sm"><i class="fas fa-search"></i></button>
+					</form>
+				</div>
 				
 				<div class="my-3"><a href="${pageContext.request.contextPath}/account/create">新規作成</a></div>
 					<div class="table-wrapper-scroll-y my-custom-scrollbar">				
@@ -61,6 +66,10 @@
 								</c:forEach>		
 						   </tbody>							   
 					</table>
+					
+					<c:if test="${message != null}">
+						<p>${message}</p>
+					</c:if> 
 				</div>
 			</div>
 		</div>

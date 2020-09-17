@@ -7,62 +7,55 @@
 			<%@ include file="fragments/topbar.jsp"%>				
 		</div>
 		
-		<div class="row my-2">						
+		<div class="row main-frame">						
 			<%@ include file="fragments/sidebar.jsp"%>	
 			
-			<div class="col-10 status">	
+			<div class="col-9 col-md-10 status">	
 				<h2><strong>毎月の日報状況</strong></h2>
 				<h5>研修生: ${empName}</h5>
-				<h5>年月：${year}/${month}</h5>		
-				
-				<hr>
-				
-				<div>				
-					<form:form method="GET" action="${pageContext.request.contextPath}/employee/report/month/status/filter">						
-						<label>年</label>
-						<select name="year" id="year-filter" onchange="enableFilter()">
-							<option value="None" selected>無</option>
-							<option value="2020">2020</option>
-							<option value="2019">2019</option>
-							<option value="2018">2018</option>
-						</select>
-						<label>月</label>
-						<select name="month" id="month-filter" onchange="enableFilter()">
-							<option value="None" selected>無</option>
-							<option value="01">01</option>
-							<option value="02">02</option>
-							<option value="03">03</option>
-							<option value="04">04</option>
-							<option value="05">05</option>
-							<option value="06">06</option>
-							<option value="07">07</option>
-							<option value="08">08</option>
-							<option value="09">09</option>
-							<option value="10">10</option>
-							<option value="11">11</option>
-							<option value="12">12</option>
-						</select>
-						
-						<input name="empName" value="${empName}" type="hidden" />
-						<input name="empId" value="${empId}" type="hidden" />
-						
-						<input type="submit" value="Search" id="filter-btn" disabled>				
-					</form:form>	
-				</div>
+				<h5>年月：${year}/${month}</h5>					
+				<hr>		
+				<form:form method="GET" action="${pageContext.request.contextPath}/employee/report/month/status/filter">						
+					<label>年</label>
+					<select name="year" id="year-filter" onchange="enableFilter()">
+						<option value="None" selected>無</option>
+						<option value="2020">2020</option>
+						<option value="2019">2019</option>
+						<option value="2018">2018</option>
+					</select>
+					<label>月</label>
+					<select name="month" id="month-filter" onchange="enableFilter()">
+						<option value="None" selected>無</option>
+						<option value="01">01</option>
+						<option value="02">02</option>
+						<option value="03">03</option>
+						<option value="04">04</option>
+						<option value="05">05</option>
+						<option value="06">06</option>
+						<option value="07">07</option>
+						<option value="08">08</option>
+						<option value="09">09</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+					</select>
+					
+					<input name="empName" value="${empName}" type="hidden" />
+					<input name="empId" value="${empId}" type="hidden" />
+					
+					<input type="submit" value="Search" id="filter-btn" disabled>				
+				</form:form>	
 				
 				<div class="d-flex">
-					<div>
-						<i class="fas fa-check-circle"></i>有
-						<i class="fas fa-times"></i>無
-					</div>			
-					
-					
+					<div class="my-2">
+						<i class="fas fa-check-circle mr-1"></i>有
+						<i class="fas fa-times mr-1"></i>無
+					</div>		
 				</div>
 						
 				<div class="table-wrapper-scroll-y my-custom-scrollbar">
 					<table class="table">				    	
 					    <tr>
-					    	<td></td>
 					    	<c:forEach begin="1" end="10" varStatus="loop">
 					    		<c:if test="${loop.index < 10}"><td>0${loop.index}</td></c:if>
 					    		<c:if test="${loop.index >= 10}"><td>${loop.index}</td></c:if>
@@ -70,7 +63,6 @@
 					    </tr>
 					    
 					    <tr>
-					    	<td>Status</td>
 					    	<c:forEach begin="1" end="10" varStatus="loop">
 					    		
 					    		<!-- Check if has report or not  -->
@@ -110,7 +102,7 @@
 				    			</c:if>					
 					    		
 					    		<!-- Render icon  -->
-						    	<td>
+						    	<td class="the-hover-one">
 						    		<c:choose>
 				    					<c:when test="${check eq true}">
 											<a href="${reportEdit}" class="wrapper"  data-toggle="tooltip" data-placement="bottom" title="日報監督へ">
@@ -126,14 +118,12 @@
 					    </tr> 
 					    
 					    <tr>
-					    	<td></td>
 					    	<c:forEach begin="11" end="20" varStatus="loop">
 					    		<td>${loop.index}</td>
 					    	</c:forEach>
 					    </tr>
 					    
 					     <tr>
-					    	<td>Status</td>
 					    	<c:forEach begin="11" end="20" varStatus="loop">
 					    		<!-- Check if has report or not  -->
 					    		<c:set var="index" value="${Integer.toString(loop.index)}" />
@@ -152,7 +142,7 @@
 				    			</c:forEach>	
 				    			
 						    	<!-- Render icon  -->
-					    		<td>
+					    		<td  class="the-hover-one">
 						    		<c:choose>
 				    					<c:when test="${check eq true}">				    						
 					    					<a href="${reportEdit}" class="wrapper" data-toggle="tooltip" data-placement="bottom" title="日報監督へ" >
@@ -168,14 +158,12 @@
 					    </tr>
 					    
 					    <tr>
-					    	<td></td>
 					    	<c:forEach begin="21" end="${monthDays <= 30 ? monthDays : 30}" varStatus="loop">
 					    		<td>${loop.index}</td>
 					    	</c:forEach>
 					    </tr>
 					    
 					    <tr>
-					    	<td>Status</td>
 					    	<c:forEach begin="21" end="${monthDays <= 30 ? monthDays : 30}" varStatus="loop">	
 					    		<!-- Check if has report or not  -->
 					    		<c:set var="index" value="${Integer.toString(loop.index)}" />
@@ -194,7 +182,7 @@
 				    			</c:forEach>	
 				    			
 						    	<!-- Render icon  -->
-					    		<td>
+					    		<td class="the-hover-one">
 						    		<c:choose>
 				    					<c:when test="${check eq true}">				    						
 					    					<a href="${reportEdit}" class="wrapper"　 data-toggle="tooltip" data-placement="bottom" title="${日報監督へ}" >
@@ -210,12 +198,10 @@
 					    </tr>						
 					    <c:if test="${monthDays > 30}">				    
 					    	<tr>
-						    	<td></td>
 						    	<td>${monthDays}</td>
 						    </tr>
 						    
 						    <tr>
-						    	<td>Status</td>
 						    		<!-- Check if has report or not  -->
 						    		<c:set var="check" value="false" />	
 				    				<c:forEach items="${reports}" var="report">			    						
@@ -233,7 +219,7 @@
 					    			</c:forEach>
 					    			
 					    			<!-- Render icon  -->
-						    		<td>
+						    		<td class="the-hover-one">
 							    		<c:choose>
 					    					<c:when test="${check eq true}">				    						
 						    					<a href="${reportEdit}" class="wrapper"  data-toggle="tooltip" data-placement="bottom" title="${日報監督へ}">
@@ -250,15 +236,15 @@
 					</table>
 				</div>
 								
-				<div class="d-flex mt-5" style="max-width: 1000px;">	
-					<a class="nav-link pl-0" href="${pageContext.request.contextPath}/employee/list">研修生一覧に戻る</a>	
+				<div class="d-flex mt-2" style="max-width: 800px;">	
+					<a class="nav-link pl-0" href="${pageContext.request.contextPath}/employee/list"><i class="fas fa-chevron-circle-left mr-2"></i>${empName}の研修生一覧へ</a>	
 								
 					<c:url var="report" value="${pageContext.request.contextPath}/employee/report/list">
 						<c:param name="id" value="${empId}" />	
 						<c:param name="empName" value="${empName}" />						
 					</c:url>
 					
-					<p class="ml-auto"><a href="${report}">本研修生の日報一覧へ</a></p>	
+					<a class="nav-link ml-auto" href="${report}">${empName}の日報一覧へ<i class="fas fa-chevron-circle-right ml-2"></i></a>	
 				</div>
 			</div>			
 		</div>	

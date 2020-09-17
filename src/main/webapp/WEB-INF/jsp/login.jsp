@@ -6,7 +6,7 @@
     	<div class="row">
     		<div class="col mt-5 form-frame">   			
 	    
-		    	<form class="mx-auto login-form" action="${contextPath}/authenticateTheUser" method="POST">
+		    	<form class="mx-auto" style="max-width: 400px;" action="${contextPath}/authenticateTheUser" method="POST">
 		    		<h2>Log in</h2>		    	
 		    		<!-- Place for messages: error, alert etc ... -->
 				    <div class="form-group">					
@@ -18,7 +18,7 @@
 						</c:if>							
 						<!-- Check for logout -->
 						<c:if test="${param.logout != null}">								            
-							<div class="alert alert-success col-xs-offset-1 col-xs-10">
+							<div class="alert alert-primary col-xs-offset-1 col-xs-10">
 								You have been logged out.
 							</div>						    
 						</c:if>	
@@ -39,7 +39,7 @@
 					
 					<button type="submit" class="btn btn-primary">Submit</button>
 					
-					<div class="mt-5">
+					<div class="mt-3">
 						<a href="${contextPath}/account/new">Create new account</a> 	
 					</div>	
 				</form>

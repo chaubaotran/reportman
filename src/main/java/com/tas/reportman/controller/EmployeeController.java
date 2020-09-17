@@ -47,8 +47,48 @@ public class EmployeeController {
 		
 		List<EmpListForm> empList = new ArrayList<EmpListForm>();
 		
-		for (User emp:employees) {
+		if (employees != null && employees.size() !=0) {
+			for (User emp:employees) {
+				
+				// get unread report number
+				int tempUnread = userReportReadService.getUnreadReports(emp.getId(), user.getId()).size();
+				// get all report number
+				int tempAll = reportService.getAllReports(emp.getId()).size();
+				
+				EmpListForm tempEmp = new EmpListForm();
+				
+				// populate the tempEmp
+				tempEmp.setId(emp.getId());
+				tempEmp.setUserName(emp.getUserName());
+				tempEmp.setUnreadNumber(tempUnread);
+				tempEmp.setReportNumber(tempAll);
+				
+				empList.add(tempEmp);
+			}
+		} else {
+			model.addAttribute("message", "研修生がいません。");		
+		}
+	
+		// add to model
+		model.addAttribute("employees", empList);		
 			
+		return "emp_list";
+	}
+	
+	@GetMapping("/find")
+	public String showEmployee(ModelMap model,
+							   @RequestParam("userName") String userName,
+							   HttpSession session) {
+		
+		// get employee
+		User emp = userService.findByUserName(userName);
+		
+		// get current logged in user
+		User user = (User)session.getAttribute("user");
+		
+		List<EmpListForm> empList = new ArrayList<EmpListForm>();
+		
+		if (emp != null) {
 			// get unread report number
 			int tempUnread = userReportReadService.getUnreadReports(emp.getId(), user.getId()).size();
 			// get all report number
@@ -63,8 +103,10 @@ public class EmployeeController {
 			tempEmp.setReportNumber(tempAll);
 			
 			empList.add(tempEmp);
+		} else {
+			model.addAttribute("message", "お探しの研修生が見つかりません。");		
 		}
-		
+				
 		// add to model
 		model.addAttribute("employees", empList);		
 			

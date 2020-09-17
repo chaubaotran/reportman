@@ -10,7 +10,7 @@
 		<nav class="nav flex-column">
 			<a class="nav-link" href="${pageContext.request.contextPath}/account/edit/?id=${user.id}">アカウント編集</a>
 			
-			<a class="nav-link" href="${pageContext.request.contextPath}/account/password/edit/?id=${user.id}">パスワード編集</a>
+			<a class="nav-link" href="${pageContext.request.contextPath}/account/password/edit/?id=${user.id}">パスワード変更</a>
 			
 			<form:form action="${pageContext.request.contextPath}/logout" method="POST">
 				<input type="submit" value="ログアウト" class="logout-link" />										
