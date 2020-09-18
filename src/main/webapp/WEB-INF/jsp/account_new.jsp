@@ -3,12 +3,12 @@
 <%@ include file="fragments/header.jsp"%>
 	
 	<div class="container">		
-		<div class="row mt-2">										
+		<div class="row mt-4">										
 			<div class="col form-frame">			
 				<!-- Registration Form -->
 				<form:form action="${pageContext.request.contextPath}/account/new/processing" 
 					  	   modelAttribute="crmUser"
-					  	   class="form-horizontal"
+					  	   class="form-horizontal mx-auto"
 					  	   method="POST">
 					  	   
 					<div class="d-flex">
@@ -85,7 +85,7 @@
 					</div>
 				</form:form>
 				
-				<div class="mt-3">
+				<div class="mt-3 mx-auto" style="max-width: 800px;">
 					<a href="${pageContext.request.contextPath}/login"><i class="fas fa-arrow-circle-left mr-2"></i>Back to login</a>
 				</div>					
 			</div>

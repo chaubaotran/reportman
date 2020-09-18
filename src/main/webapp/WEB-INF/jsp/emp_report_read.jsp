@@ -13,8 +13,6 @@
 					
 			<div class="col-9 col-md-10 form-frame emp-report-read">								
 				<form:form action="report/confirm" method="POST" modelAttribute="report">
-					
-					
 					<form:input type="hidden" path="id" />
 					<div class="d-flex">
 						
