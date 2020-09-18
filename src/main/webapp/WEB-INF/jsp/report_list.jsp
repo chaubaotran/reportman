@@ -91,8 +91,7 @@
 			var path = window.location.pathname;
 			var menu = document.querySelector(".drop-down-menu");
 			var toggleBtn = document.querySelector(".toggle-btn");
-			
-			
+						
 			/* Make sidebar active item stand out */
 			var navLinks = Array.from(document.querySelectorAll(".nav-link"));
 			navLinks.forEach(item => {

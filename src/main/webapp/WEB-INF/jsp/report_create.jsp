@@ -93,7 +93,12 @@
 				}
 			})			
 			/* Make report date max value is today */
-			document.getElementById("report-date").value = getParam("reportDate") != null ? getParam("reportDate") : getTodayDate();
+			if (getParam("reportDate") == null) {
+				document.getElementById("report-date").value = document.getElementById("report-date").value != null ? document.getElementById("report-date").value : getTodayDate();				
+			} else {
+				document.getElementById("report-date").value = getParam("reportDate");
+			}
+			
 			document.getElementById("report-date").setAttribute("max", getTodayDate());
 		
 			/* Make drop down menu disappear when user clicks outside */
