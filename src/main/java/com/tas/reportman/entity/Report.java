@@ -47,6 +47,8 @@ public class Report {
 	@Column(name = "feeling")
 	private String feeling;
 	
+	@NotNull
+	@Size(min=1, message="必須項目をご入力ください")
 	@Column(name = "date")
 	private String date;
 	

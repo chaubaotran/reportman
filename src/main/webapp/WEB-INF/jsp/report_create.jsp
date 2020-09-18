@@ -22,6 +22,8 @@
 						<label>日付*</label>	
 						<br>
 						<form:input class="my-auto" type="date" path="date" id="report-date" />
+						<br>
+						<form:errors path="date" class="error" />
 					</div>
 					<div class="form-group">
 					    <label>課題*</label>		    
@@ -107,6 +109,7 @@
 					menu.classList.remove("active");
 				}			
 			})
+			
 		}
 			
 		function confirmSubmit() {
