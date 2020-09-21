@@ -79,10 +79,10 @@
 			}	
 			
 			const getParam = (string) => {
-				 var url_string = window.location.href; // www.test.com?filename=test
-			    var url = new URL(url_string);
-			    var paramValue = url.searchParams.get(string);
-			    return paramValue
+				var url_string = window.location.href;
+				var url = new URL(url_string);
+				var paramValue = url.searchParams.get(string);
+				return paramValue
 				
 			}
 			

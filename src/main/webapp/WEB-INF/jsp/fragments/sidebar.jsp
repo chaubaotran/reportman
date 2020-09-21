@@ -31,5 +31,9 @@
 				<a class="nav-link" href="${pageContext.request.contextPath}/account/create">アカウント作成</a>
 			</li>
 		</sec:authorize>
+		
+		<li class="nav-item">
+			<a class="nav-link" href="${pageContext.request.contextPath}/manual">マニュアル</a>
+		</li>
 	</ul>
 </div>		

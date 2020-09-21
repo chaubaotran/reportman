@@ -1,0 +1,39 @@
+.manual img {
+	max-width: 30%;
+}
+
+.manual .logo-img {
+	float: left;
+}
+
+.manual button {
+	font-size: 12px;
+	text-decoration: none;
+	color: #000;
+}
+
+.manual button:hover,
+.manual button:active,
+.manual button:focus {
+	color: #015d82;
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.manual h5 {
+	margin-top: 5px;
+}
+
+.manual .manual-main-frame {
+	border: 3px solid #c0c0c0;
+	min-height: calc(100vh - 70px);
+	overflow: hidden;
+}
+
+@media only screen and (min-width: 768px) { 
+
+	.manual button {
+		font-size: 14px;
+	}
+	
+}

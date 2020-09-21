@@ -2,6 +2,7 @@
 @import "sidebar.css";
 @import "topbar.css";
 @import "report_month_status.css";
+@import "manual.css";
 
 body {
 	font-size: 10px;
@@ -27,7 +28,7 @@ hr {
 
 .main-frame {
 	border: 3px solid #c0c0c0;
-	height: calc(100vh - 70px);
+	min-height: calc(100vh - 70px);
 	over-flow: hidden;
 }
 
