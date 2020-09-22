@@ -1,10 +1,16 @@
 .manual img {
-	max-width: 30%;
+	max-width: 100%;
+	margin: 10px 0;
 }
 
-.manual .logo-img {
-	float: left;
+.manual .user-img {
+	max-width: 100%;
+	margin: 10px 0;
 }
+
+.manual p {
+	margin: 8px 0;
+} 
 
 .manual button {
 	font-size: 12px;
@@ -30,10 +36,40 @@
 	overflow: hidden;
 }
 
+.manual #scroll-up-btn {
+	color: #808080;
+	border: 1px solid #808080;
+	border-radius: 10px;
+	padding: 5px 10px;
+	position: fixed;
+	font-size: 10px;
+	bottom: 5%;
+	right: 7%;
+	cursor: pointer;
+}
+
+.manual #scroll-up-btn:hover {
+	color: #015d82;
+	border: 1px solid #015d82;
+}
+
 @media only screen and (min-width: 768px) { 
 
 	.manual button {
 		font-size: 14px;
 	}
+	
+	.manual img {
+		max-width: 40%;
+	}
+	
+	.manual .user-img {
+		max-width: 20%;
+	}
+	
+ 	.manual #scroll-up-btn {
+		font-size: 20px;
+		padding: 5px 15px;
+	} 
 	
 }

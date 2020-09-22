@@ -13,7 +13,7 @@
 			
 			<div class="col-9 col-md-10 report-create">			
 				<div class="d-flex" style="max-width: 800px;">
-					<h2><strong>研修生一覧</strong></h2>			
+					<h2><strong>アカウント一覧</strong></h2>			
 					
 					<form class="search-form ml-auto" action="${contextPath}/account/find" method="GET">
 						<input type="text" name="userName" class="form-control form-control-sm" placeholder="ユーザー名">
