@@ -44,7 +44,7 @@
 	position: fixed;
 	font-size: 10px;
 	bottom: 5%;
-	right: 7%;
+	
 	cursor: pointer;
 }
 
@@ -70,6 +70,7 @@
  	.manual #scroll-up-btn {
 		font-size: 20px;
 		padding: 5px 15px;
+		right: 5%;
 	} 
 	
 }

@@ -69,8 +69,8 @@
 				} else {
 					item.classList.remove("active");
 				}
-			})		
-		
+			})	
+					
 			/* Make drop down menu disappear when user clicks outside */
 			document.addEventListener("click", function(e) {
 				if (!menu.contains(e.target) && !toggleBtn.contains(e.target)) {
@@ -88,6 +88,11 @@
 			 return true ;
 			else
 			 return false ;
+		}	
+		
+		function toggleMenu() {
+			var menu = document.querySelector(".drop-down-menu");
+			menu.classList.toggle("active");
 		}	
 	</script>
 	

@@ -91,6 +91,10 @@
 		font-size: 12px;
 	}
 	
+	.search-form button {
+		padding: 0 10px;
+	}
+	
 
 }
 
