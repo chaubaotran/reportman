@@ -21,5 +21,3 @@ Default admin account:
 email: admin@tas.com
 
 password: admin
-
-P.S. This app is currently in Japanese, so the interface might be a little hard to understand. I'll try to add English in the future. Sorry for any inconveniences.
