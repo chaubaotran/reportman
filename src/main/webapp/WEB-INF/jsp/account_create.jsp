@@ -19,7 +19,7 @@
 					  	   method="POST">
 					  	   
 					<div class="d-flex">
-						<h2><strong>アカウント新規作成</strong></h2>
+						<h2><strong>Creat new account (アカウント新規作成)</strong></h2>
 					</div>	
 
 				    <!-- Place for messages: error, alert etc ... -->

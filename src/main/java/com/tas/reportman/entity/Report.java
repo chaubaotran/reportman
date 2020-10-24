@@ -28,27 +28,27 @@ public class Report {
 	private int id;
 	
 	@NotNull
-	@Size(min=1, message="必須項目をご入力ください")
+	@Size(min=1, message="Please fill in required fields (必須項目をご入力ください)")
 	@Column(name = "task")
 	private String task;
 	
 	@NotNull
-	@Size(min=1, message="必須項目をご入力ください")
+	@Size(min=1, message="Please fill in required fields (必須項目をご入力ください)")
 	@Column(name = "detail")
 	private String detail;
 	
 	@NotNull
-	@Size(min=1, message="必須項目をご入力ください")
+	@Size(min=1, message="Please fill in required fields (必須項目をご入力ください)")
 	@Column(name = "result")
 	private String result;
 	
 	@NotNull
-	@Size(min=1, message="必須項目をご入力ください")
+	@Size(min=1, message="Please fill in required fields (必須項目をご入力ください)")
 	@Column(name = "feeling")
 	private String feeling;
 	
 	@NotNull
-	@Size(min=1, message="必須項目をご入力ください")
+	@Size(min=1, message="Please fill in required fields (必須項目をご入力ください)")
 	@Column(name = "date")
 	private String date;
 	

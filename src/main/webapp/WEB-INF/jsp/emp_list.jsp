@@ -12,23 +12,23 @@
 			
 			<div class="col-9 col-md-10">			
 				<div class="d-flex" style="max-width: 800px;">
-					<h2><strong>研修生一覧</strong></h2>			
+					<h2><strong>List of employees (研修生一覧)</strong></h2>			
 					
 					<form class="search-form ml-auto" action="${contextPath}/employee/find" method="GET">
-						<input type="text" name="userName" class="form-control form-control-sm" placeholder="ユーザー名">
+						<input type="text" name="userName" class="form-control form-control-sm" placeholder="User name">
 						<button type="submit" class="btn btn-sm"><i class="fas fa-search"></i></button>
 					</form>
 				</div>	
 				
 				<div class="table-wrapper-scroll-y my-custom-scrollbar mt-3">
-					<p style="color: red">* 未確認日報が有する研修生は赤字で表示されます</p>					
+					<p style="color: red">* Employee with unread reports is printed red (未確認日報が有する研修生は赤字で表示されます)</p>					
 					
 					<table class="table table-hover mt-4">
 						<thead>
 							<tr>
-								<th style="width: 25%;">名前</th>
-								<th style="width: 25%;">日報数</th>
-								<th style="width: 25%;">未確認数</th>
+								<th style="width: 25%;">Name (名前)</th>
+								<th style="width: 25%;">Reports number (日報数)</th>
+								<th style="width: 25%;">Unread number (未確認数)</th>
 								<th style="width: 25%;"><i class="fas fa-cogs"></i></th>
 							</tr>	
 						</thead>
@@ -52,9 +52,9 @@
 										<td><c:out value="${employee.reportNumber}" /></td>
 										<td><c:out value="${employee.unreadNumber}" /></td>
 										<td>
-											<a <c:if test="${employee.unreadNumber > 0}">style="color: red"</c:if> href="${report}">日報一覧</a>
-											<span class="mx-2">|</span>
-											<a <c:if test="${employee.unreadNumber > 0}">style="color: red"</c:if> href="${reportMonthStatus}">毎月状況</a>
+											<a <c:if test="${employee.unreadNumber > 0}">style="color: red"</c:if> href="${report}">View reports list</a>
+											<br />
+											<a <c:if test="${employee.unreadNumber > 0}">style="color: red"</c:if> href="${reportMonthStatus}">View monhly status</a>
 										</td>
 									</tr>
 									</c:forEach>	

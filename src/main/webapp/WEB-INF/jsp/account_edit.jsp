@@ -19,8 +19,8 @@
 					  	   method="POST">
 					
 					<div class="d-flex">
-							<h2><strong>アカウント編集</strong></h2>
-							<span class="ml-auto">ユーザー名: ${crmUser.userName}</span>
+							<h2><strong>Edit account (アカウント編集)</strong></h2>
+							<span class="ml-auto">User name (ユーザー名): ${crmUser.userName}</span>
 						</div>	
 	
 				    <!-- Place for messages: error, alert etc ... -->

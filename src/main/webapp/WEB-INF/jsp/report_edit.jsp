@@ -13,43 +13,43 @@
 			<div class="col-9 col-md-10 form-frame">	
 				<form:form action="editReport" method="POST" modelAttribute="report">
 					<div class="d-flex">
-						<h2><strong>日報編集</strong></h2>
-						<span class="ml-auto">研修生: ${user.userName}</span>
+						<h2><strong>Edit report (日報編集)</strong></h2>
+						<span class="ml-auto">Employee (研修生): ${user.userName}</span>
 					</div>	
 					<p class="message">${successMessage}</p>		
 							
 					<div class="form-group">
-						<label>日付*</label>	
+						<label>Date (日付)*</label>	
 						<br>
 						<form:input class="my-auto" type="date" path="date" id="report-date" />
 					</div>
 					<div class="form-group">
-					    <label>課題*</label>		    
+					    <label>Task (課題)*</label>		    
 					    <form:textarea class="form-control" path="task" rows="3" />
 					    <form:errors path="task" class="error" />
 					</div>
 					
 					<div class="form-group">
-					    <label>詳細内容*</label>		    
+					    <label>Details (詳細内容)*</label>		    
 					    <form:textarea class="form-control" path="detail" rows="3" />
 					    <form:errors path="detail" class="error" />
 					</div>
 					
 					<div class="form-group">
-					    <label>進歩の良し悪し*</label>		     
+					    <label>Progress (進歩の良し悪し)*</label>		     
 					    <form:textarea class="form-control" path="result" rows="3" />
 					    <form:errors path="result" class="error" />
 					</div>
 					
 					<div class="form-group">
-					    <label>所感*</label>
+					    <label>Emotion (所感)*</label>
 					    <form:textarea class="form-control" path="feeling" rows="3" />
 					    <form:errors path="feeling" class="error" />
 					</div>
 								
 					<form:input type="hidden" path="id" />	
 					
-				  	<input type="submit" class="btn btn-primary" value="編集" onClick="return confirmSubmit()" />		
+				  	<input type="submit" class="btn btn-primary" value="Edit" onClick="return confirmSubmit()" />		
 				</form:form>		
 			</div>
 		</div>

@@ -17,14 +17,14 @@
 					<div class="d-flex">
 						
 						<c:if test="${unread eq true}">
-							<h2><span class="badge badge-warning">未確認</span></h2>
+							<h2><span class="badge badge-warning">Unread (未確認)</span></h2>
 						</c:if>
 						
 						<c:if test="${unread eq false}">
-							<h2><span class="badge badge-success">確認済</span></h2>
+							<h2><span class="badge badge-success">Read (確認済)</span></h2>
 						</c:if>
 						
-						<p class="ml-auto">研修生: ${emp.userName}</p>
+						<p class="ml-auto">Employee (研修生): ${emp.userName}</p>
 					</div>
 					
 					<c:if test="${message != null}">
@@ -32,30 +32,30 @@
 					</c:if>											
 					
 					<div class="form-group">
-						<label>日付*</label>	
+						<label>Date (日付)*</label>	
 						<br>
 						<form:input class="my-auto" type="date" path="date" id="report-date" />
 					</div>
 					<div class="form-group">
-					    <label>課題*</label>		    
+					    <label>Task (課題)*</label>		    
 					    <form:textarea class="form-control" path="task" rows="2" />
 					    <form:errors path="task" class="error" />
 					</div>
 					
 					<div class="form-group">
-					    <label>詳細内容*</label>		    
+					    <label>Details (詳細内容)*</label>		    
 					    <form:textarea class="form-control" path="detail" rows="2" />
 					    <form:errors path="detail" class="error" />
 					</div>
 					
 					<div class="form-group">
-					    <label>進歩の良し悪し*</label>		     
+					    <label>Progess (進歩の良し悪し)*</label>		     
 					    <form:textarea class="form-control" path="result" rows="2" />
 					    <form:errors path="result" class="error" />
 					</div>
 					
 					<div class="form-group">
-					    <label>所感*</label>
+					    <label>Emotion (所感)*</label>
 					    <form:textarea class="form-control" path="feeling" rows="2" />
 					    <form:errors path="feeling" class="error" />
 					</div>
@@ -65,7 +65,7 @@
 			            <c:param name="empName" value="${emp.userName}"/>
 			        </c:url>	
 			        			        
-			        <input type="submit" class="btn btn-primary confirm-btn" value="確認"  <c:if test="${unread == false}"><c:out value="disabled='disabled'"/></c:if> /> 					
+			        <input type="submit" class="btn btn-primary confirm-btn" value="Confirm"  <c:if test="${unread == false}"><c:out value="disabled='disabled'"/></c:if> /> 					
 				</form:form>
 			
 				<div class="d-flex" style="max-width: 800px;">

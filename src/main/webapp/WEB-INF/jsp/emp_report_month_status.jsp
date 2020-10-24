@@ -11,21 +11,21 @@
 			<%@ include file="fragments/sidebar.jsp"%>	
 			
 			<div class="col-9 col-md-10 status">	
-				<h2><strong>毎月の日報状況</strong></h2>
-				<h5>研修生: ${empName}</h5>
-				<h5>年月：${year}/${month}</h5>					
+				<h2><strong>Monthly status (毎月の日報状況)</strong></h2>
+				<h5>Employee (研修生): ${empName}</h5>
+				<h5>Year/month (年月)：${year}/${month}</h5>					
 				<hr>		
 				<form:form method="GET" action="${pageContext.request.contextPath}/employee/report/month/status/filter">						
-					<label>年</label>
+					<label>Year (年)</label>
 					<select name="year" id="year-filter" onchange="enableFilter()">
-						<option value="None" selected>無</option>
+						<option value="None" selected></option>
 						<option value="2020">2020</option>
 						<option value="2019">2019</option>
 						<option value="2018">2018</option>
 					</select>
-					<label>月</label>
+					<label>Month (月)</label>
 					<select name="month" id="month-filter" onchange="enableFilter()">
-						<option value="None" selected>無</option>
+						<option value="None" selected></option>
 						<option value="01">01</option>
 						<option value="02">02</option>
 						<option value="03">03</option>
@@ -48,8 +48,8 @@
 				
 				<div class="d-flex">
 					<div class="my-2">
-						<i class="fas fa-check-circle mr-1"></i>有
-						<i class="fas fa-times mr-1"></i>無
+						<i class="fas fa-check-circle mr-1"></i>Done (有)
+						<i class="fas fa-times mr-1"></i>Undone (無)
 					</div>		
 				</div>
 						

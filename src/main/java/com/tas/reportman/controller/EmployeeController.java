@@ -66,7 +66,7 @@ public class EmployeeController {
 				empList.add(tempEmp);
 			}
 		} else {
-			model.addAttribute("message", "研修生がいません。");		
+			model.addAttribute("message", "No employees found (研修生がいません)");		
 		}
 	
 		// add to model
@@ -104,7 +104,7 @@ public class EmployeeController {
 			
 			empList.add(tempEmp);
 		} else {
-			model.addAttribute("message", "お探しの研修生が見つかりません。");		
+			model.addAttribute("message", "No employees found (お探しの研修生が見つかりません)");		
 		}
 				
 		// add to model
@@ -212,7 +212,7 @@ public class EmployeeController {
 		model.addAttribute("report", report);
 		model.addAttribute("emp", theReport.getUser());
 		model.addAttribute("unread", false);
-		model.addAttribute("message", "確認終了しました");
+		model.addAttribute("message", "Read (確認終了しました)");
 			
 		return "emp_report_read";
 	}

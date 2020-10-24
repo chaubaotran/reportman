@@ -13,7 +13,7 @@
 			
 			<div class="col-9 col-md-10 report-create">			
 				<div class="d-flex" style="max-width: 800px;">
-					<h2><strong>アカウント一覧</strong></h2>			
+					<h2><strong>List of accounts (アカウント一覧)</strong></h2>			
 					
 					<form class="search-form ml-auto" action="${contextPath}/account/find" method="GET">
 						<input type="text" name="userName" class="form-control form-control-sm" placeholder="ユーザー名">
@@ -21,16 +21,16 @@
 					</form>
 				</div>
 				
-				<div class="my-3"><a href="${pageContext.request.contextPath}/account/create">新規作成</a></div>
+				<div class="my-3"><a href="${pageContext.request.contextPath}/account/create">Create new (新規作成)</a></div>
 					<div class="table-wrapper-scroll-y my-custom-scrollbar">				
 						<table class="table table-hover">
 							<thead>
 								<tr>
-									<th>ユーザー名</th>
-									<th>ファーストネーム</th>
-									<th>ファミリーネーム</th>
-									<th>メール</th>
-									<th>ロール</th>
+									<th>User name</th>
+									<th>First name</th>
+									<th>Family name</th>
+									<th>Email</th>
+									<th>Role</th>
 									<th><i class="fas fa-cogs"></i></th>
 								</tr>	
 							</thead>
@@ -48,19 +48,19 @@
 										<td>
 											<c:forEach items="${user.roles}" var="role">
 												<c:if test="${role.name == 'ROLE_EMPLOYEE'}">
-													<c:out value="研修生"></c:out>
+													<c:out value="Employee"></c:out>
 												</c:if>
 												<c:if test="${role.name == 'ROLE_MANAGER'}">
-													<c:out value="指導者"></c:out>
+													<c:out value="Manager"></c:out>
 												</c:if>
 											    <c:if test="${role.name == 'ROLE_ADMIN'}">
-													<c:out value="アドミン"></c:out>
+													<c:out value="admin"></c:out>
 												</c:if>
 											</c:forEach>
 										</td>
 										
 										<td>
-											<a href="${accountEdit}">編集</a>
+											<a href="${accountEdit}">Edit</a>
 										</td>
 									</tr>
 								</c:forEach>		

@@ -12,46 +12,46 @@
 						
 			<div class="col-9 col-md-10 form-frame">						
 				<form:form action="addNewReport" method="POST" modelAttribute="report">			
-					<h2><strong>日報新規作成</strong></h2>
-					<p>研修生: ${user.userName}</p>
+					<h2><strong>Create new report (日報新規作成)</strong></h2>
+					<p>Employee (研修生): ${user.userName}</p>
 					
 					<p class="message">${successMessage}</p>		
 					<p class="error">${errorMessage}</p>	
 							
 					<div class="form-group">
-						<label>日付*</label>	
+						<label>Date (日付)*</label>	
 						<br>
 						<form:input class="my-auto" type="date" path="date" id="report-date" />
 						<br>
 						<form:errors path="date" class="error" />
 					</div>
 					<div class="form-group">
-					    <label>課題*</label>		    
+					    <label>Task (課題)*</label>		    
 					    <form:textarea class="form-control" path="task" rows="2" />
 					    <form:errors path="task" class="error" />
 					</div>
 					
 					<div class="form-group">
-					    <label>詳細内容*</label>		    
+					    <label>Details (詳細内容)*</label>		    
 					    <form:textarea class="form-control" path="detail" rows="2" />
 					    <form:errors path="detail" class="error" />
 					</div>
 					
 					<div class="form-group">
-					    <label>進歩の良し悪し*</label>		     
+					    <label>Progress (進歩の良し悪し)*</label>		     
 					    <form:textarea class="form-control" path="result" rows="2" />
 					    <form:errors path="result" class="error" />
 					</div>
 					
 					<div class="form-group">
-					    <label>所感*</label>
+					    <label>Emotion (所感)*</label>
 					    <form:textarea class="form-control" path="feeling" rows="2" />
 					    <form:errors path="feeling" class="error" />
 					</div>
 								
 					<form:input type="hidden" path="id" />	
 					  	
-				  	<input type="submit" class="btn btn-primary" value="提出" onClick="return confirmSubmit()" />		  	
+				  	<input type="submit" class="btn btn-primary" value="Submit" onClick="return confirmSubmit()" />		  	
 				</form:form>					
 			</div>
 		</div>

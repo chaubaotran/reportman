@@ -19,7 +19,7 @@
 					  	   method="POST">
 					
 					<div class="d-flex">
-						<h2><strong>アカウント変更</strong></h2>
+						<h2><strong>Edit password (パスワード変更)</strong></h2>
 					</div>	
 
 				    <!-- Place for messages: error, alert etc ... -->
@@ -46,28 +46,28 @@
 
 					<!-- Old password -->
 					<div class="mb-4">
-						<label>現在パスワード</label>
+						<label>Current password (現在パスワード)</label>
 						<form:errors path="currentPassword" cssClass="error" />	
 						<form:password path="currentPassword" placeholder="current password (*)" class="form-control" />												
 					</div>	
 					
 					<!-- New password -->
 					<div class="mb-4">
-						<label>新しいパスワード</label>
+						<label>New password (新しいパスワード)</label>
 						<form:errors path="newPassword" cssClass="error" />
 						<form:password path="newPassword" placeholder="new password (*)" class="form-control" />													
 					</div>	
 					
 					<!-- Matching password -->
 					<div class="mb-4">
-						<label>確認</label>
+						<label>Confirm (確認)</label>
 						<form:errors path="matchingPassword" cssClass="error" />
 						<form:password path="matchingPassword" placeholder="new password again (*)" class="form-control" />													
 					</div>			
 							
 					<!-- Register Button -->
 					<div class="form-group">
-						<button type="submit" class="btn btn-primary">変更</button>
+						<button type="submit" class="btn btn-primary">Change (変更)</button>
 					</div>						
 				</form:form>					
 			</div>

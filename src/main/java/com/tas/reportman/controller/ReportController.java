@@ -70,10 +70,10 @@ public class ReportController {
 			Report report = reportService.trimReport(theReport);			 
 			// save report object to database
 			reportService.saveOrUpdateReport(report, user.getId());	
-			redirectAttrs.addFlashAttribute("successMessage", "日報追加しました");
+			redirectAttrs.addFlashAttribute("successMessage", "New report added (日報追加しました)");
 			 } else {
 			redirectAttrs.addFlashAttribute("report", theReport);
-			redirectAttrs.addFlashAttribute("message", "ご指定の日付にすでに日報が存在します");
+			redirectAttrs.addFlashAttribute("message", "You've already created a report on this date (ご指定の日付にすでに日報が存在します)");
 		}	
 		
 		// redirect to previous page
@@ -89,7 +89,7 @@ public class ReportController {
 		
 		// add model attributes
 		model.addAttribute("reports", reports);
-		model.addAttribute("message", "日報が存在しません");
+		model.addAttribute("message", "No reports found (日報が存在しません)");
 		
 		return "report_list";
 		
@@ -104,7 +104,7 @@ public class ReportController {
 		List<Report> reports = reportService.getFilteredReports(year, month, id);	
 		
 		model.addAttribute("reports", reports);
-		model.addAttribute("message", "フィルターの結果が見つかりません");
+		model.addAttribute("message", "No reports found (フィルターの結果が見つかりません)");
 		
 		return "report_list";
 		
@@ -140,7 +140,7 @@ public class ReportController {
 		// save report object to database
 		reportService.saveOrUpdateReport(report, userId);	
 		
-		redirectAttrs.addFlashAttribute("message", "日報編集しました");
+		redirectAttrs.addFlashAttribute("message", "Your edit is submitted (日報編集しました)");
 		
 		// redirect to previous page
 		return "redirect:/report/list/?id=" + userId;

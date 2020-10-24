@@ -11,9 +11,9 @@
 			<%@ include file="fragments/sidebar.jsp"%>				
 			
 			<div class="col-9 col-md-10">
-				<h2>アカウントが登録されました。</h2>				
+				<h2>New account created (アカウントが登録されました)</h2>				
 				<hr>					
-				<a href="${pageContext.request.contextPath}/login">ログインページへ</a>
+				<a href="${pageContext.request.contextPath}/login">Move to login page (ログインページへ)</a>
 			</div>
 		</div>
 	</div>

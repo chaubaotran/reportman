@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
+Built-By: tranb
+Build-Jdk: 11.0.7
 Implementation-Title: reportman
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: TAS_CHAU
 Implementation-Vendor-Id: com.tas
-Build-Jdk: 1.8.0_131
 Implementation-URL: https://spring.io/projects/spring-boot/reportman
 Created-By: Maven Integration for Eclipse
 

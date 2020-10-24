@@ -12,24 +12,24 @@
 
 			<div class="col-9 col-md-10">
 				
-				<h2><strong>日報一覧</strong></h2>
-				<h5>研修生: ${user.userName}</h5>
+				<h2><strong>List of reports (日報一覧)</strong></h2>
+				<h5>Employee (研修生): ${user.userName}</h5>
 				
 				<hr>
 				
 				<div class="my-3">
 					<form:form method="GET" action="${pageContext.request.contextPath}/report/list/filter/">
-						<span>フィルター:</span>							
-						<label>年</label>
+						<span>Filter (フィルター):</span>							
+						<label>Year (年)</label>
 						<select name="year" id="year-filter" onchange="enableFilter()">
-							<option value="None" selected>無</option>
+							<option value="None" selected></option>
 							<option value="2020">2020</option>
 							<option value="2019">2019</option>
 							<option value="2018">2018</option>
 						</select>
-						<label>月</label>
+						<label>Month (月)</label>
 						<select name="month" id="month-filter" onchange="enableFilter()">
-							<option value="None" selected>無</option>
+							<option value="None" selected></option>
 							<option value="01">01</option>
 							<option value="02">02</option>
 							<option value="03">03</option>
@@ -53,8 +53,8 @@
 					<table class="table table-hover">
 						<thead>
 							<tr>
-								<th>日付</th>
-								<th>課題</th>
+								<th>Date (日付)</th>
+								<th>Task (課題)</th>
 								<th><i class="fas fa-cogs"></i></th>
 							</tr>	
 						</thead>
@@ -69,7 +69,7 @@
 								<td><c:out value="${report.date}" /></td>
 								<td><c:out value="${report.task}" /></td>
 								<td>
-									<a href="${editLink}">編集</a>
+									<a href="${editLink}">Edit</a>
 								</td>
 							</tr>
 							</c:forEach>	
@@ -80,7 +80,7 @@
 				<c:set var = "reports" scope = "session" value = "${reports}"/>
 				<c:if test = "${reports == null || reports.size() == 0}">
 					<p>${message}</p>
-					<a href="${pageContext.request.contextPath}/report/create">日報追加へ</a>
+					<a href="${pageContext.request.contextPath}/report/create">Add new report (日報追加へ)</a>
 			    </c:if>
 			</div>
 		</div>

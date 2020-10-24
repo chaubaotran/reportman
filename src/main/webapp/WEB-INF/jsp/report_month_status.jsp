@@ -15,24 +15,24 @@
 			<%@ include file="fragments/sidebar.jsp"%>	
 			
 			<div class="col-9 col-md-10 status">
-				<h2><strong>毎月の日報状況</strong></h2>
-				<h5 class="ml-auto">研修生: ${empName}</h5>
-				<h5>年月：${year}/${month}</h5>				
+				<h2><strong>Monthly status (毎月の日報状況)</strong></h2>
+				<h5 class="ml-auto">Employee (研修生): ${empName}</h5>
+				<h5>Year/month (年月)：${year}/${month}</h5>				
 				
 				<hr>
 				
 				<div>
 					<form:form method="GET" action="${pageContext.request.contextPath}/report/month/status/filter">						
-						<label>年</label>
+						<label>Year (年)</label>
 						<select name="year" id="year-filter" onchange="enableFilter()">
-							<option value="None" selected>無</option>
+							<option value="None" selected></option>
 							<option value="2020">2020</option>
 							<option value="2019">2019</option>
 							<option value="2018">2018</option>
 						</select>
-						<label>月</label>
+						<label>Month (月)</label>
 						<select name="month" id="month-filter" onchange="enableFilter()">
-							<option value="None" selected>無</option>
+							<option value="None" selected></option>
 							<option value="01">01</option>
 							<option value="02">02</option>
 							<option value="03">03</option>
@@ -55,8 +55,8 @@
 				</div>
 				
 				<div class="d-flex">
-					<p class="mr-3"><i class="fas fa-check-circle"></i>有</p>
-					<p><i class="fas fa-times"></i>	無</p>
+					<p class="mr-3"><i class="fas fa-check-circle"></i>Done (有)</p>
+					<p><i class="fas fa-times"></i>Undone (無)</p>
 				</div>
 				
 				<div class="my-custom-scrollbar">

@@ -13,24 +13,24 @@
 						
 			<div class="col-9 col-md-10">
 				
-				<h2><strong>日報一覧</strong></h2>	
-				<h5>研修生: ${empName}</h5>
+				<h2><strong>List of reports (日報一覧)</strong></h2>	
+				<h5>Employee (研修生): ${empName}</h5>
 				
 				<hr>			
 					
 				<form:form method="GET" action="${pageContext.request.contextPath}/employee/report/list/filter/">
-					<span>フィルター:</span>
+					<span>Filter (フィルター):</span>
 					
-					<label>年</label>
+					<label>Year (年)</label>
 					<select name="year" id="year-filter" onchange="enableFilter()">
-						<option value="None" selected>無</option>
+						<option value="None" selected></option>
 						<option value="2020">2020</option>
 						<option value="2019">2019</option>
 						<option value="2018">2018</option>
 					</select>
-					<label>月</label>
+					<label>Month (月)</label>
 					<select name="month" id="month-filter" onchange="enableFilter()">
-						<option value="None" selected>無</option>
+						<option value="None" selected></option>
 						<option value="01">01</option>
 						<option value="02">02</option>
 						<option value="03">03</option>
@@ -66,8 +66,8 @@
 				</c:url>
 				
 				<h4>
-					<a href="${showAll}"><span class="badge badge-dark">日報数：${allNumber}</span></a>
-					<a href="${showOnlyUnread}"><span class="badge badge-danger">未確認数：${unReadNumber}</span></a>
+					<a href="${showAll}"><span class="badge badge-dark">Reports number (日報数)：${allNumber}</span></a>
+					<a href="${showOnlyUnread}"><span class="badge badge-danger">Unread number (未確認数)：${unReadNumber}</span></a>
 				</h4>	
 					
 				
@@ -75,8 +75,8 @@
 					<table class="table table-hover">
 						<thead>
 							<tr>
-								<th style="width: 40%">日付</th>
-								<th style="width: 40%">課題</th>
+								<th style="width: 40%">Date (日付)</th>
+								<th style="width: 40%">Task (課題)</th>
 								<th style="width: 20%"><i class="fas fa-cogs"></i></th>
 							</tr>
 						</thead>
@@ -100,7 +100,7 @@
 										<td><c:out value="${report.date}" /></td>
 										<td><c:out value="${report.task}" /></td>
 										<td>
-											<a style="color: red;" href="${readLink}">読む</a>
+											<a style="color: red;" href="${readLink}">Read</a>
 										</td>
 									</tr>	
 							  	</c:if>
@@ -110,7 +110,7 @@
 										<td><c:out value="${report.date}" /></td>
 										<td><c:out value="${report.task}" /></td>
 										<td>
-											<a href="${readLink}">読む</a>
+											<a href="${readLink}">Read</a>
 										</td>
 									</tr>	
 							  	</c:if>
@@ -121,7 +121,7 @@
 				
 				<c:set var = "reports" scope = "session" value = "${reports}"/>
 				<c:if test = "${reports == null || reports.size() == 0}">
-					<c:out value="該当する日報は見つかりません" />
+					<c:out value="No reports found (該当する日報は見つかりません)" />
 			    </c:if>
 			    
 			    <div class="d-flex mt-2" style="max-width: 800px;">
